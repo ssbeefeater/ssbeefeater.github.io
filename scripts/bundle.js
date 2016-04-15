@@ -32767,7 +32767,7 @@ module.exports = [
                         iframe: {className: 'idd'}
                     }, 'landscapes');
                     ssi_modal.imgBox({
-                        imgTitle: false,
+                        title: false,
                         backdropAnimation: true,
                         modalAnimation: {
                             'show': 'animated  rotateInDownLeft',
