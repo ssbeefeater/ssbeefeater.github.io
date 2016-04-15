@@ -33177,9 +33177,10 @@ ssi_modal.notify('custom',{closeAfter:{time:7},title:false,content:'Plugins are 
              e.stopPropagation();
              var $eTarget=$(e.currentTarget);
 if($eTarget.hasClass('git')){
-    window.open("https://github.com/ssbeefeater/" + currentPlugin, '_blank');
+    window.open("https://github.com/ssbeefeater/" + (currentPlugin ||'ssi-modal'), '_blank');
+
 }else{
-    thisS.navigate(currentPlugin+$eTarget.attr('href'),{trigger:true})
+    thisS.navigate((currentPlugin ||'ssi-modal')+$eTarget.attr('href'),{trigger:true})
 }
 
          });
