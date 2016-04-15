@@ -33133,7 +33133,6 @@ var SsinputRouter = Backbone.Router.extend({
     beforeBoot: function (plugin) {
         $('body').off('.example');
         $(document).off('.example');
-        $('#scrollSpyUl').html('');
         $('.title').html('');
         $('.collapse.in').collapse('hide');
         currentPlugin=plugin;
