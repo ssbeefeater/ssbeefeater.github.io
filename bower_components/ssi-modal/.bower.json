@@ -21,6 +21,7 @@
     "node_modules",
     "bower_components",
     ".npmignore",
+    ".gitignore",
     "/src",
     "package.json",
     "gulpfile.js"
@@ -30,11 +31,11 @@
     "url": "https://github.com/ssbeefeater/ssi-modal.git"
   },
   "homepage": "https://github.com/ssbeefeater/ssi-modal",
-  "_release": "0ae13646ac",
+  "_release": "2cba0dbfff",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "0ae13646ac76f0cd99964afc2ff0bc2b3821e2b1"
+    "commit": "2cba0dbfff3d39d8a5db8b8eb9d69141ebce0124"
   },
   "_source": "https://github.com/ssbeefeater/ssi-modal.git",
   "_target": "*",
