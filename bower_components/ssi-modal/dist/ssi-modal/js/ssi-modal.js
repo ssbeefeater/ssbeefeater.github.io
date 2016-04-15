@@ -10,13 +10,11 @@
     var openedModals = 0;
     var sharedBackdrop = 0;
     var byKindShare = {
-        imgModal: 0,
+        imgBox: 0,
         stackModal: 0,
         normalModal: 0
     };
     var uniqueId = 0;
-    var modalAnimationIn = '';
-    var backdropAnimationIn = '';
     var orphanBackdrop = false;
 
     /**
@@ -439,21 +437,19 @@
         var inAnim,
          outAnim;
 
-        inAnim = (modalAnimationIn !== '' ? modalAnimationIn : changeAnimations((typeof modalAnim.show !== 'undefined' ? modalAnim.show : modalAnim), 'show'));
+        inAnim =changeAnimations((typeof modalAnim.show !== 'undefined' ? modalAnim.show : modalAnim), 'show');
         outAnim = changeAnimations((typeof modalAnim.hide !== 'undefined' ? modalAnim.hide : modalAnim), 'hide');
         modalObj.options.modalAnimation = {
             'show': inAnim,
             'hide': outAnim
         };
 
-        inAnim = (backdropAnimationIn !== '' ? backdropAnimationIn : changeAnimations((typeof backdropAnim.show !== 'undefined' ? backdropAnim.show : backdropAnim), 'show'));
+        inAnim = changeAnimations((typeof backdropAnim.show !== 'undefined' ? backdropAnim.show : backdropAnim), 'show');
         outAnim = changeAnimations((typeof backdropAnim.hide !== 'undefined' ? backdropAnim.hide : backdropAnim), 'hide');
         modalObj.options.backdropAnimation = {
             'show': inAnim,
             'hide': outAnim
         };
-        modalAnimationIn = '';
-        backdropAnimationIn = '';
         if (animationSupport === false) {
             modalObj.options.modalAnimation = {
                 'show': (modalObj.options.modalAnimation.show !== 'ssi-show' ? 'anim ssi-fadeIn' : 'ssi-show'),
@@ -688,35 +684,15 @@
                 keyPress();
             }
         }
-        var setNewAnimation = function (item) {
-            if (typeof buttonOptions[item] !== 'undefined') {
-                if (typeof buttonOptions[item] === 'boolean') {
-                    modalObj.options[item].hide = changeAnimations(buttonOptions.modalAnimation, 'hide');
-                    modalAnimationIn = buttonOptions[item];
-                } else {
-                    if (typeof buttonOptions[item].show !== 'undefined') {
-                        modalAnimationIn = buttonOptions[item].show;
-                    }
-                    if (typeof buttonOptions[item].hide !== 'undefined') {
-                        modalObj.options[item].hide = changeAnimations(buttonOptions[item].hide, 'hide');
-                    }
-                }
-            }
-        };
-
         return $btn.click(function (e) {
             e.preventDefault();
             if (buttonOptions.clearTimeOut) {
                 clearTimeOut(modalObj);
             }
-
-            setNewAnimation('modalAnimation');
-            setNewAnimation('backdropAnimation');
             if (typeof buttonOptions.method === 'function') {
                 resume = $.proxy(buttonOptions.method, this)(e, modalObj);
             }
             if (resume === false) {
-                modalAnimationIn = '';
                 return;
             }
             if (typeof buttonOptions.keepContent === 'boolean' && buttonOptions.keepContent !== modalObj.options.keepContent) {
@@ -997,7 +973,7 @@
         }
 
         if (typeof offset !== 'number') {
-            offset = 130;
+            offset = 115;
         }
 
         var $content = this.get$content();
@@ -1146,7 +1122,7 @@
         },
         /**
          * Closes all or a group of modals.
-         * @param {'normalModal'||'imgModal'||'stackModal'} group
+         * @param {'normalModal'||'pluginName'} group
          * @param {className} except -The modal with this class will not close
          */
         proto: Ssi_modal.prototype,
@@ -1188,17 +1164,15 @@
             openedModals = 0;
             sharedBackdrop = 0;
             byKindShare = {
-                imgModal: 0,
+                imgBox: 0,
                 stackModal: 0,
                 normalModal: 0
             };
             uniqueId = 0;
-            modalAnimationIn = '';
-            backdropAnimationIn = '';
         }
     };
 
-//-----------------------------Starts confirm plugin------------------------------------------------------------------
+//-----------------------------Start of confirm plugin------------------------------------------------------------------
 
     ssi_modal.dialog = function (options, method) {
         var defaults = {
@@ -1224,7 +1198,7 @@
 
     //-----------------------------End of dialog plugin------------------------------------------------------------------
 
-//-----------------------------Starts confirm plugin------------------------------------------------------------------
+//-----------------------------Start of confirm plugin------------------------------------------------------------------
 
     ssi_modal.confirm = function (options, method) {
         var defaults = {
@@ -1265,9 +1239,9 @@
         return new Ssi_modal(options).init().show();
     };
 
-    //--------------------------------End of dialog plugin--------------------------------------------------
+    //--------------------------------End of confirm plugin--------------------------------------------------
 
-//-----------------------------Starts imgBox plugin------------------------------------------------------------------
+//-----------------------------Start of imgBox plugin------------------------------------------------------------------
 
     var imgBoxOptions = {'ssi-mainOption': {}};//this will hold the imgbox options when will call ssi_modal.imgBox function
     ssi_modal.imgBox = function (options, group) {//set options for the image box
@@ -1299,7 +1273,7 @@
         return this;
     };
 
-    $('body').on('click.ssi-imgModal', 'a.ssi-imgBox', function (e) {//click event handler for all links with ssi-imgbox class
+    $('body').on('click.ssi-imgBox', 'a.ssi-imgBox', function (e) {//click event handler for all links with ssi-imgbox class
         e.preventDefault();
         var defaults = {//set defaults
             backdrop: 'byKindShared',
@@ -1343,7 +1317,7 @@
         });
         var url = $eventTarget.attr('href');
         var imgBox = ssi_modal.createObject(options)
-         .setPluginName('imgModal');
+         .setPluginName('imgBox');
 
         imgBox.imgUrl = url;
         imgBox.imgTitle = options.title;
@@ -1527,7 +1501,7 @@
 
 //-----------------------------End of imgBox plugin------------------------------------------------------------------
 
-//--------------------------------End of notify plugin--------------------------------------------------
+//--------------------------------Start of notify plugin--------------------------------------------------
     ssi_modal.notify = function (type, options, callback) {
         var defaults = {
             closeIcon: false,
@@ -1624,7 +1598,7 @@
         if (options.className) {
             options.className += defaults.className || '';
         }
-        options = $.extend({}, defaults, options);
+        options = $.extend(true, defaults, options);
 
         if (options.icon != false) {
             icon = options.icon || type || '';
@@ -1632,7 +1606,7 @@
         if (options.title != false) {
             title = options.title || type;
         }
-        if (options.icon != false || options.title != false) {
+        if ((options.icon != false && options.title != false) && icon!='') {
             options.title = generateIcon(icon) + ' ' + title;
         }
         if (options.backdrop === true) {
@@ -1644,6 +1618,53 @@
          .init().show();
     };
 //--------------------------------End of notify plugin--------------------------------------------------
+
+
+//--------------------------------Start of jquery selector plugin--------------------------------------------------
+
+    $.fn.ssi_modal = function () {
+        var opts;
+        if (typeof arguments[1] === 'object') {
+            var action = arguments[0];
+            opts = arguments[1] || {};
+            var callback = arguments[2];
+        } else {
+            opts = arguments[0] || {};
+        }
+        return this.each(function () {
+            var element = $(this), options;
+            if (opts.content) {//that means that we will not use any div element for content
+                element.click(function () {
+                    switch (action) {//action could be show,dialog or confirm
+                        case 'show':
+                            ssi_modal['show'](opts, element);
+                            break;
+                        default:
+                            ssi_modal[action](opts, callback);
+                    }
+                })
+            } else {
+                var content, def, dataAttr = element.attr('data-ssi_modal');
+                if (dataAttr) {// that means the content is an element.  data-ssi_modal shows the elements selector
+                    element.click(function () {//set click event
+                        content = $(dataAttr);
+                        def = {
+                            content: content
+                        };
+                        options = $.extend({}, opts, def);
+                        ssi_modal.createObject(options).init().show();
+                    });
+                } else {//that means the target is the element that contains the content
+                    def = {
+                        content: element
+                    };
+                    options = $.extend({}, opts, def);
+                    ssi_modal.createObject(options).init().show();
+                }
+            }
+        });
+    };
+//--------------------------------End of jquery selector plugin--------------------------------------------------
 
     /**
      * Adds animation to an element

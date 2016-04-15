@@ -30855,13 +30855,13 @@ module.exports =  [{
 
             }, {
                 name: 'title',
-                type: '{string || boolean}',
+                type: '{string}',
                 defaultValue: 'null',
                 required: [{content: 'normal', type: 'success'}, {
                     content: 'stack',
                     type: 'success'
                 }],
-                description: 'Sets a title to the modal.<span class="attention">The boolean type is only for image modals. If you set to true the link\'s title attribute will be the modal\'s title. (<a class="example" href="ssi-modal/examples/2">Example</a>) (<a class="example" href="ssi-modal/examples/5">Example</a>)'
+                description: 'Sets a title to the modal. (<a class="example" href="ssi-modal/examples/2">Example</a>) (<a class="example" href="ssi-modal/examples/5">Example</a>)'
             }, {
                 name: 'sizeClass',
                 type: "{ 'dialog' || 'small' || 'smallToMedium' || 'medium'|| 'mediumToLarge' || 'large' || 'full' || 'auto' }",
@@ -30881,7 +30881,7 @@ module.exports =  [{
                     type: 'warning',
                     tooltip: '({\'shared\' || \'byKindShared\'})'
                 }],
-                description: 'Enables/disables the backdrop. The <span class="underline">\'shared\'</span> option defines that a backdrop will open only if there is not any already in the dom. The <span class="underline">\'byKindShared\'</span> is similar to the shared but the existing backdrop must belong to the same kind of modals (normalModal, stackModal, imgModal) if not, a new one will open.',
+                description: 'Enables/disables the backdrop. The <span class="underline">\'shared\'</span> option defines that a backdrop will open only if there is not any already in the dom. The <span class="underline">\'byKindShared\'</span> is similar to the shared but the existing backdrop must belong to the same kind of modals (imgBox, notify) if not, a new one will open.',
             }, {
                 name: 'outSideClose',
                 type: '{boolean}',
@@ -30927,7 +30927,7 @@ module.exports =  [{
                     content: 'stack',
                     type: 'danger'
                 }],
-                description: 'If modal\'s height is bigger than the screen\'s, modal\'s height will be fixed and will fit the screen also the content will be scrollable. If set a number offset will be added. Default offset is 110. (<a class="example" href="ssi-modal/examples/8">Example</a>)'
+                description: 'If modal\'s height is bigger than the screen\'s, modal\'s height will be fixed and will fit the screen also the content will be scrollable. If set a number offset will be added. Default offset is 115. (<a class="example" href="ssi-modal/examples/8">Example</a>)'
             }, {
                 name: 'fitScreen',
                 type: '{boolean || number}',
@@ -30936,7 +30936,7 @@ module.exports =  [{
                     content: 'stack',
                     type: 'danger'
                 }],
-                description: 'The modal min-height will be the height of screen. If set a number offset will be added. Default offset is 110. (<a class="example" href="ssi-modal/examples/8">Example</a>)'
+                description: 'The modal min-height will be the height of screen. If set a number offset will be added. Default offset is 115. (<a class="example" href="ssi-modal/examples/8">Example</a>)'
             }, {
                 name: 'beforeShow',
                 type: '{function}',
@@ -31003,9 +31003,9 @@ module.exports =  [{
                 collapse: '7 sub'
             }, {
                 name: 'buttons.enableAfter',
-                type: "{number}",
+                type: "{number || boolean}",
                 defaultValue: 'false',
-                description: 'If a number is set then the button will be enabled after that number in seconds.If you set to true then the button is just disabled and it is up to you to enable it again.',
+                description: 'If a number is set then the button will be enabled after that number in seconds. If you set to true then the button is just disabled and it is up to you to enable it again.',
                 collapse: '7 sub'
             }, {
                 name: 'buttons.id',
@@ -31014,22 +31014,10 @@ module.exports =  [{
                 description: 'Defines an id to the button.',
                 collapse: '7 sub'
             }, {
-                name: 'buttons.modalAnimation',
-                type: "{boolean || string || object}",
-                defaultValue: 'null',
-                description: 'When the button is clicked changes the animations of the modal.If you set a show animation, the next modal tha will open will have that animation.',
-                collapse: '7 sub'
-            }, {
-                name: 'buttons.backDropAnimation',
-                type: "{boolean || string || object}",
-                defaultValue: 'null',
-                description: 'When the button is clicked changes the animations of the backdrop.If you set a show animation, the next modal tha will open will have thiat animation.',
-                collapse: '7 sub'
-            }, {
                 name: 'buttons.method',
                 type: "{function}",
                 defaultValue: 'null',
-                description: 'The function that will execute when the button is pressed.This function has access to the event and modal objects<pre class="prettyprint inline">{method:function(event,modal){}}</pre>',
+                description: 'The function that will execute when the button is pressed. This function has access to the event and modal objects<pre class="prettyprint inline">{method:function(event,modal){}}</pre>. Also you can target the button object with jquery using the <code>this</code> operator <pre class="prettyprint inline">$(this)</pre>.',
                 collapse: '7 sub'
             }, {
                 name: 'buttons.keyPress',
@@ -31063,7 +31051,7 @@ module.exports =  [{
                 name: 'iconsButtons.method',
                 type: '{function}',
                 defaultValue: 'null',
-                description: 'The function that will execute when the icon button will pressed. This function has access to the event and modal objects<pre class="prettyprint inline">{method:function(event,modal){}}</pre>',
+                description: 'The function that will execute when the icon button will pressed. This function has access to the event and modal objects<pre class="prettyprint inline">{method:function(event,modal){}}</pre>. Also you can target the icon object with jquery using the <code>this</code> operator <pre class="prettyprint inline">$(this)</pre>.',
                 collapse: '9 sub'
             }, {
                 name: 'position',
@@ -31153,36 +31141,7 @@ module.exports =  [{
                 defaultValue: 'false',
                 description: 'Resets the time when the cursor is on the main window.',
                 collapse: '2 sub'
-            }, {
-                name: 'closeAfter.closeBackdrop',
-                type: '{boolean}',
-                defaultValue: 'true',
-                description: 'If you set to true, prevent the backdrop to close. The backdrop will belong to the next modal that will open. With this way the imageBox navigation works',
-                required: [{content: 'stack', type: 'warning', tooltip: 'not recommended'}],
-                collapse: '2 sub'
-            }, {
-                name: 'iframe',
-                type: '{object}',
-                defaultValue: '',
-                required: [{content: 'normal', type: 'danger'}, {
-                    content: 'stack',
-                    type: 'danger'
-                }],
-                description: '(<a class="example" href="ssi-modal/examples/6">Example</a>)',
-                collapseLink: '3'
-            }, {
-                name: 'iframe.className ',
-                type: '{string}',
-                defaultValue: 'null',
-                description: 'Defines a class name to the element that is responsible for iframe\'s size',
-                collapse: '3 sub'
-            }, {
-                name: 'iframe.allowFullScreen',
-                type: "{boolean}",
-                defaultValue: 'true',
-                description: '',
-                collapse: '3 sub'
-            }, {
+            },{
                 name: 'center',
                 type: '{boolean}',
                 defaultValue: 'false',
@@ -31362,7 +31321,7 @@ module.exports =  [{
                 name: 'modalType',
                 type: "{('normalModal' || 'stackModal' || 'pluginName') || array }",
                 defaultValue: 'null',
-                description: 'The group or plugin modal you target to close. All modals that belong to the group you specify will be closed after the execution of the method. You can also select multiple groups using an array.'
+                description: 'The group or plugin modal you target to close. All modals that belong to the group you specified will be closed after the execution of the method. You can also select multiple groups using an array.'
 
             }, {
                 name: 'excludeElement',
@@ -31409,7 +31368,7 @@ module.exports =  [{
                 name: 'okBtn',
                 type: '{object}',
                 defaultValue: '',
-                description: 'The option for the ok button <span class="important">This option is available only for confirm or dialog notify.</span>.',
+                description: 'The option for the ok button.',
                 collapseLink: '16a'
             }, {
                 name: 'okBtn.className',
@@ -31453,7 +31412,7 @@ module.exports =  [{
                 name: 'okBtn',
                 type: '{object}',
                 defaultValue: '',
-                description: 'The option for the ok button <span class="important">This option is available only for confirm or dialog notify.</span>.',
+                description: 'The option for the ok button.',
                 collapseLink: '14a'
             }, {
                 name: 'okBtn.className',
@@ -31471,7 +31430,7 @@ module.exports =  [{
                 type: '{object}',
                 defaultValue: '',
                 collapseLink: '15a',
-                description: 'The option for the cancel button <span class="important">This option is available only for confirm notify.</span>.'
+                description: 'The option for the cancel button.'
             }, {
                 name: 'cancelBtn.className',
                 type: '{object}',
@@ -31515,7 +31474,7 @@ module.exports =  [{
             }]
         }, {
             id: '3deee',
-            description: '<span class="attention">With ssi_modal.imgBox() you can use 2 more options.</span>',
+            description: '<span class="attention">With ssi_modal.imgBox() you can use 3 more options.</span>',
             properties: [{
                 name: 'navigation',
                 type: '{boolean}',
@@ -31539,6 +31498,28 @@ module.exports =  [{
                 defaultValue: 'null',
                 description: 'The button will be visible only when the mouse cursor is inside the main window',
                 collapse: '8 sum'
+            }, {
+                name: 'iframe',
+                type: '{object}',
+                defaultValue: '',
+                required: [{content: 'normal', type: 'danger'}, {
+                    content: 'stack',
+                    type: 'danger'
+                }],
+                description: '(<a class="example" href="ssi-modal/examples/6">Example</a>)',
+                collapseLink: '322aa'
+            }, {
+                name: 'iframe.className ',
+                type: '{string}',
+                defaultValue: 'null',
+                description: 'Defines a class name to the element that is responsible for iframe\'s size',
+                collapse: '322aa sub'
+            }, {
+                name: 'iframe.allowFullScreen',
+                type: "{boolean}",
+                defaultValue: 'true',
+                description: '',
+                collapse: '322aa sub'
             }]
         }, {
             id: '3da',
@@ -31619,6 +31600,7 @@ module.exports =  [{
             }, {
                 name: 'okBtn.label',
                 type: '{string}',
+                description: 'The label of the ok button..',
                 defaultValue: "'Ok'",
                 collapse: '12a'
             }, {
@@ -31703,7 +31685,7 @@ module.exports =  [{
                     type: '{object}',
                     defaultValue: '',
                     required: [{content: 'normal', type: 'success'}, {content: 'stack', type: 'success'}],
-                    description: 'The options of the modal. You can see the available options <a class="anchor" href="#2">here</a> <br><span class="important">After modal\'s initialization the option.title, option.content, option.buttons, options.imgButtons and options.iconButtons are not available any more for performance isues! You can access them using a <a class="anchor" href="#4o">get function</span>.',
+                    description: 'The options of the modal. You can see the available options <a class="anchor" href="#2">here</a> <br><span class="important">After modal\'s initialization the option.title, option.content, option.buttons and options.iconButtons are not available any more, for performance isues! You can access them using a <a class="anchor" href="#4o">get function</span>.',
                 }, {
                     name: 'pluginName',
                     type: "{string}",
@@ -32205,7 +32187,7 @@ module.exports = [
     }, {
         id: '2',
         title: 'Size, title, animation',
-        description: 'You can change the size of the ssi-modal by setting a <code>sizeClass</code> option. The valid size values are <code>\'dialog\'</code>, <code>\'small\'</code>, <code>\'smallToMedium\'</code>, <code>\'medium\'</code>, <code>\'mediumToLarge\'</code>, <code>\'large\'</code>, <code>\'full\'</code>. Setting <code class="bg">{animation:true}</code> gives a nice and simple fade effect to the modal window and to the backdrop. Unfortunatly this is the only built in animation but as we will shall see later you can use out of the box css animation libraries to add any animation you want. You can also use the <code>modalAnimation</code> and <code>backdropAnimation</code> options to set different animations to each element. You can also specify the show or hide animation by simple do this <pre class="inline prettyprint"><code>{animation:{show:true,hide:false}</code></pre> ',
+        description: 'You can change the size of the ssi-modal by setting a <code>sizeClass</code> option. The valid size values are <code>\'dialog\'</code>, <code>\'small\'</code>, <code>\'smallToMedium\'</code>, <code>\'medium\'</code>, <code>\'mediumToLarge\'</code>, <code>\'large\'</code>, <code>\'full\'</code> and <code>\'auto\'</code>. Setting <code class="bg">{animation:true}</code> gives a nice and simple fade effect to the modal window and to the backdrop. Unfortunatly this is the only built in animation but as we will shall see later you can use out of the box css animation libraries to add any animation you want. You can also use the <code>modalAnimation</code> and <code>backdropAnimation</code> options to set different animations to each element. You can also specify the show or hide animation simply by doing this <pre class="inline prettyprint"><code>{animation:{show:true,hide:false}</code></pre> ',
         content: [{
             id: '2a',
             example: {
@@ -32225,7 +32207,7 @@ module.exports = [
         title: 'Confirm - Dialog',
         content: [{
             id: '3a',
-            description: 'There are pre build modals tha can be used as a simple dialog or confirm window. To use that you just call <pre class="inline prettyprint"><code>ssi_modal.dialog(options,function(){})</code></pre> or <pre class="inline prettyprint"><code>ssi_modal.confirm(options,function(result){})</code></pre>. You can use any ssi-modal\'s options based on your needs. ',
+            description: 'There are pre-configured modals tha can be used as a simple dialog or confirm window. To use that you just call <pre class="inline prettyprint"><code>ssi_modal.dialog(options,function(){})</code></pre> or <pre class="inline prettyprint"><code>ssi_modal.confirm(options,function(result){})</code></pre>. You can use any ssi-modal\'s options based on your needs. ',
             example: {
                 result: '<button id="modal3" class="btn btn-primary">Confirm</button>\n<button id="modal3b" class="btn btn-primary">Dialog</button>',
                 method: function () {   $('#modal3').click(function () {
@@ -32290,7 +32272,7 @@ module.exports = [
         title: 'KeepContent',
         content: [{
             id: '5a',
-            description: 'Setting keepContent to true, when you close the modal the content will not be lost.For more complicated cases, you can change the keepContent option using a modal\'s button. <pre class="prettyprint inline"><code>ssi_modal.show({content:\'...\',<span class="border">keepContent:true</span>,buttons:[{label:\'cancel\',<span class="border">keepContent:false</span>}]},\'#modal5\') </code></pre>',
+            description: 'Setting keepContent to true, when you close the modal, the content will not be lost. For more complicated cases, you can change the keepContent option using a modal\'s button. <pre class="prettyprint inline"><code>ssi_modal.show({content:\'...\',<span class="border">keepContent:true</span>,buttons:[{label:\'cancel\',<span class="border">keepContent:false</span>}]},\'#modal5\') </code></pre>',
             example: {
                 result: '<button id="modal5" class="btn btn-primary">Basic example</button> \n<button id="modal5a" class="btn btn-primary">Complicated example</button>',
                 method: function () {
@@ -32411,7 +32393,7 @@ module.exports = [
         title: 'Callbacks',
         content: [{
             id: '7a',
-            description: 'The ssi-modal supports 4 kind of callbacks:<code>beforeShow,onShow,beforeClose,onClose</code>. Each one have access to modal object. If you <code>return false</code> with the beforeClose/beforeShow callbacks, you will prevent to close/open the modal. All callbacks have access to the modal object. <pre class="prettyprint inline"><code>{beforeClose:function(modal){}</code></pre></code></pre>',
+            description: 'The ssi-modal supports 4 kind of callbacks:<code>beforeShow, onShow, beforeClose, onClose</code>. Each one have access to the modal object. If you <code>return false</code> with the beforeClose/beforeShow callbacks, you will prevent to close/open the modal. <pre class="prettyprint inline"><code>{beforeClose:function(modal){}</code></pre></code></pre>',
             example: {
                  result: '<button id="modal7" class="btn btn-primary">Open modal</button>',
                 method: function () {   $('#modal7').click(function () {
@@ -32478,7 +32460,7 @@ module.exports = [
         title: 'Using existing element',
         content: [{
             id: '9a',
-            description: 'You can use an element tha is already sitting in the DOM.To do that there are two ways.With the first way you just target the element with jquery and call the function <pre class="inline prettyprint"><code>$(\'.selector\').ssi_modal(options)</code></pre> and the second one, you set a data-ssi_modal attribute to a trigger element like button </br><pre class="inline prettyprint"><code>&lt;button id="button" data-ssi_modal="#simpleDiv"&gt;Open&lt;/button&gt;</code></pre> and target it with jquery again <pre class="inline prettyprint"><code>$(\'#button\').ssi_modal(options)</code></pre> If you want the changes you made in the modal to affect and the to original content, you must set the <code>overrideOriginaContent</code> option to true <pre class="prettyprint inline">{overrideOriginaContent:true}</pre>',
+            description: 'You can use an element that is already sitting in the DOM.To do that there are three ways. The first way is to target the object with jquery and add it to the content <pre class="prettyprint inline">ssi_modal.show({content:$(\'myDiv\')})</pre>. With the second way you just target the element with jquery and call the function <pre class="inline prettyprint"><code>$(\'.selector\').ssi_modal(options)</code></pre> and the second one, you set a data-ssi_modal attribute to a trigger element like button </br><pre class="inline prettyprint"><code>&lt;button id="button" data-ssi_modal="#simpleDiv"&gt;Open&lt;/button&gt;</code></pre> and target it with jquery again <pre class="inline prettyprint"><code>$(\'#button\').ssi_modal(options)</code></pre> If you want the changes you made in the modal to affect and the to original content, you must set the <code>extendOriginalContent</code> option to true <pre class="prettyprint inline">{extendOriginalContent:true}</pre>',
             example: {
                  result: '<button id="modal9" class="btn btn-primary">Open modal</button></br></br>\n<div id="simpleDiv"><input type="text" value="Edit me"/></div>',
                 method: function () {   $('#modal9').click(function(){
@@ -32587,7 +32569,7 @@ module.exports = [
         title: 'Using animations',
         content: [{
             id: '12a',
-            description: 'The ssi-modal is compatible with animations but haven\'t any built in.You can create your own animations or can use any animation library. Use <pre class="prettyprint inline"><code>{modalAnimation:{show:\'animationClass\',hide:\'animationClass\'}}</code></pre> and  <pre class="prettyprint inline"><code>{backdropAnimation:{show:\'animationClass\',hide:\'animationClass\'}}</code></pre> to specify your animations. To set animation to both at once you can also use <pre class="prettyprint inline"><code>{animation:{show:\'animationClass\',hide:\'animationClass\'}}</code></pre>. In this example we are using the <a href="https://daneden.github.io/animate.css/" target="_blank">animate.css</a> library.',
+            description: 'The ssi-modal is compatible with animations but it hasn\'t any built in. You can create your own animations or can use any animation library. Use <pre class="prettyprint inline"><code>{modalAnimation:{show:\'animationClass\',hide:\'animationClass\'}}</code></pre> and  <pre class="prettyprint inline"><code>{backdropAnimation:{show:\'animationClass\',hide:\'animationClass\'}}</code></pre> to specify your animations. To set animation to both at once you can also use <pre class="prettyprint inline"><code>{animation:{show:\'animationClass\',hide:\'animationClass\'}}</code></pre>. In this example we are using the <a href="https://daneden.github.io/animate.css/" target="_blank">animate.css</a> library.',
             example: {
                 result: '<button id="modal12" class="btn btn-primary">Open modal</button> \n<button id="modal12a" class="btn btn-primary">Open modal</button> \n<button id="modal12b" class="btn btn-primary">Open modal</button>',
                 method: function () {   $('#modal12').click(function(){
@@ -33121,7 +33103,7 @@ var PropertiesCollection = require('../collections/properties');
 var PropertyView = require('../views/propertyView');
 var currentView;
 var currentPlugin='ssi-modal';
-
+var activated=false;
 var scrollState = {
     doc: 0,
     example: 0
@@ -33178,7 +33160,10 @@ var SsinputRouter = Backbone.Router.extend({
             } else if ($hash.hasClass('collapse')) {
                 $('.' + $hash.attr('data-col')).collapse('show');
             }
-
+if($hash.children('a').html()=='Plugins' && activated===false){
+    activated=true;
+ssi_modal.notify('custom',{closeAfter:{time:7},title:false,content:'Plugins are not part of the core code. For now they are all in the same file. Somewhere in the future i hope you will be able to download them separately. If you don\'t want to use any, you can remove it. <a href="#" class="seeHow"> See how </a>.',onShow:function(modal){$('.seeHow').click(function(){;modal.close();ssi_modal.show({title:'Remove a plugin',content:'<ol class="delPL"><li>First open the ssi-modal.js file.</li><li>Find the line with the comment <pre class="prettyprint inline">//Start of (plugin Name) plugin</pre>.</li><li>Delete the code until you get to the comment <pre class="prettyprint inline">//End of (plugin Name) plugin</pre>.</li><li>Do the same with ssi-modal.css file.</li></ol>'});prettyPrint();return false;})},sizeClass:'medium',position:'top center',okBtn:{className:'btn btn-primary'}})
+}
         });
         $(document).on('scroll.examples', function () {
             if (currentView === 'doc') {
@@ -33505,7 +33490,7 @@ if($eTarget.hasClass('git')){
                         closeAfter: false,
                         side: 'left',
                         method: function () {
-                            ssi_modal.closeAll('imgModal');
+                            ssi_modal.closeAll('imgBox');
                         }
                     }, {
                         label: 'close Notifications',
