@@ -30829,7 +30829,7 @@ module.exports =  [{
     }, {
         id: '44',
         title: 'Callbacks',
-        description: 'The ssi-modal supports 4 kind of callbacks:<code>beforeShow,onShow,beforeClose,onClose</code>. Each one has access to modal object. If you <code>return false</code> with the beforeClose/beforeShow callbacks, you will prevent to close/open the modal. Ie <pre class="prettyprint inline"><code>{beforeClose:function(modal){return false;}}</code></pre> (<a class="example" href="ssi-modal/examples/7">Example</a>)',
+        description: 'The ssi-modal supports 4 kind of callbacks:<code>beforeShow, onShow, beforeClose, onClose</code>. Each one has access to modal object. If you <code>return false</code> with the beforeClose/beforeShow callbacks, you will prevent to close/open the modal. Ie <pre class="prettyprint inline"><code>{beforeClose:function(modal){return false;}}</code></pre> (<a class="example" href="ssi-modal/examples/7">Example</a>)',
         content: [{
             id: '44aa',
             description: 'Also an event will be triggered after each action that you can listen to',
@@ -33800,7 +33800,7 @@ var PropertiesView = Backbone.View.extend({
             content.push(property.$el);
 
         }, this);
-        this.$el.append(content);
+        this.$el=$('<div class="table-responsive"></div>').append(this.$el.append(content));
     }
 });
 
