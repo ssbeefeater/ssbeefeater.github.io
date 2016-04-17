@@ -31216,6 +31216,16 @@ module.exports =  [{
                 defaultValue: '',
                 description: 'Defines the animation of the backdrop when closes.',
                 collapse: '6 sub'
+            }, {
+                name: 'bodyElement',
+                type: '{boolean}',
+                defaultValue: '',
+                description: 'Defines that the content you have set, is a element that is already in the dom. (<a class="example" href="ssi-modal/examples/9">Example</a>)'
+            }, {
+                name: 'extendOriginalContent',
+                type: '{boolean}',
+                defaultValue: '',
+                description: 'If true, the changes made in the modal will affect and the to original content. <span class="important">Requires bodyElement to be set to true.</span> (<a class="example" href="ssi-modal/examples/9">Example</a>)'
             }]
         }]
     }, {
@@ -31679,7 +31689,7 @@ module.exports =  [{
         content: [
             {
                 id: '4a',
-                title: '<br><h3>Public variables<h3>',
+                title: '<br><h3>Public variables</h3>',
                 properties: [{
                     name: 'options',
                     type: '{object}',
@@ -32139,7 +32149,7 @@ module.exports =  [{
                 title: 'Example',
                 code: "//create a ssi-modal object<br>ssi_modal.createObject(options).init().destroyBackdrop();"
             }, {
-                id: '4x',
+                id: '4y',
                 title: '<br>setModalHeight()<h6><span class="label label-success">normal</span><span class="label label-success">stack</span></h6>',
                 description: 'Sets the height of the modal.<span class="important">You must initialize and show the modal first.</span>',
                 properties: [{
@@ -32152,10 +32162,10 @@ module.exports =  [{
                     description: 'The height option you want to set the height number. If true it will just return the height number'
                 }]
             }, {
-                id: '4xa',
+                id: '4ya',
                 description: '<code>Returns the height number.</code><br><br>'
             }, {
-                id: '4xb',
+                id: '4yb',
                 title: 'Example',
                 code: "//create a ssi-modal object<br>ssi_modal.createObject(options).init().show().setContentHeight();"
             }
@@ -32460,12 +32470,13 @@ module.exports = [
         title: 'Using existing element',
         content: [{
             id: '9a',
-            description: 'You can use an element that is already sitting in the DOM.To do that there are three ways. The first way is to target the object with jquery and add it to the content <pre class="prettyprint inline">ssi_modal.show({content:$(\'myDiv\')})</pre>. With the second way you just target the element with jquery and call the function <pre class="inline prettyprint"><code>$(\'.selector\').ssi_modal(options)</code></pre> and the second one, you set a data-ssi_modal attribute to a trigger element like button </br><pre class="inline prettyprint"><code>&lt;button id="button" data-ssi_modal="#simpleDiv"&gt;Open&lt;/button&gt;</code></pre> and target it with jquery again <pre class="inline prettyprint"><code>$(\'#button\').ssi_modal(options)</code></pre> If you want the changes you made in the modal to affect and the to original content, you must set the <code>extendOriginalContent</code> option to true <pre class="prettyprint inline">{extendOriginalContent:true}</pre>',
+            description: 'You can use an element that is already sitting in the DOM. To do that there are three ways. The first way is to target the object with jquery and add it to the content also set bodyElement option to true <pre class="prettyprint inline">ssi_modal.show({content:$(\'myDiv\'),bodyElement:true})</pre>. With the second way you just target the element with jquery and call the function <pre class="inline prettyprint"><code>$(\'.selector\').ssi_modal({options...,bodyElement:true})</code></pre> and the second one, you set a data-ssi_modal attribute to a trigger element like button </br><pre class="inline prettyprint"><code>&lt;button id="button" data-ssi_modal="#simpleDiv"&gt;Open&lt;/button&gt;</code></pre> and target it with jquery again <pre class="inline prettyprint"><code>$(\'#button\').ssi_modal({options...,bodyElement:true})</code></pre> If you want the changes you made in the modal to affect and the to original content, you must set the <code>extendOriginalContent</code> option to true <pre class="prettyprint inline">{extendOriginalContent:true}</pre>',
             example: {
                  result: '<button id="modal9" class="btn btn-primary">Open modal</button></br></br>\n<div id="simpleDiv"><input type="text" value="Edit me"/></div>',
                 method: function () {   $('#modal9').click(function(){
         ssi_modal.show({
             content:$('#simpleDiv'),
+            bodyElement:true,
         title:'ssi-modal',
             extendOriginalContent:true
         })
@@ -32639,8 +32650,8 @@ module.exports = [
             backdrop:'shared',outSideClose:true,
             content: 'An error occurred.',
             buttons:[
-    {label:'Shared backdrop',className:'btn btn-default btn-xs',method:function(){ssi_modal.notify('info',{content:'hi',outSideClose:true,backdrop:'shared'})}},
-    {label:'Without backdrop',className:'btn btn-default btn-xs',method:function(){ssi_modal.notify('warning',{content:'hi'})}}
+    {label:'Shared backdrop',className:'btn btn-primary btn-xs',method:function(){ssi_modal.notify('info',{content:'hi',outSideClose:true,backdrop:'shared'})}},
+    {label:'Without backdrop',className:'btn btn-warning btn-xs',method:function(){ssi_modal.notify('warning',{content:'hi'})}}
             ]
         })
     });
@@ -32809,12 +32820,12 @@ module.exports = [{
     },{
         id: '44',
         title: 'Callbacks',
-        description: 'The ssi-uploader supports 4 kind of callbacks:<code>beforeUpload,beforeEachUpload,onUpload,onEachUpload</code>. (<a class="example" href="ssi-uploader/examples/5">Example</a>)',
+        description: 'The ssi-uploader supports 4 kind of callbacks:<code>beforeUpload, beforeEachUpload, onUpload, onEachUpload</code>. (<a class="example" href="ssi-uploader/examples/7">Example</a>)',
         content: [{
             id: '44ab',
             title:'beforeUpload',
             description: 'The <code>beforeUpload</code> callback is executed before an upload process starts.',
-            code: "$('input').ssi_uploader({url:'uploadAction.php',beforeUpload:function(){\n   console.log(The upload is ready to start.);\n}})\n\n$('input').on(\'beforeUpload.ssi-uploader\',function(){console.log(\'A fill is going for uploading.\')});"
+            code: "$('input').ssi_uploader({url:'uploadAction.php',beforeUpload:function(){\n   console.log(\'The upload is ready to start.\');\n}})\n\n$('input').on(\'beforeUpload.ssi-uploader\',function(){console.log(\'A fill is going for uploading.\')});"
         },{
             id: '44ac',
             title:'beforeEachUpload',
@@ -32852,37 +32863,37 @@ module.exports = [{
                 name: 'data',
                 type: '{object}',
                 defaultValue: 'null',
-                description: 'Send extra data with the request. (ie <pre class="prettyprint inline">$(\'input\').ssi-uploader({url:\'uploadAction.php\',data:{"name":"myDragon"}})</pre>)'
+                description: 'Sends extra data with the request. (ie <pre class="prettyprint inline">$(\'input\').ssi-uploader({url:\'uploadAction.php\',data:{"name":"myDragon"}})</pre>)'
             }, {
                 name: 'locale',
                 type: '{string}',
                 defaultValue: '"en"',
-                description: 'The language to use. For now available in en, gr . (<a class="example" href="ssi-uploader/examples/3">Example</a>)'
+                description: 'The language to use. For now available in en, gr . To sse how to translate to your language click <button class="btn btn-default btn-xs howTo" href="ssi-uploader/examples/4">here</button>. (<a class="example" href="ssi-uploader/examples/3">Example</a>)'
             }, {
                 name: 'preview',
                 type: '{boolean}',
                 defaultValue: 'true',
-                description: 'Enables/disables the file preview. (<a class="example" href="ssi-uploader/examples/3">Example</a>) (<a class="example" href="ssi-uploader/examples/2">Example</a>)'
+                description: 'Enables/disables the file preview. (<a class="example" href="ssi-uploader/examples/2">Example</a>)'
             }, {
                 name: 'maxNumberOfFiles',
                 type: '{number}',
                 defaultValue: 'null',
-                description: 'How many files are allowed per upload. (<a class="example" href="ssi-uploader/examples/1">Example</a>)'
+                description: 'How many files are allowed per upload.)'
             }, {
                 name: 'maxFileSize',
                 type: '{number}',
                 defaultValue: 'null',
-                description: 'The maximum size of each file. (<a class="example" href="ssi-uploader/examples/1">Example</a>)'
+                description: 'The maximum size of each file. (<a class="example" href="ssi-uploader/examples/6">Example</a>)'
             }, {
                 name: 'allowed',
                 type: '{array}',
                 defaultValue: "['jpg', 'jpeg', 'png', 'bmp', 'gif']",
-                description: 'The maximum size of each file. (<a class="example" href="ssi-uploader/examples/1">Example</a>)'
+                description: 'The maximum size of each file. (<a class="example" href="ssi-uploader/examples/5">Example</a>)'
             }, {
                 name: 'errorHandler',
                 type: '{object}',
                 defaultValue: "",
-                description: 'The method that will be used to display the messages. (<a class="example" href="ssi-uploader/examples/4">Example</a>)',
+                description: 'The method that will be used to display the messages. (<a class="example" href="ssi-uploader/examples/6">Example</a>)',
                 collapseLink:'a1'
             }, {
                 name: 'errorHandler.method',
@@ -32906,22 +32917,22 @@ module.exports = [{
                 name: 'beforeUpload',
                 type: '{function}',
                 defaultValue: "",
-                description: 'The callback that is executed before an upload process starts. (<a class="example" href="ssi-uploader/examples/5">Example</a>)'
+                description: 'The callback that is executed before an upload process starts. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
             }, {
                 name: 'beforeEachUpload',
                 type: '{function}',
                 defaultValue: "",
-                description: 'The callback that is executed just before each file starts to uploading. (<a class="example" href="ssi-uploader/examples/5">Example</a>)'
+                description: 'The callback that is executed just before each file starts to uploading. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
             }, {
                 name: 'onUpload',
                 type: '{function}',
                 defaultValue: "",
-                description: 'The callback that is executed when the upload process ends. (<a class="example" href="ssi-uploader/examples/5">Example</a>)'
+                description: 'The callback that is executed when the upload process ends. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
             }, {
                 name: 'onEachUpload',
                 type: '{function}',
                 defaultValue: "",
-                description: 'The callback that is executed when each file finishes to uploading. (<a class="example" href="ssi-uploader/examples/5">Example</a>)'
+                description: 'The callback that is executed when each file finishes to uploading. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
             }]
         }]
     }];
@@ -32930,23 +32941,40 @@ module.exports = [{
 },{}],23:[function(require,module,exports){
 "use strict";
 
-//var ssi_modal=require('../../ssi-modal/js/ssi-modal');
+var notifyOptions={iconButtons: {
+    className: 'fa fa-question about',
+     method: function (e, modal) {
+        ssi_modal.closeAll('notify');
+        var btn = $(this).addClass('disabled');
+        ssi_modal.dialog({
+            onClose: function () {
+                btn.removeClass('disabled')
+            },
+            onShow:function(){},
+            okBtn:{className:'btn btn-primary btn-sm'},
+            title: 'ssi-modal',
+            content: 'ssi-modal is an open source modal window plugin that only depends on jquery. It has many options and it\'s super flexible, maybe the most flexible modal out there... For more details click <a class="sss" href="http://ssbeefeater.github.io/#ssi-modal" target="_blank">here</a>',
+            sizeClass:'small',
+            animation: true
+        });
+    }
+}};
 module.exports =[{
         id: '1',
         title: 'Basic example',
-        description: '<br><br>',
+        description: '',
         content: [{
             id: '1a',
             example:{
             result: '<input type="file" multiple id="ssi-upload"/>',
             method:function(){
-                $('#ssi-upload').ssi_uploader({url:'uploadAction.php',dropZone:false});
+                $('#ssi-upload').ssi_uploader({url:'http://144.76.94.162/scripts/uploadAction.php',beforeEachUpload:function(info,xhr){xhr.setRequestHeader("Access-Control-Allow-Origin","*")}}  );
             }}
         }]
     },{
         id: '2',
         title: 'Disable preview',
-        description: '<br><br>',
+        description: 'For multiple files click in the name box to see your files!',
         content: [{
             id: '2a',
             example:{
@@ -32957,26 +32985,61 @@ module.exports =[{
         }]
     },{
         id: '3',
-        title: 'Localize',
-        description: '<br><br>',
+        title: 'Disable drag n drop',
+        description: '',
         content: [{
             id: '3a',
             example:{
-            result: '<input type="file" id="ssi-upload3"/>',
+            result: '<input type="file" multiple id="ssi-upload3"/>',
             method:function(){
-                $('#ssi-upload3').ssi_uploader({url:'uploadAction.php',locale:'gr'});
+                $('#ssi-upload3').ssi_uploader({url:'uploadAction.php',dropZone:false});
             }}
         }]
     },{
         id: '4',
-        title: 'Error handler',
-        description: '<br><br>',
+        title: 'Localize',
+        description: '',
+        content: [{
+            id: '3a',
+            example:{
+            result: '<input type="file" multiple id="ssi-upload4"/>',
+            method:function(){
+                $('#ssi-upload4').ssi_uploader({url:'uploadAction.php',locale:'gr'});
+            }}
+        }]
+    },{
+        id: '5',
+        title: 'More file types',
+        description: '',
         content: [{
             id: '4a',
             example:{
-                result: '<input type="file" multiple id="ssi-upload4"/>',
+                result: '<input type="file" multiple id="ssi-upload5"/>',
             method:function(){
-                $('#ssi-upload4').ssi_uploader({
+                $('#ssi-upload5').ssi_uploader({
+                    url:'uploadAction.php',
+                    allowed: ['png','jpg','pdf','txt'],
+                    errorHandler: {
+                        method: function (msg,type) {
+                           ssi_modal.notify(type, {content:msg});
+                        },
+                        success: 'success',
+                        error: 'error'
+                    },
+                    maxFileSize: 122//mb
+                });
+            }}
+        }]
+    },{
+        id: '6',
+        title: 'Error handler',
+        description: '',
+        content: [{
+            id: '6a',
+            example:{
+                result: '<input type="file" multiple id="ssi-upload6"/>',
+            method:function(){
+                $('#ssi-upload6').ssi_uploader({
                     url:'uploadAction.php',
                     allowed: ['gif','jpg'],
                     preview:false,
@@ -32992,36 +33055,34 @@ module.exports =[{
             }}
         }]
     },{
-        id: '5',
+        id: '7',
         title: 'Callbacks',
-        description: '<br><br>',
+        description: '',
         content: [{
-            id: '5a',
+            id: '7a',
             example:{
-            result: '<input type="file" id="ssi-upload5"/>',
+            result: '<input type="file" multiple id="ssi-upload7"/>',
             method:function(){
-                $('#ssi-upload5').ssi_uploader({
+                $('#ssi-upload7').ssi_uploader({
                     url:'uploadAction.php',
-                    preview:false,
                     onUpload: function () {
-                        alert('upload finished');
+                      ssi_modal.notify('info', $.extend({},notifyOptions,{title:'onUpload',icon:false,position:'top center'}));
                     },
-                    onEachUpload: function (info) {
-                        alert('Status: '+info.uploadStatus+
-                         'name: '+info.name+
-                         'sizeClass: '+info.size+
-                         'type: '+info.type
-                        )
+                    onEachUpload: function (fileInfo) {
+                        ssi_modal.notify('error', $.extend({},notifyOptions,{ classSize:'auto',title:'onEachUpload',position:'bottom center',content:
+                             'Status: '+fileInfo.uploadStatus+
+                             '<br>name: '+fileInfo.name+
+                             '<br>sizeClass: '+fileInfo.size+
+                             '<br>type: '+fileInfo.type}));
                     },
                     beforeUpload: function () {
-                        alert('Before upload start')
+                        ssi_modal.notify('warning', $.extend({},notifyOptions,{title:'onUpload',icon:false,position:'top left'}));
                     },
-                    beforeEachUpload: function (info) {
-                        /*alert('Status: '+info.status+
-                         'name: '+info.name+
-                         'sizeClass: '+info.size+
-                         'type: '+info.type
-                         )*/
+                    beforeEachUpload: function (fileInfo,xhr) {
+                        ssi_modal.notify('success', $.extend({},notifyOptions,{icon:false,sizeClass:'small',title:'beforeEachUpload',content:
+                        'name:'+fileInfo.name+
+                        '<br>size: '+fileInfo.size+
+                        '<br>type: '+fileInfo.type}));
                     }
                 });
             }}
@@ -33115,7 +33176,7 @@ var SsinputRouter = Backbone.Router.extend({
         'ssi-modal/examples': 'ssi_modalExamples',
         'ssi-modal/examples/:id': 'ssi_modalExamples',
         'ssi-modal/documentation': 'ssi_modalDocumentation',
-       /* 'ssi-uploader': 'ssi_uploader',
+      /* 'ssi-uploader': 'ssi_uploader',
         'ssi-uploader/examples': 'ssi_uploaderExamples',
         'ssi-uploader/examples/:id': 'ssi_uploaderExamples',
         'ssi-uploader/documentation': 'ssi_uploaderDocumentation',*/
@@ -33238,9 +33299,6 @@ if($eTarget.hasClass('git')){
         }];
         var defaults = {
             className: 'prev',
-            beforeClose: function () {
-                return false;
-            },
             fitScreen: true,
             fixedHeight: true,
             outSideClose: false,
@@ -33262,10 +33320,10 @@ if($eTarget.hasClass('git')){
             fitScreen: false,
             outSideClose:true,
             closeIcon:true,
-            beforeClose:function(){},
+            beforeClose:function(){window.history.back()},
             title: '',
             content: '<div class="pageNF"> <h1>Not found <span>:(</span></h1><p>Sorry, but the page you were trying to view does not exist.</p><p>It looks like this was the result of either:</p><ul><li>a mistyped address</li><li>an out-of-date link</li></ul></div>',
-            buttons: ''
+            buttons:{}
         })
     },
     'home': function () {
@@ -33273,20 +33331,70 @@ if($eTarget.hasClass('git')){
         this.homePage('ssi-modal', {buttons: '', title: '', content: content, backdropClassName: 'ssi-modalBg'});
     },
     'ssi_modal': function () {
+       this.ssi_modalExamples();
         var content = 'tested on: <img src="images/browser_icons.png"><div id="desc">ssi-modal is an open source modal window plugin that only depends on jquery. It has many options and it\'s super flexible, maybe the most flexible modal out there.</div><div class="feature"><br><ul><li><i class="fa fa-check"></i> Responsive</li><li><i class="fa fa-check"></i> Mobile friendly</li><li><i class="fa fa-check"></i> Customizable</li><li><i class="fa fa-check"> Full feature</i></li></div>'
+      var thisS=this;
         this.homePage('ssi-modal', {
             fitScreen: 180,
             fixedHeight: 180,
             center: true,
             closeIcon: true,
+            onClose:function(){thisS.navigate('ssi-modal/examples',{trigger:false})},
             content: content,
             backdropClassName: 'ssi-modalBg'
         });
-
     },/*
     'ssi_uploader': function () {
-        var content = 'tested on: <img src="images/browser_icons.png"><div id="desc">ssi-modal is an open source modal window plugin that only depends on jquery. It has many options and it\'s super flexible, maybe the most flexible modal out there.</div><br><div id="thumbs"><div class="thumbsWrapper"><div class="thumbnail"><h3><i class="fa fa-arrows-alt" aria-hidden="true"></i> Responsive</h3> <p>The ssi-modal is responsive</p> <p></p> </div><div class="thumbnail"><h3><i class="fa fa-mobile" aria-hidden="true"></i> Mobile friendly</h3> <p>The ssi-modal is responsive</p></div><div class="thumbnail"><h3><i class="fa fa-forumbee" aria-hidden="true"></i> Customizable</h3> <p>The ssi-modal is responsive</p></div><div class="thumbnail"><h3><i class="fa fa-cogs" aria-hidden="true"></i> Full feature</h3> <p>The ssi-modal is responsive</p></div></div></div>'
-        this.homePage('ssi-uploader', {content: content, backdropClassName: 'ssi-uploaderBg'});
+        this.ssi_uploaderExamples();
+        this.beforeBoot('ssi-uploader');
+        var buttons = [{
+            label: '<i class="fa fa-github fa-2x" aria-hidden="true"></i> View on GitHub',
+            className: 'btn btn-default',
+            method: function () {
+                window.open("https://github.com/ssbeefeater/" + 'ssi-uploader', '_blank');
+            }
+        }, {
+            label: '<i class="fa fa-book fa-2x" aria-hidden="true"></i> Documentation',
+            className: 'btn btn-default',
+            method: function () {
+                thisS.navigate('ssi-uploader' + "/documentation", {trigger: true});
+            }
+        }, {
+            label: '<i class="fa fa-wrench fa-2x" aria-hidden="true"></i> Examples',
+            className: 'btn btn-default',
+            method: function () {
+                thisS.navigate('ssi-uploader' + "/examples", {trigger: true});
+            }
+        }, {
+            label: '<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif">',
+            className: 'donateBtn btn btn-default',
+            method: function () {
+                var myform = document.createElement("form");
+                myform.action = "https://www.paypal.com/cgi-bin/webscr";
+                myform.method = "post";
+                myform.target = "_top";
+                var cmd = document.createElement("input");
+                cmd.value = "_s-xclick";
+                cmd.name = "cmd";
+                var hosted_button_id = document.createElement("input");
+                hosted_button_id.value = "RGC7YRQBPSMCE";
+                hosted_button_id.name = "hosted_button_id";
+                myform.appendChild(cmd);
+                myform.appendChild(hosted_button_id);
+                myform.submit();
+            }
+        }];
+        var content = 'tested on: <img src="images/browser_iconsUL.png"><div id="descUL"><h2>ssi-uploader</h2><br>A jquery, ajax, asynchronous upload plugin.</div>';
+        var options= {outSideClose:false,onClose:function(){thisS.navigate('ssi-uploader/examples',{trigger:false})},className:'UL',title:'',content: content, backdropClassName: 'ssi-uploaderBg'};
+
+        var thisS=this;
+        $(document).ready(function () {
+            thisS.bootPage();
+           var a= ssi_modal.createObject(options);
+            a.init();
+            a.setButtons(buttons,'.UL .ssi-modalContent');
+            a.show();
+        });
     },*/
     'examplesPage': function (plugin, id) {
         var thisS = this;
@@ -33444,7 +33552,6 @@ if($eTarget.hasClass('git')){
          prop.$el.css('font-size', '12px')[0].outerHTML + ' <h3>Example</h3><pre class="prettyprint">//closes the normal and notify modals but not those with myModal class.<br>ssi_modal.closeAll([\'normalModal\',\'notify\'],\'myModal\']);<br><br>//closes all the modals except those with myModal and mySecondModal classes.<br>ssi_modal.closeAll(\'\',[\'myModal\',\'mySecondModal\']]);<br><br>//closes all the modals.<br>ssi_modal.closeAll();</pre> ';
 
         $(document).ready(function () {
-
             ssi_modal.notify('me', {
                 title: 'Choose an action',
                 onClickClose: false,
@@ -33504,12 +33611,16 @@ if($eTarget.hasClass('git')){
                 ]
             });
         });
-    }/*,
-    'ssi_uploaderExamples': function (id) {
+    },
+/*    'ssi_uploaderExamples': function (id) {
         this.examplesPage('ssi-uploader', id);
     },
     'ssi_uploaderDocumentation': function () {
         this.documentationPage('ssi-uploader');
+        $('body').on('click.example','button.howTo',function(e){
+            e.preventDefault();
+            ssi_modal.show({onShow:function(){prettyPrint()},content:'<ol class="delPL"><li>First open the ssi-uploader.js file.</li><li>Find the varaible with name locale. You will see something like this <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...}}</pre>.</li><li>Now add your language and follow tha same pattern. <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...},gr:{hi:\'Γειά\',error:\'Σφάλμα\'}}</pre>.</li><li>Now you can set you own language to the plugin <pre class="prettyprint inline">$(\'input\').ssi_uploader({locale:\'gr\'})</pre></li></ol>'})})
+
     }*/
 
 });
