@@ -32968,7 +32968,7 @@ module.exports =[{
             example:{
             result: '<input type="file" multiple id="ssi-upload"/>',
             method:function(){
-                $('#ssi-upload').ssi_uploader({url:'http://144.76.94.162/scripts/uploadAction.php',beforeEachUpload:function(info,xhr){xhr.setRequestHeader("Access-Control-Allow-Origin","*")}}  );
+                $('#ssi-upload').ssi_uploader({url:'http://5.9.111.116/scripts/uploadAction.php',beforeEachUpload:function(info,xhr){xhr.setRequestHeader("Access-Control-Allow-Origin","*")}}  );
             }}
         }]
     },{
@@ -33176,10 +33176,10 @@ var SsinputRouter = Backbone.Router.extend({
         'ssi-modal/examples': 'ssi_modalExamples',
         'ssi-modal/examples/:id': 'ssi_modalExamples',
         'ssi-modal/documentation': 'ssi_modalDocumentation',
-      /* 'ssi-uploader': 'ssi_uploader',
+     'ssi-uploader': 'ssi_uploader',
         'ssi-uploader/examples': 'ssi_uploaderExamples',
         'ssi-uploader/examples/:id': 'ssi_uploaderExamples',
-        'ssi-uploader/documentation': 'ssi_uploaderDocumentation',*/
+        'ssi-uploader/documentation': 'ssi_uploaderDocumentation',
         '*notFound': 'notFound'
     },
     initialize: function () {
@@ -33343,7 +33343,7 @@ if($eTarget.hasClass('git')){
             content: content,
             backdropClassName: 'ssi-modalBg'
         });
-    },/*
+    },
     'ssi_uploader': function () {
         this.ssi_uploaderExamples();
         this.beforeBoot('ssi-uploader');
@@ -33395,7 +33395,7 @@ if($eTarget.hasClass('git')){
             a.setButtons(buttons,'.UL .ssi-modalContent');
             a.show();
         });
-    },*/
+    },
     'examplesPage': function (plugin, id) {
         var thisS = this;
         currentView = 'example';
@@ -33612,7 +33612,7 @@ if($eTarget.hasClass('git')){
             });
         });
     },
-/*    'ssi_uploaderExamples': function (id) {
+  'ssi_uploaderExamples': function (id) {
         this.examplesPage('ssi-uploader', id);
     },
     'ssi_uploaderDocumentation': function () {
@@ -33621,7 +33621,7 @@ if($eTarget.hasClass('git')){
             e.preventDefault();
             ssi_modal.show({onShow:function(){prettyPrint()},content:'<ol class="delPL"><li>First open the ssi-uploader.js file.</li><li>Find the varaible with name locale. You will see something like this <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...}}</pre>.</li><li>Now add your language and follow tha same pattern. <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...},gr:{hi:\'Γειά\',error:\'Σφάλμα\'}}</pre>.</li><li>Now you can set you own language to the plugin <pre class="prettyprint inline">$(\'input\').ssi_uploader({locale:\'gr\'})</pre></li></ol>'})})
 
-    }*/
+    }
 
 });
 module.exports = {route:SsinputRouter,not:'dd'};
