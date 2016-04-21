@@ -32769,7 +32769,7 @@ module.exports = [
         content: [{
             id: '16a',
             example: {
-                result: '<a data-ssi_imgGroup="landscapes" href="https://www.youtube.com/embed/ydD1Wg2B8Vk" title="Landscapes" class="ssi-imgBox">\n  <img src="images/3b5dd04be82af929dd3070cb089bcf03.jpg"/>\n</a> \n<a data-ssi_imgGroup="landscapes" href="images/ipad.jpg" title="Landscapes" class="ssi-imgBox">\n  <img src="images/ipad.jpg"/>\n</a> \n<a data-ssi_imgGroup="landscapes" href="images/canada-view-niblet_71483_600x450.jpg" title="Canada" class="ssi-imgBox">\n  <img src="images/canada-view-niblet_71483_600x450.jpg"/>\n</a>&nbsp;&nbsp;&nbsp;&nbsp;\n<a data-ssi_imgGroup="bands" href="images/iron-maiden-fear-live-i15906.jpg" title="My landscape" class="ssi-imgBox">\n  <img src="images/iron-maiden-fear-live-i15906.jpg"/>\n</a> \n<a data-ssi_imgGroup="bands" href="images/brand.gif" title="Landscapes" class="ssi-imgBox">\n  <img src="images/brand.gif"/>\n</a> \n<a data-ssi_imgGroup="bands" href="images/master_of_puppets_album.jpg" title="Metallica" class="ssi-imgBox awesome">\n  <img src="images/master_of_puppets_album.jpg"/>\n</a>',
+                result: '<a data-ssi_imgGroup="landscapes" href="https://player.vimeo.com/video/29950141?byline=0&portrait=0" title="Landscapes" class="ssi-imgBox">\n  <img src="images/3b5dd04be82af929dd3070cb089bcf03.jpg"/>\n</a> \n<a data-ssi_imgGroup="landscapes" href="images/ipad.jpg" title="Landscapes" class="ssi-imgBox">\n  <img src="images/ipad.jpg"/>\n</a> \n<a data-ssi_imgGroup="landscapes" href="images/canada-view-niblet_71483_600x450.jpg" title="Canada" class="ssi-imgBox">\n  <img src="images/canada-view-niblet_71483_600x450.jpg"/>\n</a>&nbsp;&nbsp;&nbsp;&nbsp;\n<a data-ssi_imgGroup="bands" href="images/iron-maiden-fear-live-i15906.jpg" title="My landscape" class="ssi-imgBox">\n  <img src="images/iron-maiden-fear-live-i15906.jpg"/>\n</a> \n<a data-ssi_imgGroup="bands" href="images/brand.gif" title="Landscapes" class="ssi-imgBox">\n  <img src="images/brand.gif"/>\n</a> \n<a data-ssi_imgGroup="bands" href="images/master_of_puppets_album.jpg" title="Metallica" class="ssi-imgBox awesome">\n  <img src="images/master_of_puppets_album.jpg"/>\n</a>',
                 method: function () {
                     ssi_modal.imgBox({
                         title: true,
@@ -32968,7 +32968,7 @@ module.exports =[{
             example:{
             result: '<input type="file" multiple id="ssi-upload"/>',
             method:function(){
-                $('#ssi-upload').ssi_uploader({url:'http://5.9.111.116/scripts/uploadAction.php',beforeEachUpload:function(info,xhr){xhr.setRequestHeader("Access-Control-Allow-Origin","*")}}  );
+                $('#ssi-upload').ssi_uploader({url:'http://socialcook.gr/scripts/uploadAction.php',beforeEachUpload:function(info,xhr){xhr.setRequestHeader("Access-Control-Allow-Origin","*")}}  );
             }}
         }]
     },{
