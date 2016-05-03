@@ -32836,13 +32836,13 @@ module.exports = [{
             id: '44ad',
             title:'onUpload',
             description: 'The <code>onUpload</code> callback is executed when the upload process ends. Also a "onUpload.ssi-uploader" event will be triggred that you can listen to.',
-            code: "$('input').ssi_uploader({url:'uploadAction.php',onUpload:function(){\n   console.log(The upload process finished.);\n}})\n\n$('input').on(\'onUpload.ssi-uploader\',function(){console.log(\'The upload process finished.\')});"
+            code: "$('input').ssi_uploader({url:'uploadAction.php',onUpload:function(){\n   console.log(\'The upload process finished.\');\n}})\n\n$('input').on(\'onUpload.ssi-uploader\',function(){console.log(\'The upload process finished.\')});"
 
         },{
             id: '44ae',
             title:'onEachUpload',
             description: 'The <code>onEachUpload</code> callback is executed when each file finish to uploading. This callback has access to the file\'s info. Also a "onEachUpload.ssi-uploader" event will be triggred that you can listen to.',
-            code: "$('input').ssi_uploader({url:'uploadAction.php',onEachUpload:function(fileInfo){\n   console.log(fileInfo.name+' '+fileInfo.type+' '+fileInfo.size+' '+fileInfo.uploadStatus);\n}});\n\n$('input').on(\'onEachUpload.ssi-uploader\',function(){console.log(\'A file uploaded.\')});"
+            code: "$('input').ssi_uploader({url:'uploadAction.php',onEachUpload:function(fileInfo){\n   console.log(fileInfo.uploadStatus+' 'fileInfo.name+' '+fileInfo.type+' '+fileInfo.size+' '+fileInfo.uploadStatus);\n}});\n\n$('input').on(\'onEachUpload.ssi-uploader\',function(){console.log(\'A file uploaded.\')});"
 
         }]
 
@@ -33000,7 +33000,7 @@ module.exports =[{
         title: 'Localize',
         description: '',
         content: [{
-            id: '3a',
+            id: '4a',
             example:{
             result: '<input type="file" multiple id="ssi-upload4"/>',
             method:function(){
@@ -33012,7 +33012,7 @@ module.exports =[{
         title: 'More file types',
         description: '',
         content: [{
-            id: '4a',
+            id: '5a',
             example:{
                 result: '<input type="file" multiple id="ssi-upload5"/>',
             method:function(){
