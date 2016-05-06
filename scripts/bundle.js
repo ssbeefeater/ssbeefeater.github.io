@@ -31589,7 +31589,7 @@ module.exports =  [{
             description: '<code>Returns the Ssi-modal object.</code><br><br>'
         }, {
             id: '3ee',
-            description: '<span class="attention">With ssi_modal.notify() you can use 3 more options </span>',
+            description: '<span class="attention">With ssi_modal.notify() you can use 4 more options </span>',
             properties: [{
                 name: 'icon',
                 type: "'boolean || string'",
@@ -31631,6 +31631,11 @@ module.exports =  [{
                 defaultValue: "'Cancel'",
                 collapse: '13a',
                 description: 'The label of the cancel button.'
+            }, {
+                name: 'onePerPosition',
+                type: '{boolean}',
+                defaultValue: "false",
+                description: 'If true,a new message will override the old in every position.'
             }]
         }, {
             id: '3ea',
