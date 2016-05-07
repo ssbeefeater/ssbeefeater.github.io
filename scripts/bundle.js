@@ -31632,10 +31632,10 @@ module.exports =  [{
                 collapse: '13a',
                 description: 'The label of the cancel button.'
             }, {
-                name: 'onePerPosition',
+                name: 'overideOther',
                 type: '{boolean}',
                 defaultValue: "false",
-                description: 'If true,a new message will override the old in every position.'
+                description: 'If true,a new message will override the old messages.'
             }]
         }, {
             id: '3ea',
