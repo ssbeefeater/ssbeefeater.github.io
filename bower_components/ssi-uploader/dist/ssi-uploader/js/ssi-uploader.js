@@ -58,11 +58,11 @@
         }
         var thisS = this;
         var $input = $chooseBtn.find(".ssi-uploadInput");
-        $chooseBtn.find('button').click(function(){
+        $chooseBtn.find('button').click(function () {
             $input.trigger('click');
         });
 
-        $input.on('change',function () { //choose files
+        $input.on('change', function () { //choose files
             thisS.toUploadFiles(this.files);
             $input.val('');
         });
@@ -182,7 +182,7 @@
         var thisS = this,
          j = 0,
          length,
-         imgContent='',
+         imgContent = '',
          $uploadBtn = this.$element.find('#ssi-uploadBtn'),
          $clearBtn = this.$element.find('#ssi-clearBtn'),
          $fileList = this.$element.find('#ssi-fileList'),
@@ -258,21 +258,21 @@
             var ext = filename.getExtension(); //get file's extension
             thisS.imgNames[index] = filename; //register file's name
             if (thisS.options.preview) {
-var getTemplate=function(content){
-    return'<table class="ssi-imgToUploadTable ssi-pending">' +
-     '<tr><td class="ssi-upImgTd">'+content+'</td></tr>' +
-     '<tr><td><div id="ssi-uploadProgress' + index + '" class="ssi-hidden ssi-uploadProgress"></div></td></tr>' +
-     '<tr><td><button data-delete="' + index + '" class=" ssi-button error ssi-removeBtn"><span class="trash10 trash"></span></button></td></tr>' +
-     '<tr><td>' + cutFileName(filename, ext, 15) + '</td></tr></table>'
-};
+                var getTemplate = function (content) {
+                    return '<table class="ssi-imgToUploadTable ssi-pending">' +
+                     '<tr><td class="ssi-upImgTd">' + content + '</td></tr>' +
+                     '<tr><td><div id="ssi-uploadProgress' + index + '" class="ssi-hidden ssi-uploadProgress"></div></td></tr>' +
+                     '<tr><td><button data-delete="' + index + '" class=" ssi-button error ssi-removeBtn"><span class="trash10 trash"></span></button></td></tr>' +
+                     '<tr><td>' + cutFileName(filename, ext, 15) + '</td></tr></table>'
+                };
                 var fileType = file.type.split('/');
 
-               if (fileType[0] == 'image') {
+                if (fileType[0] == 'image') {
                     $uploadBtn.prop("disabled", true);
                     $clearBtn.prop("disabled", true);
                     var fileReader = new FileReader();
                     fileReader.onload = function () {
-                        imgContent+=getTemplate('<img class="ssi-imgToUpload" src=""/><i class="fa-spin fa fa-spinner fa-pulse"></i>'); // set the files element without the img
+                        imgContent += getTemplate('<img class="ssi-imgToUpload" src=""/><i class="fa-spin fa fa-spinner fa-pulse"></i>'); // set the files element without the img
                         imgs[index] = fileReader.result;
                         j++;
                         if (toUploadLength === j) {// if all elements are in place lets load images
@@ -280,18 +280,18 @@ var getTemplate=function(content){
                             $uploadBtn.prop("disabled", false);
                             $clearBtn.prop("disabled", false);
                             setTimeout(function () {
-                              setImg();//and load the images
+                                setImg();//and load the images
                             }, 10);
                             imgContent = '';
                             toUploadLength = [];
                         }
                     };
                     fileReader.readAsDataURL(file);
-                }else{
-                   imgs[index]=null;
-                       $uploadBox.append(getTemplate('<div class="document-item" href="test.mov" filetype="'+ext+'"><span class = "fileCorner"></span></div>'));
-                       j++;
-               }
+                } else {
+                    imgs[index] = null;
+                    $uploadBox.append(getTemplate('<div class="document-item" href="test.mov" filetype="' + ext + '"><span class = "fileCorner"></span></div>'));
+                    j++;
+                }
             } else {
                 thisS.$element.find('.ssi-namePreview').html((index === 0 ? cutFileName(filename, ext, 13) : (thisS.currentListLength + 1) + ' ' + thisS.language.files));//set name preview
                 $fileList.append('<tr class="ssi-space"><td></td></tr>' +//append files element to dom
@@ -302,12 +302,12 @@ var getTemplate=function(content){
 
             var setImg = function () {//load the images
                 for (var i = 0; i < imgs.length; i++) {
-                    if(imgs[i]!==null){
-                    $uploadBox.find("#ssi-uploadProgress" + i).parents('table.ssi-imgToUploadTable')
-                     .find('.ssi-imgToUpload')
-                     .attr('src', imgs[i]) //set src of the image
-                     .next().remove();//remove the spinner
-                        imgs[i]=null;
+                    if (imgs[i] !== null) {
+                        $uploadBox.find("#ssi-uploadProgress" + i).parents('table.ssi-imgToUploadTable')
+                         .find('.ssi-imgToUpload')
+                         .attr('src', imgs[i]) //set src of the image
+                         .next().remove();//remove the spinner
+                        imgs[i] = null;
                     }
                 }
                 imgs = [];
@@ -324,9 +324,9 @@ var getTemplate=function(content){
     };
     var clearPending = function (thisS) {//clear all pending files
         var $pending = thisS.$element.find('.ssi-pending');
-        var length=thisS.imgNames.length;
-        for(var i=0;i<length;i++){
-            if(thisS.imgNames[i]===null){
+        var length = thisS.imgNames.length;
+        for (var i = 0; i < length; i++) {
+            if (thisS.imgNames[i] === null) {
                 thisS.toUpload.splice(i, 1);
                 thisS.imgNames.splice(i, 1);
             }
@@ -336,8 +336,6 @@ var getTemplate=function(content){
         thisS.pending = 0;
         if (!thisS.options.preview)$pending.prev('tr').remove();
         $pending.remove();
-        console.log(thisS.imgNames);
-
     };
 
     Ssi_upload.prototype.clear = function (action) {//clean the list of all non in progress files
@@ -393,7 +391,7 @@ var getTemplate=function(content){
              .addClass('ssi-abortUpload')
              .removeClass('ssi-removeBtn')
              .children('span').removeClass('trash7 trash10 trash')
-             .addClass((this.options.preview?'ban7w':'ban7'));//transform remove button to abort button
+             .addClass((this.options.preview ? 'ban7w' : 'ban7'));//transform remove button to abort button
             var $uploadBtn = this.$element.find('#ssi-uploadBtn'),
              $clearBtn = this.$element.find('#ssi-clearBtn');
             $uploadBtn.prop("disabled", true);
@@ -432,7 +430,7 @@ var getTemplate=function(content){
             var uploadBar = thisS.$element.find('#ssi-uploadProgress' + ii);//get the file's  progress bar
             uploadBar.removeClass('ssi-hidden') //make it visible
              .parents(selector).removeClass('ssi-pending');
-            $.ajax({//store the request to the uploadList variable
+            var ajaxOptions = $.extend({}, {//store the request to the uploadList variable
                 xhr: function () {
                     var xhr = new window.XMLHttpRequest();
                     xhr.upload.addEventListener('progress', function (e) {// add event listener to progress
@@ -503,32 +501,61 @@ var getTemplate=function(content){
                         if (getCompleteStatus(thisS)) {//if no more elements in progress
                             finishUpload(thisS);
                         }
+                        if (typeof thisS.options.onEachUpload === 'function') {//execute the onEachUpload callback
+                            thisS.options.onEachUpload({//and return some info
+                                uploadStatus: 'error',
+                                name: thisS.toUpload[ii].name,
+                                size: (thisS.toUpload[ii].size / 1024).toFixed(2),
+                                type: thisS.toUpload[ii].type
+                            });
+                        }
                         console.log(arguments);//log the error
                         console.log(" Ajax error: " + error);
                     }
                 }
-            }).done(function (data) {
-                var msg, title = '', dataType = 'error', spanClass = 'exclamation';
-                data = $.parseJSON(data);
-                if (data.type === 'success') {//if response type is success
-                    dataType = 'success';
-                    msg = thisS.language.success;
-                    spanClass = 'check';
-                    thisS.successfulUpload++;// one more successful upload
+            }, thisS.ajaxOptions);
+
+            $.ajax(ajaxOptions).done(function (responseData) {
+                var msg, title = '', dataType = 'error', spanClass = 'exclamation', data;
+                try {
+                    data = $.parseJSON(responseData);
+                } catch (err) {
+                    data = responseData;
+                }
+                if (thisS.options.responseValidation) {
+                    var valData = thisS.options.responseValidation;
+                    if (typeof valData.validationKey === 'object' && valData.resultKey == 'validationKey') {
+                        if (data.hasOwnProperty(valData.validationKey.success)) {
+                            cb(true);
+                        } else {
+                            cb(false, data[valData.validationKey.error]);
+                        }
+                    } else {
+                        if (data[valData.validationKey] == valData.success) {
+                            cb(true);
+                        } else {
+                            cb(false, data[valData.resultKey]);
+                        }
+                    }
                 } else {
-                    if (data.type === 'console') {//this type is to display the error only to the console
-                        console.log(data.msg);
-                        msg = thisS.language.error;
-                        title = thisS.language.uploadFailed;
+                    cb(true);
+                }
+                function cb(result, data) {
+                    if (result) {//if response type is success
+                        dataType = 'success';
+                        msg = thisS.language.success;
+                        spanClass = 'check';
+                        thisS.successfulUpload++;// one more successful upload
                     } else {
                         if (thisS.options.preview) {
                             uploadBar.addClass('ssi-canceledProgressBar');
                             msg = thisS.language.error;
                         }
-                        title = data.msg;
+                        title = data;
+                        thisS.abortedWithError++;
                     }
-                    thisS.abortedWithError++;
                 }
+
                 if (!thisS.options.preview) {
                     msg = '<span class="' + spanClass + '7"></span>';
                 }
@@ -556,7 +583,7 @@ var getTemplate=function(content){
             //--------------end of ajax request-----------------------
 
             i = ii;
-           // thisS.toUpload[i]=null;//cl
+            // thisS.toUpload[i]=null;//cl
             i++;//go to the next element
             while (thisS.toUpload[i] === null) {// do it until you find a file
                 i++;
@@ -647,7 +674,7 @@ var getTemplate=function(content){
             } else if (thisS.aborted > 0 && thisS.successfulUpload === 0) {//if all request aborted
                 msg = '<span class="ban23"></span>';
                 title = thisS.language.aborted;
-            } else if (thisS.successfulUpload > 0){// all request were successfull
+            } else if (thisS.successfulUpload > 0) {// all request were successfull
                 type = 'success';
                 msg = '<span class="check23"></span>';
                 title = thisS.language.sucUpload;
@@ -689,7 +716,9 @@ var getTemplate=function(content){
             preview: true,
             dropZone: true,
             maxNumberOfFiles: '',
+            responseValidation:false,
             maxFileSize: 2,
+            ajaxOptions: {},
             onUpload: function () {
             },
             onEachUpload: function () {
@@ -715,7 +744,7 @@ var getTemplate=function(content){
                 var ssi_upload = new Ssi_upload(this, options);
                 $element.data('ssi_upload', ssi_upload);
             } else {
-                console.log('the targeted element is not file input')
+                console.log('The targeted element is not file input.')
             }
 
         });
@@ -756,8 +785,6 @@ var getTemplate=function(content){
         return sum;
     };
 
-
-
     var locale = {
         en: {
             success: 'Success',
@@ -794,7 +821,5 @@ var getTemplate=function(content){
             someErrorsOccurred: 'Σημειώθηκαν ορισμένα λάθη!'
         }
     };
-
-
 
 }));

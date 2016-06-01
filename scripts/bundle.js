@@ -30769,7 +30769,7 @@ var methodsCollection = Backbone.Collection.extend({
 module.exports =methodsCollection;
 
 
-},{"../models/methods":25,"backbone":1,"jquery":15,"lodash":16}],19:[function(require,module,exports){
+},{"../models/methods":27,"backbone":1,"jquery":15,"lodash":16}],19:[function(require,module,exports){
 "use strict";
 var Backbone=require('backbone');
 var $=require('jquery');
@@ -30785,7 +30785,1637 @@ var propertiesCollection = Backbone.Collection.extend({
 module.exports =propertiesCollection;
 
 
-},{"../models/properties":26,"backbone":1,"jquery":15,"lodash":16}],20:[function(require,module,exports){
+},{"../models/properties":28,"backbone":1,"jquery":15,"lodash":16}],20:[function(require,module,exports){
+"use strict";
+module.exports = [{
+    id: '1',
+    title: 'INSTALLATION',
+    content: [{
+        id: '1a',
+        description: 'You can install ss-input with 3 ways.'
+    }, {
+        id: '1a',
+        description: '1st.Using npm.',
+        code: 'npm install ss-input --save'
+
+    }, {
+        id: '1b',
+        description: '2nd. Using bower.',
+        code: 'bower install ss-input --save'
+
+    }, {
+        id: '1c',
+        description: '3rd. Download the files and include them to your html file.',
+        code: '&lt;link href="ss-input.css" rel="stylesheet"/&gt;\n&lt;script src="ss-input.js"&gt;&lt;/script&gt;'
+
+    }]
+
+}, {
+    id: '3',
+    title: 'Basic usage',
+    content: [
+        {
+            id: '3a',
+            title: 'singleSelection',
+            description:'(<a class="example" href="ss-input/examples/1">Example</a>)',
+            code: "//html \n&lt;input type=&quot;file&quot; id=&quot;ss-input1&quot; name=&quot;profileImage&quot;/&gt;\n//js\n$(\'#ss-input').ss_input({\n  fileSystem:{\n    scriptsPath: '/dist/bower_components/ss-input/dist/ssi-input/system/',\n    rootPath: '/dist/images'\n  },\n  selection:{\n    inputName:'profileImage'\n  }\n)"
+        }, {
+            id: '3b',
+            description:'(<a class="example" href="ss-input/examples/2">Example</a>)',
+
+            title: 'multiSelection',
+            code: "//html \n&lt;button id=&quot;ssi-multiPick1&quot;&gt;Select images&lt;/button&gt;\n//js\n&lt;div id=&quot;resultContainer&quot;&gt;&lt;/div&gt;\n$('#ssi-multiPick1').ss_input({\n  fileSystem:{\n    scriptsPath: '/dist/bower_components/ss-input/dist/ssi-input/system/',\n    rootPath: '/dist/images',\n  selection:{\n    selectionMode: 'multiSelection',\n    inputName: 'productImages[]',\n    modeOptions: {\n      content:'#resultContainer',\n    }\n  }\n});"
+        }, {
+            id: '3c',
+            title: 'textEditorSelection',
+            description:'(<a class="example" href="ss-input/examples/3">Example</a>)',
+            code: " $('#ssi-textEditor').ss_input({\n  fileSystem:{\n     scriptsPath: '/dist/bower_components/ss-input/dist/ssi-input/system/',\n     rootPath: '/dist/images'\n  },\n  selection:{\n    selectionMode: 'textEditorSelection',\n    modeOptions: {\n      method: function (value) {\n        CKEDITOR.instances['editor1'].insertHtml('&lt;img src=\&quot;' + value + '\&quot;&gt;');\n        tinyMCE.get('mytextarea').execCommand('mceInsertContent', false, '&lt;img src=\&quot;' + value + '\&quot;&gt;');\n      }\n    }\n  }\n});"
+        }
+
+    ]
+
+}, {
+    id: '2',
+    title: 'Core options',
+    description: '',
+    content: [{
+        id: '2a',
+        description: '<br><br>Options:',
+        properties: [{
+            name: 'language',
+            type: "{String}",
+            defaultValue: 'en',
+            description: 'Defines the display language. For now available languages are english("en") and greek ("gr")}'
+        }, {
+            name: 'plugins',
+            type: '{Array}',
+            defaultValue: '',
+            description: 'The list of the plugins that you want to load. <span class="important">If you set this option, only the plugins that are in this list will be loaded.</span>'
+        }, {
+            name: 'excludePlugin',
+            type: '{Array}',
+            defaultValue: '',
+            description: 'Prevents one or more plugins to be loaded.'
+        }, {
+            name: 'permissions',
+            type: '{Array}',
+            defaultValue: "['read','edit','write']",
+            description: 'Defines the users permissions. You can also add a name of a plugin that will be included regadless the persissions you set.(<a class="example" href="ss-input/examples/4">Example</a>)'
+        }, {
+            name: 'modalOptions',
+            type: '{Object}',
+            description: 'Defines the options of the main modal window. (<a href="http://ssbeefeater.github.io/#ssi-modal/documentation" target="_blank">see available options</a>)'
+        }, {
+            name: 'mode',
+            type: '{String}',
+            defaultValue: 'selection',
+            description: 'Defines the ss-input mode. Availables for now is only <code>selection</code>'
+        }, {
+            name: 'storageType',
+            type: '{String}',
+            defaultValue: 'fileSystem',
+            description: 'The storage type where tha data come from. Available options are <code>fileSystem</code>,<code>database</code>'
+        }, {
+            name: 'showTo',
+            type: '{String}',
+            defaultValue: 'modalWindow',
+            description: 'Defines the element where the ss-input will append to. Available options are<code>modalWindow</code> or a jquery selector of a div element, for example <code>#myDiv</code>'
+        }, {
+            name: 'responseValidation',
+            type: '{Object||false}',
+            description: 'Normally ssi-input accept an array of objects or a string as response<pre class="prettyprint inline">[{name:"recordName",url:"recordUrl"},{...}]</pre>. Setting up the response validation, ssi-input will be able to handle 2 more response structure types that validates the result set. Structure 1 example: <pre class="prettyprint inline">{ type:"success",result:[{name:"recordName",url:"recordUrl"},{...}] }</pre> or  <pre class="prettyprint inline">{ type:"error",result:"Nothing found" }</pre> Structure 2 example: <pre class="prettyprint inline">{ success:[{name:"recordName",url:"recordUrl"},{...}] }</pre> or <pre class="prettyprint inline">{ error:"Nothing found." }</pre> ',
+            collapseLink: "333dsadasd"
+        }, {
+            name: 'validationKey',
+            type: '{String||Object}',
+            description: 'Defines the validation key of the response. For ',
+            collapse: "333dsadasd sub"
+        }, {
+            name: 'resultKey',
+            type: '{String}',
+            description: 'Defines the validation key of the response.',
+            collapse: "333dsadasd sub"
+        }, {
+            name: 'success',
+            type: '{String}',
+            description: 'Defines the success key of the response.',
+            collapse: "333dsadasd sub"
+        }, {
+            name: 'error',
+            type: '{String}',
+            description: 'Defines the error key of the response.',
+            collapse: "333dsadasd sub"
+        }],
+        code: "//structure 1\n$(\'#ss-input').ss_input({\n  responseValidation:{\n    validationKey: 'type',\n    resultKey: 'data',\n    success: 'success',\n    error: 'error'\n  }\n});\n\n//result\n /*\n  {\n    type:'success',\n    data:[{name:'recordName',url:'recordUrl''},{...}]\n  } \nor\n  {\n    type:'error',\n    data:'Nothing found.'\n  } \n*/ \n\n//structure 2\n$(\'#ss-input').ss_input({\n  responseValidation:{\n    validationKey: {\n      success: 'success',\n      error: 'error'\n    },\n    resultKey: 'validationKey'\n  }\n})\n\n//result\n /*\n  {\n    success:[{name:'recordName',url:'recordUrl''},{...}]\n  } \nor\n  {\n    error:'Nothing found.'\n  } \n*/"
+    }]
+},
+    {
+        id: '4',
+        title: 'Mode options (selection)',
+        content: [
+            {
+                id: '4a',
+                description: '<br><br>Options:',
+                properties: [{
+                    name: 'selectionMode',
+                    type: '{String}',
+                    defaultValue: 'singleSelection',
+                    description: 'Defines the ss-input mode. Available modes are <code>singleSelection</code> for a single item (<a class="example" href="ss-input/examples/1">Example</a>), <code>multiSelection</code> for multiple items (<a class="example" href="ss-input/examples/2">Example</a>) and <code>textEditor</code> to define images to textEditors (<a class="example" href="ss-input/examples/3">Example</a>)',
+                }, {
+                    name: 'inputName',
+                    type: '{String}',
+                    defaultValue: '',
+                    description: 'Defines the name of the input where the selected value will be set.'
+                }, {
+                    name: 'selectionField',
+                    type: '{String}',
+                    defaultValue: '',
+                    description: 'The field name that it\'s value will be selected.By default the defined id field will be selected.'
+                }, {
+                    name: 'excludeItems',
+                    type: '{conditional String} <a class="anchor" href="#7">more</a>.',
+                    defaultValue: '',
+                    description: 'Defines a condition that will be used to exclude items/records from selecting them. Example:<pre class="prettyprint inline">{ excludeItems: "condition:(field:(mimeType)==\'directory\')" }</pre>',
+                }, {
+                    name: 'modeOptions',
+                    type: '{Object}',
+                    defaultValue: '',
+                    description: 'The options specified for the selected selectionMode. See the available options below.',
+                }]
+            }, {
+                id: '4b',
+                title: 'singleSelection',
+                description: 'The singleSelection mode(<a class="example" href="ss-input/examples/1">Example</a>)<br><br>Options:',
+                properties: [{
+                    name: 'defaultValue',
+                    type: '{String}',
+                    defaultValue: '',
+                    description: 'Initialize the input with a default value.(<a class="example" href="ss-input/examples/1b">Example</a>)'
+                }]
+            }, {
+                id: '4c',
+                title: 'multiSelection',
+                description: 'The multiSelection mode(<a class="example" href="ss-input/examples/2">Example</a>)<br><br>Options:',
+                properties: [{
+                    name: 'content',
+                    type: '{String}',
+                    defaultValue: '',
+                    required: [{content: 'required', type: 'danger'}],
+                    description: 'Defines the element that the selected items will append to. <pre class="prettyprint inline">{content:"#myDiv"}</pre>'
+
+                }, {
+                    name: 'className',
+                    type: '{String}',
+                    defaultValue: '',
+                    description: 'Defines a className to the outer element.'
+                }, {
+                    name: 'maxItems',
+                    type: '{Number}',
+                    defaultValue: 0,
+                    description: 'The max file number that the user can select.The 0 value means unlimited'
+                }, {
+                    name: 'duplicate',
+                    type: '{Boolean}',
+                    defaultValue: 'true',
+                    description: 'If false you can\'t select the same item twice.'
+                }, {
+                    name: 'pathType',
+                    type: '{String}',
+                    defaultValue: 'relative',
+                    description: 'The type of the produced url. The available options are <code>relative</code> <code>absolute</code> and <code>dataUrl</code>. For dataUrl type when you pick an image, a text input will appear with the name of image as default value and the name of the input you define with the suffix Name <pre class="prettyprin inline">&lt;input type=&quot;text&quot; placeholder=&quot;Name&quot; value=&quot;myImage.jpg&quot; name=&quot;filesName[]&quot;&gt;</pre>(<a class="example" href="ss-input/examples/5">Example</a>)'
+
+                }, {
+                    name: 'input',
+                    type: '{Object[]}',
+                    defaultValue: 'files[]',
+                    description: 'Adds extra inputs to each selected image.(<a class="example" href="ss-input/examples/2c">Example</a>)',
+                    collapseLink: '2a.sub'
+                }, {
+                    name: 'input.label',
+                    type: "{String}",
+                    defaultValue: '',
+                    description: 'The label of the input',
+                    collapse: '2a sub'
+                }, {
+                    name: 'input.type',
+                    type: "{String}",
+                    defaultValue: 'text',
+                    description: 'The type of the input. Available options are the usual html properties.',
+                    collapse: '2a sub'
+                }, {
+                    name: 'input.value',
+                    type: "{String}",
+                    defaultValue: '',
+                    description: 'Defines the default value of the input.',
+                    collapse: '2a sub'
+                }, {
+                    name: 'input.className',
+                    type: "{String}",
+                    defaultValue: '',
+                    description: 'Defines a className to the input element.',
+                    collapse: '2a sub '
+                }, {
+                    name: 'input.id',
+                    type: "{String}",
+                    defaultValue: '',
+                    description: 'Defines an id to the input element.',
+                    collapse: '2a sub'
+                }, {
+                    name: 'input.name',
+                    type: "{String}",
+                    defaultValue: '',
+                    description: 'Defines a name to the input element.',
+                    collapse: '2a sub'
+                }, {
+                    name: 'input.placeholder',
+                    type: "{String}",
+                    defaultValue: '',
+                    description: 'Defines a placeholder to the input element. <span class="important">This option is available only with the text inputs.</span>',
+                    collapse: '2a sub '
+                }, {
+                    name: 'input.checked',
+                    type: "{Boolean}",
+                    defaultValue: '',
+                    description: 'Defines if an input will be checked by default. <span class="important">This option is available only with radio and checkbox inputs.</span>',
+                    collapse: '2a sub '
+                }, {
+                    name: 'input.options',
+                    type: "{Object[]}",
+                    defaultValue: '',
+                    description: 'Defines the options of a select input <span class="important">This option is available only with select inputs.</span>',
+                    collapse: '2a sub ',
+                    collapseLink: '2b.sub'
+
+                }, {
+                    name: 'input.options.label',
+                    type: "{String}",
+                    defaultValue: '',
+                    description: 'Defines the text of the option.',
+                    collapse: '2b sub sub2'
+                }, {
+                    name: 'input.options.value',
+                    type: "{String}",
+                    defaultValue: '',
+                    description: 'Defines the value of the option.',
+                    collapse: '2b sub sub2'
+                }, {
+                    name: 'input.options.selected',
+                    type: "{Boolean}",
+                    defaultValue: 'false',
+                    description: 'Defines if the option will be selected.',
+                    collapse: '2b sub sub2'
+                }, {
+                    name: 'input.multiple',
+                    type: "{Boolean}",
+                    defaultValue: '',
+                    description: 'Specifies that multiple options can be selected at once.<span class="important">This option is available only with select tag.</span>',
+                    collapse: '2a sub'
+                }, {
+                    name: 'input.radio',
+                    type: "{Boolean}",
+                    defaultValue: 'Object[]',
+                    description: 'Defines a group of radion buttons<span class="important">This option is available only with radio inputs.</span>',
+                    collapseLink: '2c.sub',
+                    collapse: '2a sub'
+                }, {
+                    name: 'input.radio.label',
+                    type: "{String}",
+                    defaultValue: '',
+                    description: 'Defines the label of the radio.',
+                    collapse: '2c sub sub2'
+                }, {
+                    name: 'input.radio.value',
+                    type: "{String}",
+                    defaultValue: '',
+                    description: 'Defines the value of the radio.',
+                    collapse: '2c sub sub2'
+                }, {
+                    name: 'input.radio.checked',
+                    type: "{Boolean}",
+                    defaultValue: '',
+                    description: 'Defines if the radio will be checked by default.',
+                    collapse: '2c sub sub2'
+                }, {
+                    name: 'defaultValue',
+                    type: "{Object[]}",
+                    defaultValue: '',
+                    description: 'Initialize the ss-input with default images.',
+                    collapseLink: '2d.sub'
+                }, {
+                    name: 'defaultValue.url',
+                    type: "{String}",
+                    defaultValue: '',
+                    description: 'The url of the image.',
+                    collapse: '2d sub'
+                }, {
+                    name: 'defaultValue.input',
+                    type: "{Array}",
+                    defaultValue: '',
+                    description: 'The default value of the each input. You must specify the values with the same order as you defined the inputs. For example <br><pre class="prettyprint inline">inputs:[{type="text",label:"text1"},{type="text",label:"text2"},{type="text",label:"text3"}]</pre>. To set default values you must do this:<br>  <pre class="prettyprint inline">defaultValue:[{url:"images/myImage.jpg",\ninput:["The text1 default","The text2 default","The text3 default"]}]</pre> ',
+                    collapse: '2d sub'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  selection:{\n    selectionMode:'multiSelection',\n    modeOptions:{\n      input:[\n        {type:'text',label:'Name'},\n        {type:'checkbox',label:'Married',value:'married'},\n        {type:'radio',label:'Genre',radio:[{label:'Male',value:'male',checked:true},{label:'Female',value:'female'}] },\n        {type:'select',label:'Permissions',multiple:true,options:[{label:'Write',value:'write'},{label:'Edit',value:'edit'}] }\n      ],\n      defaultValue:[{\n        value:'someValue',\n        input:['ssBeeFeaTer',false,'male',['write','edit']]\n      },{\n        value:'someOtherValue',\n        input:['Acillatem',true,'male',['write']]\n      }]\n    }\n  }\n})"
+            }, {
+                id: '4d',
+                title: 'textEditorSelection',
+                description: 'The textEditorSelection mode(<a class="example" href="ss-input/examples/3">Example</a>)',
+                properties: [{
+                    name: 'method',
+                    type: "{Function}",
+                    defaultValue: '',
+                    description: 'A function that will execute after the selection action and will return the selected value as parameter.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  selection:{\n    selectionMode:'textEditorSelection',\n    modeOptions:{\n      method:function(value){\n        CKEDITOR.instances[\'editor\'].insertHtml(\'&lt;img src=&quot;\' + value + \'&quot;&gt;\');\n      }\n    }\n  }\n})"
+
+            }
+        ]
+    }, {
+        id: '5',
+        title: 'StorageType options',
+        content: [
+            {
+                id: '5a',
+                title: '<br>fileSystem',
+                description: '(<a class="example" href="ss-input/examples/1">Example</a>)<br><br>Options:',
+                properties: [{
+                    name: 'rootPath',
+                    type: '{String}',
+                    defaultValue: '',
+                    required: [{content: 'Required', type: 'danger'}],
+                    description: 'Defines the root path.'
+
+                }, {
+                    name: 'scriptsPath',
+                    type: '{String}',
+                    defaultValue: '',
+                    required: [{content: 'Required', type: 'danger'}],
+                    description: 'Defines the path to the system files.'
+                }, {
+                    name: 'allowed',
+                    type: '{Array}',
+                    defaultValue: "['jpg', 'jpeg', 'png']",
+                    description: 'The allowed file types'
+                }, {
+                    name: 'responseValidation',
+                    type: '{Object||false}',
+                    description: 'for more details see <a class="anchor" href="#2">here</a>',
+                }]
+            }, {
+                id: '5b',
+                title: '<br>database',
+                description: '(<a class="example" href="ss-input/examples/8">Example</a>)<br><br>Options:',
+                properties: [{
+                    name: 'translateFields',
+                    type: '{Boolean}',
+                    defaultValue: 'false',
+                    description: 'If false, the fields will not be translated.'
+                }, {
+                    name: 'sendNullValues',
+                    type: '{Boolean}',
+                    defaultValue: 'false',
+                    description: 'If false, when you create a new record or edit an existing one, the null inputs will not be sent.'
+                }, {
+                    name: 'responseValidation',
+                    type: '{Object||false}',
+                    defaultValue: 'false',
+                    description: 'For more details see <a class="anchor" href="#2">here</a>',
+                }, {
+                    name: 'baseCollection',
+                    type: '{String||false}',
+                    defaultValue: '',
+                    description: 'The collection that will be loaded when the ss-input will open by default will load the first collection you defined. If false will not load any collection.'
+                }, {
+                    name: 'collections',
+                    type: '{Object}',
+                    defaultValue: '',
+                    required: [{content: 'Required', type: 'danger'}],
+                    description: 'Defines the options of the collections that will be used. The key is the collection title and the value is the collection\'s options <code>collections:{myCollection1:{...},myCollection2:{...}}</code> See below for the available options'
+                }]
+            }, {
+                id: '5bv',
+                description: '<h4>database.collections</h4>',
+                properties: [{
+                    name: 'baseUrl',
+                    type: '{String}',
+                    defaultValue: '',
+                    description: 'The url where the ss-input will fetch the data.'
+                }, {
+                    name: 'schema',
+                    type: '{Object}',
+                    defaultValue: '',
+                    description: 'Defines the schema of the collection. The key defines the key name and the value the options.<br> <code>{_id:{...},name:{...}}</code>. If a scema is not defined the ss-input will try to generate one automaticaly.',
+                    collapseLink: 'dsss'
+                }, {
+                    name: 'type',
+                    type: '{String}',
+                    description: 'The type of the field. Available options are <code>string</code>,<code>number</code>,<code>date</code>,<code>boolean</code> and <code>enum</code>',
+                    collapse: 'dsss'
+                }, {
+                    name: 'required',
+                    type: '{Boolean}',
+                    defaultValue: 'false',
+                    description: 'Defines if the field is required.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'default',
+                    type: '{Boolean}',
+                    defaultValue: 'false',
+                    description: 'Defines the default value of the document.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'inputType',
+                    type: '{String}',
+                    description: 'Defines the input type when edit a document or adding a new one.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'search',
+                    type: '{Boolean}',
+                    defaultValue: 'false',
+                    description: 'Defines if the field is searchable.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'sort',
+                    type: '{Boolean}',
+                    defaultValue: 'false',
+                    description: 'Defines if the field is sortable.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'edit',
+                    type: '{Boolean}',
+                    defaultValue: 'true',
+                    description: 'If false the fiels won\'t be editable.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'id',
+                    type: '{Boolean}',
+                    description: 'Marks the field as the id of the document.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'displayName',
+                    type: '{Boolean}',
+                    description: 'Marks the field as the display name of the document.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'displayImage',
+                    type: '{Boolean}',
+                    description: 'Marks the field as the display image of the document.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'details',
+                    type: '{Boolean}',
+                    defaultValue: 'true',
+                    description: 'If false will not be excluded from the details template.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'selectionField',
+                    type: '{Boolean}',
+                    defaultValue: 'false',
+                    description: 'If true the value of this field will be selected.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'options',
+                    type: '{ String[ ] }',
+                    defaultValue: 'true',
+                    description: 'Defines the values of the enum type.',
+                    collapse: 'dsss'
+                }, {
+                    name: 'id',
+                    type: '{Object}',
+                    defaultValue: '',
+                    required: [{content: 'Required', type: 'danger'}],
+                    description: 'Defines the field that holds the id of the document. Also it can be set directly to the schema using the option <code>{ id:true }</code>.'
+                }, {
+                    name: 'displayName',
+                    type: '{String}',
+                    defaultValue: '',
+                    description: 'Defines the field that you want to be shown as title. If not set, the id field will be shown as title. Also it can be set directly to the schema using the option <code>{ displayName:true }</code>.'
+                }, {
+                    name: 'displayImage',
+                    type: '{Object}',
+                    defaultValue: '',
+                    description: 'The preview image of each document/record. Also supports conditions. Examples: <code>{ displayImage:"images/itemImage.jpg" }</code> or <code>{ displayImage:"field(imgUrl)" }</code>or <code>{ displayImage:"condition:(field(genre)==\'male\' ? \'male.png\':\'female.png\')" }</code>. It can also be set directly to the schema using the option <code>{ displayImage:true }</code>.'
+
+                }, {
+                    name: 'selectionField',
+                    type: '{Object}',
+                    defaultValue: '',
+                    description: 'Defines the field that it\'s value will be selected.By default the defined id field will be selected. Also it can be set directly to the schema using the option <code>{ selectionField:true }</code>.'
+                }, {
+                    name: 'search',
+                    type: '{Array}',
+                    description: 'Defines the searchable fields of the collection. Also it can be set directly to the schema using the option <code>{ search:true }</code>.'
+                }, {
+                    name: 'sort',
+                    type: '{Array}',
+                    defaultValue: 'true',
+                    description: 'Defines the sortable fields of the collection. Also it can be set directly to the schema using the option <code>{ sort:true }</code>.'
+
+                }, {
+                    name: 'details',
+                    type: '{Array}',
+                    defaultValue: '',
+                    description: 'Defines the fields that will be excluded from details template. Also it can be set directly to the schema using the option <code>{ details:false }</code>.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  storageType:'database'\n  database:{\n    baseCollection:'Images',\n    collections:{\n      Images:{\n        baseUrl:https:'//api.mlab.com/api/1/databases/ss_input/collections/images/:id?apiKey=',\n        schema:{\n          _id:{type: 'string', edit: false,sort:true, id: true, search: true},\n          title:{type: 'string',required: true,sort:true, search: true, displayName: true},\n          description:{type: 'string', inputType: 'textarea'},\n          url:{type: 'string',details:false,default:'noImage.png',displayImage: true}\n      }\n    }\n  }\n})"
+            }
+        ]
+    }, {
+        id: '6',
+        title: 'Plugins',
+        description: '<br><span class="label label-primary">Persmissions</span> <span class="label label-danger">Requirements</span>',
+        content: [
+            {
+                id: '6a',
+                title: '<br><h3>cache</h3>',
+                description: 'Caches the data of each request. The cache data is deleted every time you close the modal or leave the page.<br><br>Options:',
+                properties: [{
+                    name: 'cacheLimit',
+                    type: "{Number}",
+                    defaultValue: '5',
+                    description: 'The max page number that will be cached.'
+                }, {
+                    name: 'cacheTo',
+                    type: "{String}",
+                    defaultValue: 'localStorage',
+                    description: 'Where the cache data will be stored. Available options are <code>localStorage</code> , <code>memory</code>.',
+                }],
+                code: "$(\'#ss-input').ss_input({\n  cache:{\n    cacheLimit: 3,\n    cacheTo: 'memory'\n  }\n)"
+            }, {
+                id: '6b',
+                title: '<br><h3>contextMenu</h3>',
+                description: 'The menu that appears when you press right click.'
+            }, {
+                id: '6d',
+                title: '<br><h3>delete</h3>',
+                description: '<span class="label label-primary">edit</span><br>The plugin responsible for deleting records.<br><br>Triggered events:<ul><li><code>deleteAction.ssi</code> : When the delete action is finished.</li></ul><br><br>Options:',
+                properties: [{
+                    name: 'sendId',
+                    type: "{String}",
+                    defaultValue: "inForm",
+                    description: 'Defines the way that id will be send to server. Available options are <code>inUrl</code>,<code>inForm</code>. With "inUrl" option, a DELETE request will be sent to the defined url, adding the id of the selected element in end. For example my/url/43j434jhjg3. With the inForm option ,an array with the selected elements id will be send with the form data.'
+                }, {
+                    name: 'ajaxOptions',
+                    type: "{Object}",
+                    defaultValue: "{type:'DELETE'}",
+                    description: 'Extends the default options of $.ajax function. You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>. Also there is one extra option.',
+                    collapseLink: '311ddd'
+                }, {
+                    name: 'stringifyData',
+                    type: "{Boolean}",
+                    description: 'Sends the data in string form!',
+                    collapse: '311ddd sub'
+                }, {
+                    name: 'data',
+                    type: "{Object}",
+                    description: 'Send extra data with the request.',
+                }]
+            }, {
+                id: '6e',
+                title: '<br><h3>info</h3>',
+                description: 'The plugin that is responsible to display the information of the files.<br><br>Triggered events:<ul><li><code>infoShowAction.ssi</code> : When the info window appears. Also sends the <code>$table</code> element as parameter.</li><li><code>infoCloseAction.ssi</code> : When the info window closes.</li></ul><br><br>Options:',
+                properties: [{
+                    name: 'excludeFields',
+                    type: "{Array}",
+                    defaultValue: '',
+                    description: 'Defines the fields that will not be shown in the info window.',
+                }, {
+                    name: 'excludeItems',
+                    type: '{conditional String} <a class="anchor" href="#7">more</a>.',
+                    defaultValue: '',
+                    description: 'Defines a condition that will be used to exclude items/records from displaying it\'s info. Example:<pre class="prettyprint inline">{ excludeItems: "condition:(field:(mimeType)==\'directory\')" }</pre>',
+                }, {
+                    name: 'translateFields',
+                    type: '{Boolean}',
+                    defaultValue: 'true',
+                    description: 'If false, the fields will not be translated.',
+                }],
+                code: "$(\'#ss-input').ss_input({\n  info:{\n    excludeFields:['id','path'],\n    excludeItems:'condition:(field:(mimeType)==\"directory\")',\n    translateFields:false\n  }\n})"
+            }, {
+                id: '6g',
+                title: '<br><h3>iconSize</h3>',
+                description: 'The plugin that is responsible for the size of icons.<br><br>Options:',
+                properties: [{
+                    name: 'defaultSize',
+                    type: "{String}",
+                    defaultValue: 'small',
+                    description: 'The default size of the icons. The available options are <code>small</code> <code>medium</code> <code>large</code>'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  iconSize:{\n    defaultSize: 'medium'\n  }\n})"
+            }, {
+                id: '6h',
+                title: '<br><h3>imgBox</h3>',
+                description: 'The plugin that is responsible for the image preview.<br><br>Options:',
+                properties: [{
+                    name: 'excludeItems',
+                    type: '{conditional String} <a class="anchor" href="#7">more</a>.',
+                    defaultValue: '',
+                    description: 'Defines a condition that will be used to exclude items/records from creating an imgBox. Example:<pre class="prettyprint inline">{ excludeItems: "condition:(field:(mimeType).split(\'/\')[0]!=\'image\')" }</pre>',
+                }, {
+                    name: 'imageField',
+                    type: '{String}',
+                    defaultValue: '',
+                    description: 'Defines the field name that the image url is stored'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  imgBox:{\n    imageField: 'imageUrl',\n    excludeItems: 'condition:(field:(mimeType).split(\"/\")[0]!=\"image\")'\n  }\n})"
+            }, {
+                id: '6l',
+                title: '<br><h3>refresh</h3>',
+                description: 'The plugin that is responsible for refreshing the current page.'
+            },
+            {
+                id: '6n',
+                title: '<br><h3>scan</h3>',
+                description: 'The plugin that is responsible for fetching and displaying the data.<br><br>Triggered events:<ul><li><code>beforeScanAction.ssi</code> : Triggered when a new collection is scaned and before append the items to the DOM. Also sends the page data (<code>{id:"The page id",data:"the response data (documents/records)" }</code>) as parameter.</li><li><code>scanAction.ssi</code> : Triggered when a new collection is scaned and after append the items to the DOM. Also sends the page data (<code>{id:"The page id",data:"the response data (documents/records)" }</code>) as parameter.</li><li><code>beforeEchoItemsAction.ssi</code> : Triggered just before append the items to the DOM. Also sends the page data (<code>{id:"The page id",data:"the response data (documents/records)" }</code>) as parameter.</li><li><code>echoItemsAction.ssi</code> : Triggered after append the items to the DOM.</li><li><code>appendItemAction.ssi</code> : Triggered before a single item appends to the DOM. Also sends the item data and $element (<code>{$element:"The item\'s jquery element",data:"The item\'s data"}</code>) as parameter.</li><li><code>appendItemSetAction.ssi</code> : Triggered when a set of items append to the DOM (Not like echo). Also sends an array with the appended items id as parameter.</li></ul><br><br>Options:',
+                properties: [{
+                    name: 'idField',
+                    type: "{String}",
+                    required: [{content: 'Required', type: 'danger'}],
+                    defaultValue: 'id',
+                    description: 'The field that holds the id of the document.'
+                }, {
+                    name: 'titleField',
+                    type: "{String}",
+                    defaultValue: 'title',
+                    description: 'The field that you want to be shown as title. If not set, the id field will be shown as title.'
+                }, {
+                    name: 'displayImage',
+                    type: "{String || conditional String}",
+                    description: 'The preview image of each document/record. Also supports conditions. Examples: <pre class="prettyprint inline">{ displayImage:"images/itemImage.jpg" }</pre> <pre class="prettyprint inline">{ displayImage:"images/system/field:(imagePath)" }</pre> <pre class="prettyprint inline">{ displayImage:"condition:(field:(genre)==\'male\'?\'images/male.png\': field:(avatar) )" }</pre>',
+                }, {
+                    name: 'itemClass',
+                    type: "{String || conditional String}",
+                    description: 'The class of each document/record outer element. Also supports conditions. Examples: <pre class="prettyprint inline">{ itemClass:"field(type)" }</pre> <pre class="prettyprint inline">{ itemClass:"condition:(field:(type)==\'folder\' ? \'folder\': \'file\' )" }</pre>'
+                }, {
+                    name: 'ajaxOptions',
+                    type: "{Object}",
+                    defaultValue: "{type:'GET'}",
+                    description: 'Extends the default options of $.ajax function. You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>. Also there is one extra option.',
+                    collapseLink: '311'
+                }, {
+                    name: 'stringifyData',
+                    type: "{Boolean}",
+                    description: 'Sends the data in string form!',
+                    collapse: '311 sub'
+                }, {
+                    name: 'data',
+                    type: "{Object}",
+                    description: 'Send extra data with the request. If the storageType is the fileSystem, the current directory(currentDir) will be sent by default.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  scan:{\n    idField: '_id',\n    titleField: 'name',\n    displayImage: 'images/users/condition:( field:( genre ) == \"male\" ? \"male.png\" : field:( avatar ) )',\n    itemClass: 'field:(type)',\n    ajaxOptions: {stringifyData:true,success:function(){console.log(\"hi\")}},\n    data: {myData:\"whatever\"}\n  }\n})"
+            }, {
+                id: '6o',
+                title: '<br><h3>search</h3>',
+                description: 'The plugin that is responsible for searching the data.',
+                properties: [{
+                    name: 'searchFields',
+                    type: "{Array}",
+                    description: 'The searchable fields.'
+                }, {
+                    name: 'deepSearch',
+                    type: "{Object || 'false'}",
+                    description: 'Sends a request with the keywords.',
+                    collapseLink: '11'
+                }, {
+                    name: 'deepSearch.multiple',
+                    type: "{Boolean}",
+                    defaultValue: "false",
+                    description: 'If true, enables the deep search to multiple fields.',
+                    collapse: '11 sub'
+                }, {
+                    name: 'deepSearch.ajaxOptions',
+                    type: "{Object}",
+                    defaultValue: "{type:'GET'}",
+                    description: 'Extends the default options of $.ajax function. You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>. Also there is one extra option.',
+                    collapse: '11 sub'
+                }, {
+                    name: 'deepSearch.data',
+                    type: "{Object}",
+                    description: 'Send extra data with the request. In the case of single search, the keyword(<code>{keyword:"myKeyword"}</code>) will be sent and in case of multiple search, the fields with the keyword will be sent ( <code>{field1:"myKeyword1",field2:"myKeyword2",field3:"myKeyword3"}</code> )',
+                    collapse: '11 sub'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  search:{\n    searchFields: ['_id','name'],\n    deepSearch:{\n      multiple:true,\n      ajaxOptions:{url:'my/url/search'}\n    }\n  }\n})"
+
+            }, {
+                id: '6p',
+                title: '<br><h3>select</h3>',
+                description: 'The plugin that is responsible for selecting multiple files.'
+            }, {
+                id: '6q',
+                title: '<br><h3>selectAll</h3>',
+                description: 'The plugin that is responsible for selecting all files or a group of files.',
+                properties: [{
+                    name: 'selectableClasses',
+                    type: "{Object}",
+                    description: 'The class name of the items you want to select. Useful when the scan option itemClass is set. Example: <pre class="prettyprint inline">{ selectableClasses:{folders:\'directory\',images:\'image\',textFiles:\'text\'} }</pre> where the key is the title in the menu and the value tha class name.',
+
+                }, {
+                    name: 'translateFields',
+                    type: '{Boolean}',
+                    defaultValue: 'true',
+                    description: 'If false, the fields will not be translated.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  selectAll:{\n    selectableClasses:{\n      folders:\'directory\',\n      images:\'image\',\n      textFiles:\'text\'\n    },\n    translateFields: 'false'\n  }\n})"
+
+            }, {
+                id: '6r',
+                title: '<br><h3>sidebar</h3>',
+                description: 'The plugin that is responsible for the sidebar.',
+                properties: [{
+                    name: 'state',
+                    type: "{String}",
+                    defaultValue: "open",
+                    description: 'The default state of sidebar. Available options: <code>opent</code>,<code>close</code>'
+                }, {
+                    name: 'className',
+                    type: "{String}",
+                    description: 'Defines a className to the sidebar element.'
+                }, {
+                    name: 'resizable',
+                    type: "{Boolean}",
+                    description: 'If true the user can resize the sidebar.'
+                }, {
+                    name: 'data',
+                    type: "{Object[]}",
+                    description: 'The data that will use to create the sidebar list. See fieldDefinition below.'
+                }, {
+                    name: 'fieldDefinition',
+                    description: 'Matches the data keys.',
+                    collapseLink: '12'
+                }, {
+                    name: 'fieldDefinition.name',
+                    type: "{String}",
+                    defaultValue: "name",
+                    description: 'Defines the link label.',
+                    collapse: '12 sub'
+                }, {
+                    name: 'fieldDefinition.id',
+                    type: "{String}",
+                    defaultValue: "id",
+                    description: 'Defines an id to each element.',
+                    collapse: '12 sub'
+                }, {
+                    name: 'fieldDefinition.url',
+                    type: "{String}",
+                    defaultValue: "url",
+                    description: 'Defines the link url.',
+                    collapse: '12 sub'
+                }, {
+                    name: 'fieldDefinition.className',
+                    type: "{String}",
+                    defaultValue: "className",
+                    description: 'Defines a class name  to each element',
+                    collapse: '12 sub'
+                }, {
+                    name: 'fieldDefinition.children',
+                    type: "{Object[]}",
+                    defaultValue: "children",
+                    description: 'Defines the sub menu label',
+                    collapse: '12 sub'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  sidebar:{\n    state: 'close',\n    className: 'mySidebar',\n    resizable: false,\n    data: [{\n      title:'itemTitle',\n      path:'my/url'\n      subMenu:[{\n        title:'itemTitle',\n        path:'itemTitle'\n      }]\n    }],\n    fieldDefinition: {\n      name:'title',\n      url:'path',\n      children:'subMenu'\n    }\n  }\n})"
+
+            }, {
+                id: '6s',
+                title: '<br><h3>sort</h3>',
+                description: 'The plugin that is responsible for sorting the files.',
+                properties: [{
+                    name: 'sortableFields',
+                    type: '{Array}',
+                    defaultValue: '',
+                    description: 'The fields that you can sort by.'
+                }, {
+                    name: 'sortBy',
+                    type: '{String}',
+                    defaultValue: '',
+                    description: 'Sorts the elements by the defined value. Available options are the fields you defined. If not set the first field will be selected.'
+                }, {
+                    name: 'sortType',
+                    type: '{String}',
+                    defaultValue: 'asc',
+                    description: 'Sorts the elements asc or desc.'
+                }, {
+                    name: 'translateFields',
+                    type: '{Boolean}',
+                    defaultValue: 'true',
+                    description: 'If false, the fields will not be translated.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  sort:{\n    sortableFields: ['id','name','type'],\n    sortBy: 'type',\n    sortType: 'desc'\n  }\n})"
+
+            }, {
+                id: '6st',
+                title: '<br><h3>templateManager</h3>',
+                description: 'The plugin that is responsible for the templates and preview type.',
+                properties: [{
+                    name: 'template',
+                    type: '{String}',
+                    defaultValue: 'icons',
+                    description: 'Defines the default template. Available options are <code>icons</code>,<code>details</code>'
+                }, {
+                    name: 'excludeFields (details)',
+                    type: '{Array}',
+                    defaultValue: '',
+                    description: 'Defines the fields that will be excluded from details template.'
+                }, {
+                    name: 'limit (details)',
+                    type: '{Number}',
+                    defaultValue: '3',
+                    description: 'The number of fields that will be visible.'
+                }, {
+                    name: 'translateFields  (details)',
+                    type: '{Boolean}',
+                    defaultValue: 'true',
+                    description: 'If false, the fields will not be translated.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  templateManager:{\n    template:'details',\n    excludeFields: ['id','type'],\n    limit: 2,\n    translateFields: false\n  }\n})"
+
+            }, {
+                id: '6stdss',
+                title: '<br><h3>nameBubble</h3>',
+                description: 'The plugin that is responsible for creating a tooltip with item\'s name when it\'s not full visible.'
+            },
+            {
+                id: '6sts',
+                title: '<br><h3>infoBubble</h3>',
+                description: 'The plugin that is responsible for creating a tooltip with item\'s info.(Works with icons template)',
+                properties: [{
+                    name: 'excludeFields',
+                    type: '{Array}',
+                    defaultValue: '',
+                    description: 'Defines the fields that will be excluded.'
+                }, {
+                    name: 'excludeItems',
+                    type: '{conditional String} <a class="anchor" href="#7">more</a>.',
+                    defaultValue: '',
+                    description: 'Defines a condition that will be used to exclude items/records from displaying the it\'s info. Example:<pre class="prettyprint inline">{ excludeItems: "condition:(field:(mimeType).split(\'/\')[0]==\'directory\')" }</pre>',
+                }, {
+                    name: 'limit',
+                    type: '{Number}',
+                    defaultValue: '4',
+                    description: 'The number of fields that will be visible.'
+                }, {
+                    name: 'translateFields',
+                    type: '{Boolean}',
+                    defaultValue: 'true',
+                    description: 'If false, the fields will not be translated.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  infoBubble:{\n    excludeFields: ['id','type'],\n    excludeItems: 'condition:(field:(mimeType).split(\"/\")[0]==\"directory\")',\n    limit: 3,\n    translateFields: false\n  }\n})"
+
+            }, {
+                id: '6u',
+                title: '<br><h3>url</h3>',
+                description: 'The plugin that is responsible for selecting urls.'
+            }, {
+                id: '6t',
+                title: '<br><h3>upload (fs)</h3>',
+                description: '<span class="label label-primary">write</span><a href="http://ssbeefeater.github.io/#ssi-uploader/documentation" target="_blank"><span class="label label-danger">Requires ssi-uploader</span></a><br>The plugin that is responsible for uploading files.',
+                properties: [{
+                    name: 'modalOptions',
+                    type: '{Object}',
+                    description: 'Defines the options of the modal window. (<a href="http://ssbeefeater.github.io/#ssi-modal/documentation" target="_blank">see available options</a>)'
+                }, {
+                    name: 'uploadOptions',
+                    type: '{Object}',
+                    description: 'Defines the options of the ssi uploader plugin. (<a href="http://ssbeefeater.github.io/#ssi-uploader/documentation" target="_blank">see available options</a>)'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  fileSystem:{\n    scriptsPath: '/dist/bower_components/ss-input/dist/ssi-input/system/',\n    rootPath: '/dist/images',\n    upload:{\n      uploadOptions:{...},\n      modalOptions:{...}\n    }\n  }\n})"
+            }, {
+                id: '6m',
+                title: '<br><h3>rename (fs)</h3>',
+                description: '<span class="label label-primary">edit</span><br>The plugin that is responsible for renaming the files.',
+                properties: [{
+                    name: 'ajaxOptions',
+                    type: "{Object}",
+                    defaultValue: "{type:'POST'}",
+                    description: 'Extends the default options of $.ajax function. You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>. Also there is one extra option.',
+                    collapseLink: '311c'
+
+                }, {
+                    name: 'stringifyData',
+                    type: "{Boolean}",
+                    description: 'Sends the data in string form!',
+                    collapse: '311c sub'
+                }, {
+                    name: 'data',
+                    type: "{Object}",
+                    description: 'Send extra data with the request. By default, the url with the old name{oldUrl} and the url with the new name(newUrl) will be sent.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  fileSystem:{\n    scriptsPath: '/dist/bower_components/ss-input/dist/ssi-input/system/',\n    rootPath: '/dist/images',\n    rename:{\n      ajaxOptions:{...},\n      data:{...}\n    }\n  }\n})"
+
+            }, {
+                id: '6c',
+                title: '<br><h3>copy (fs)</h3>',
+                description: '<span class="label label-primary">edit</span> <span class="label label-primary">write</span><br>The plugin that is responsible for copy, cut and paste files.',
+                properties: [{
+                    name: 'cut',
+                    type: "{Object}",
+                    description: 'The options for the cut action.',
+                    collapseLink: '5'
+                }, {
+                    name: 'cut.ajaxOptions',
+                    type: "{Object}",
+                    defaultValue: "",
+                    description: 'Extends the default options of $.ajax function.<span class="important">The success option is not available.</span> You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>. Also there is one extra option.',
+                    collapse: '5 sub'
+                }, {
+                    name: 'cut.data',
+                    type: "{Object}",
+                    description: 'Send extra data with the request. By default, the new url(newUrl),the old url(oldUrl) and in some cases a variable that defines an action like replace or continue(action), will be sent.',
+                    collapse: '5 sub'
+                }, {
+                    name: 'copy',
+                    type: "{Object}",
+                    description: 'The options for the copy action.',
+                    collapseLink: '5b'
+                }, {
+                    name: 'cut.ajaxOptions',
+                    type: "{Object}",
+                    defaultValue: "",
+                    description: 'Extends the default options of $.ajax function.<span class="important">The success option is not available.</span> You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>. Also there is one extra option.',
+                    collapse: '5b sub'
+                }, {
+                    name: 'copy.data',
+                    type: "{Object}",
+                    description: 'Send extra data with the request. By default, the new url(newUrl),the old url(oldUrl), the language(language) and in some cases a variable that defines an action like replace and continue(action), will be sent.',
+                    collapse: '5b sub'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  fileSystem:{\n    scriptsPath: '/dist/bower_components/ss-input/dist/ssi-input/system/',\n    rootPath: '/dist/images',\n    copy:{\n      cut:{...},\n      copy:{...}\n    }\n  }\n})"
+
+            }, {
+                id: '6f',
+                title: '<br><h3>history (fs)</h3>',
+                description: 'The plugin that is responsible for the explore history(back forward and up folder).'
+            }, {
+                id: '6i',
+                title: '<br><h3>mkdir (fs)</h3>',
+                description: '<span class="label label-primary">write</span><br> The plugin that is responsible for folder creation.',
+                properties: [{
+                    name: 'ajaxOptions',
+                    type: "{Object}",
+                    defaultValue: "",
+                    description: 'Extends the default options of $.ajax function. You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>. Also there is one extra option.',
+                    collapseLink: '311x'
+                }, {
+                    name: 'stringifyData',
+                    type: "{Boolean}",
+                    description: 'Sends the data in string form!',
+                    collapse: '311x sub'
+                }, {
+                    name: 'data',
+                    type: "{Object}",
+                    description: 'Send extra data with the request. By default, the folder name{dirname},the current directory(currentDir) will be sent.',
+                }],
+                code: "$(\'#ss-input').ss_input({\n  fileSystem:{\n    scriptsPath: '/dist/bower_components/ss-input/dist/ssi-input/system/',\n    rootPath: '/dist/images',\n    mkdir:{\n      ajaxOptions:{...},\n      data:{...}\n    }\n  }\n})"
+
+
+            }, {
+                id: '6k',
+                title: '<br><h3>path (fs)</h3>',
+                description: 'The plugin that is responsible for displaying the path.',
+                properties: [{
+                    name: 'rootName',
+                    type: "String",
+                    defaultValue: "root",
+                    description: 'The label of the root folder'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  fileSystem:{\n    scriptsPath: '/dist/bower_components/ss-input/dist/ssi-input/system/',\n    rootPath: '/dist/images',\n    path:{\n      rootName:'Home'\n    }\n  }\n})"
+
+            }, {
+                id: '6v',
+                title: '<br><h3>textEditor (fs)</h3>',
+                description: 'The plugin that is responsible for editing text files.',
+                properties: [{
+                    name: 'ajaxOptions',
+                    type: "{Object}",
+                    defaultValue: "",
+                    description: 'Extends the default options of $.ajax function.<span class="important">The success option is not available.</span> You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>. Also there is one extra option.',
+                    collapseLink: '311z'
+                }, {
+                    name: 'stringifyData',
+                    type: "{Boolean}",
+                    description: 'Sends the data in string form!',
+                    collapse: '311z sub'
+                }, {
+                    name: 'data',
+                    type: "{Object}",
+                    description: 'Send extra data with the request. By default, the new url(newUrl),the old url(oldUrl) and in some cases a variable that defines an action like replace or continue(action), will be sent.',
+                }, {
+                    name: 'pathField',
+                    type: "{String}",
+                    description: 'The field that contains the file\'s path.'
+
+                }, {
+                    name: 'modalOptions',
+                    type: '{Object}',
+                    description: 'Defines the options of the modal window. (<a href="http://ssbeefeater.github.io/#ssi-modal/documentation" target="_blank">see available options</a>)'
+                }, {
+                    name: 'readOnly',
+                    type: "{Boolean}",
+                    description: 'If true you can\'t edit the file.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  fileSystem:{\n    scriptsPath: '/dist/bower_components/ss-input/dist/ssi-input/system/',\n    rootPath: '/dist/images',\n    textEditor:{\n      ajaxOptions:{...},\n      data:{...},\n      modalOptions:{...},\n      readOnly:true,\n      pathField:'path'\n    }\n  }\n})"
+
+            }, {
+                id: '6w',
+                title: '<br><h3>aceEditor (fs)</h3>',
+                description: '<a href="https://ace.c9.io" target="_blank"><span class="label label-danger">Requires aceEditor</span></a><br>The plugin that is responsible for editing text files using the <a href="https://ace.c9.io/#nav=about" target="_blank">ace Edtior</a>. Extends the textEditor',
+                properties: [{
+                    name: 'theme',
+                    type: "{String}",
+                    defaultValue: "monokai",
+                    description: 'The theme of the ace editor. See available themes <a href="https://github.com/ajaxorg/ace/tree/master/lib/ace/theme" target="_blank">here</a>'
+                }, {
+                    name: 'config',
+                    type: "{Function}",
+                    description: 'A function that pass as parameter the aceEditor instance.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  fileSystem:{\n    scriptsPath: '/dist/bower_components/ss-input/dist/ssi-input/system/',\n    rootPath: '/dist/images',\n    textEditor:{\n      ajaxOptions:{...},\n      data:{...},\n      modalOptions:{...},\n      readOnly:true,\n      pathField:'path'\n      theme:'chrome'\n      config:function(editor){editor.getSession().setUseWrapMode(true);}\n    }\n  }\n})"
+            }, {
+                id: '6y',
+                title: '<br><h3>newRecord (db)</h3>',
+                description: '<span class="label label-primary">write</span><br>The plugin that is responsible for adding new documents/records in the database.<br>&nbsp;&nbsp;&nbsp;<span class="important">To verify a successful write, the response code must be 201 or 200. </span>',
+                properties: [{
+                    name: 'ajaxOptions',
+                    type: "{Object}",
+                    defaultValue: "{type:'POST',stringifyData:true,contentType:'application/json'}",
+                    description: 'Extends the default options of $.ajax function. You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>. Also there is one extra option.',
+                    collapseLink: '311cxcx'
+                }, {
+                    name: 'stringifyData',
+                    type: "{Boolean}",
+                    description: 'Sends the data in string form!',
+                    collapse: '311cxcx sub'
+                }, {
+                    name: 'data',
+                    type: "{Object}",
+                    description: 'Send extra data with the request.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  storageType:'database'\n  database:{\n    collections:{...}\n    baseCollection:{...},\n    newRecord:{\n      ajaxOptions:{...},\n      data:{...}\n    }\n  }\n})"
+
+            }, {
+                id: '6qh',
+                title: '<br><h3>editRecord (db)</h3>',
+                description: '<span class="label label-primary">edit</span><br>The plugin that is responsible for updating a document/record.<br>&nbsp;&nbsp;&nbsp;<span class="important">To verify a successful edit, the response code must be 200. </span>',
+                properties: [{
+                    name: 'sendId',
+                    type: "{String}",
+                    defaultValue: "inUrl",
+                    description: 'Defines the way that id will be send to server. Available options are <code>inUrl</code>,<code>inForm</code>. With "inUrl" option, a PUT request will be sent to the defined url, adding the id of the selected element in end. For example my/url/43j434jhjg3. With the inForm option ,the id will be sent with the form data.'
+                }, {
+                    name: 'ajaxOptions',
+                    type: "{Object}",
+                    defaultValue: "{type:'PUT',stringifyData:true,contentType:'application/json'}",
+                    description: 'Extends the default options of $.ajax function. You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>. Also there is one extra option.',
+                    collapseLink: '311kkhj'
+                }, {
+                    name: 'stringifyData',
+                    type: "{Boolean}",
+                    description: 'Sends the data in string form!',
+                    collapse: '311kkhj sub'
+                }, {
+                    name: 'data',
+                    type: "{Object}",
+                    description: 'Send extra data with the request.'
+                }],
+                code: "$(\'#ss-input').ss_input({\n  storageType:'database'\n  database:{\n    collections:{...}\n    baseCollection:{...},\n    editRecord:{\n      ajaxOptions:{...},\n      data:{...}\n    }\n  }\n})"
+            }
+        ]
+    },{
+        id: '7',
+        title: 'Conditional String',
+        content: [{
+            id: '1a',
+            description: 'Conditional string is a custom type that provides the ability to create conditional statements inside a string using the keyword "condition:({statement})". Also you can use the keyword "field:({key})", to define an object value. When a variable type referred to as conditional string, means that you can use these keywords and define a condition or an object value inside the string.',
+            code: '/*data=[\n  {name:"ssBeeFeaTer",age:"25",genre:"mane",avatar:"ssBeefeater.png"},\n  {name:"Dim",age:"23",genre:"female",avatar:"dim.png}\n]*/\n\n{\n  displayImage: "condition:(field:(genre)===\'male\') ? \'male.png\' : \'female.png\'",\n  displayImage2: "myImages/users/condition:(field:(genre)===\'male\') ? \'male.png\' : \'female.png\'",\n  displayImage3: "field:(avatar)",\n  displayImage4: "images/users/avatars/field:(avatar)",\n  excludeItems: "condition:(field:(name).indexOf(\'ss\') > -1)"\n}'
+        }]
+
+    }
+];
+
+},{}],21:[function(require,module,exports){
+"use strict";
+
+module.exports = [
+    {
+        id: '1',
+        title: 'singlePick mode',
+        description: '',
+        content: [{
+            title: '<br><h3>Basic example</h3>',
+            id: '1a',
+            example: {
+                result: '<div id="ss-input1"></div>',
+                method: function () {
+                    $('#ss-input1').ss_input({
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        }
+                    })
+                }
+            }
+        }, {
+            id: '1b',
+            title: '<br><h3>Default values</h3>',
+            example: {
+                result: '<div id="ss-input2"></div>',
+                method: function () {
+                    $('#ss-input2').ss_input({
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        },
+                        selection: {
+                            inputName: 'profileImg',
+                            defaultValue: '/images/ipad.jpg'
+                        }
+                    });
+                }
+            }
+        }]
+    }, {
+        id: '2',
+        title: 'multiSelection mode',
+        description: '',
+        content: [{
+            title: '<br><h3>Basic example</h3>',
+            id: '2a',
+            example: {
+                result: '<button class="btn btn-primary" id="ssi-multiSelection1">Select images</button>\n<div id="resultContainer"></div>',
+                method: function () {
+                    $('#ssi-multiSelection1').ss_input({
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        },
+                        selection: {
+                            selectionMode: 'multiSelection',
+                            modeOptions: {
+                                className: 'table table-hover',
+                                content: '#resultContainer',
+                                inputName: 'productImages[]'
+                            }
+                        }
+                    });
+                }
+            }
+        }, {
+            title: '<br><h3>Add inputs</h3>',
+            id: '2b',
+            example: {
+                result: '<button class="btn btn-primary" id="ssi-multiSelection2">Select images</button>\n<div id="resultContainer2"></div>',
+                method: function () {
+                    $('#ssi-multiSelection2').ss_input({
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        },
+                        selection: {
+                            selectionMode: 'multiSelection',
+                            modeOptions: {
+                                className: 'table table-hover',
+                                content: '#resultContainer2',
+                                inputName: 'productImages[]',
+                                input: [{
+                                    label: 'Name',
+                                    name: 'name[]',
+                                    type: 'text'
+                                }, {
+                                    label: 'Extra',
+                                    type: 'select',
+                                    multiple: true,
+                                    options: [{label: 'Stand', value: 'stand', selected: true}, {
+                                        label: 'Gloo',
+                                        value: 'gloo'
+                                    }],
+                                    name: 'color[]'
+                                }, {
+                                    label: 'Color',
+                                    type: 'select',
+                                    options: [{label: 'Red', value: 'red'}, {label: 'Green', value: 'green'}],
+                                    name: 'color[]'
+                                }, {
+                                    label: 'Size',
+                                    type: 'radio',
+                                    radio: [{label: 'Medium', value: 'L'}, {label: 'Large', value: 'L', checked: true}],
+                                    name: 'size[]'
+                                }, {
+                                    label: 'Enabled',
+                                    type: 'checkBox',
+                                    checked: true,
+                                    name: 'enabled[]'
+                                }]
+                            }
+                        }
+                    });
+                }
+            }
+        }, {
+            title: '<br><h3>Default values</h3>',
+            id: '2c',
+            example: {
+                result: '<button class="btn btn-primary" id="ssi-multiSelection3">Select images</button>\n<div id="resultContainer3"></div>',
+                method: function () {
+                    $('#ssi-multiSelection3').ss_input({
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        },
+                        selection: {
+                            selectionMode: 'multiSelection',
+                            defaultValue: [{
+                                value: 'images/iron-maiden-fear-live-i15906.jpg',//the image
+                                input: ['Metallica poster', ['glue', 'frame'], 'red', 'm', true]//the inputs with the defined order
+                            }, {
+                                value: 'images/master_of_puppets_album.jpg',
+                                input: ['Iron maiden poster', ['glue'], 'green', 'l', 0]
+                            }],
+                            modeOptions: {
+                                className: 'table table-hover',
+                                content: '#resultContainer3',
+                                inputName: 'productImages[]',
+                                input: [{
+                                    label: 'Name',
+                                    name: 'name[]',
+                                    type: 'text'
+                                }, {
+                                    label: 'Extra',
+                                    type: 'select',
+                                    multiple: true,
+                                    options: [{label: 'Frame', value: 'frame', selected: true},
+                                        {label: 'Glue', value: 'glue'}],
+                                    name: 'color[]'
+                                }, {
+                                    label: 'Color',
+                                    type: 'select',
+                                    options: [{label: 'Red', value: 'red'}, {
+                                        label: 'Green',
+                                        value: 'green',
+                                        selected: true
+                                    }],
+                                    name: 'color[]'
+                                }, {
+                                    label: 'Size',
+                                    type: 'radio',
+                                    radio: [{label: 'Medium', value: 'm'}, {label: 'Large', value: 'l'}],
+                                    name: 'size[]'
+                                }, {
+                                    label: 'Enabled',
+                                    type: 'checkbox',
+                                    checked: true,
+                                    name: 'enabled[]'
+                                }]
+                            }
+                        }
+                    });
+                }
+            }
+        }, {
+            title: '<br><h3>Disable duplicate values</h3>',
+            id: '2d',
+            example: {
+                result: '<button class="btn btn-primary" id="ssi-multiSelection4">Select images</button>\n<div id="resultContainer4"></div>',
+                method: function () {
+                    $('#ssi-multiSelection4').ss_input({
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        },
+                        selection: {
+
+                            selectionMode: 'multiSelection',
+                            inputName: 'productImages[]',
+                            defaultValue: [{
+                                value: 'images/iron-maiden-fear-live-i15906.jpg'
+                            }, {
+                                value: 'images/master_of_puppets_album.jpg'
+                            }],
+                            modeOptions: {
+                                className: 'table table-hover',
+                                content: '#resultContainer4',
+                                duplicate: false
+                            }
+                        }
+                    });
+                }
+            }
+        }, {
+            title: '<br><h3>Max files</h3>',
+            id: '2e',
+            example: {
+                result: '<button class="btn btn-primary" id="ssi-multiSelection5">Select images</button>\n<div id="resultContainer5"></div>',
+                method: function () {
+                    $('#ssi-multiSelection5').ss_input({
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        },
+                        selection: {
+                            selectionMode: 'multiSelection',
+                            inputName: 'productImages[]',
+                            modeOptions: {
+                                className: 'table table-hover',
+                                content: '#resultContainer5',
+                                inputName: 'productImages[]',
+                                maxItems: 3//you cant add more than 5 files.
+                            }
+                        }
+                    });
+                }
+            }
+        }]
+    }, {
+        id: '3',
+        title: 'Text editor',
+        description: '',
+        content: [{
+            id: '3a',
+            title: '<br><h3>Basic example</h3>',
+            example: {
+                result: '<button class="btn btn-primary" id="ssi-textEditor1">Select images</button> <br><br> \n' +
+                '<textarea id="mytextarea"><b>TINYMCE</b></textarea>\n' +
+                '<textarea name="editor1" id="editor1"><b>CKEDITOR</b></textarea>',
+                method: function () {
+                    /*[*/
+                    $('#editor1').ckeditor({width: '47%', height: '200px', removePlugins: 'toolbar',allowedContent: true});
+
+                    tinymce.init({
+                        menubar: false, statusbar: false, toolbar: false, selector: "textarea#mytextarea",
+                        theme: "modern", width: '47%', height: 200
+                    });
+                    /*]*/
+                    $('#ssi-textEditor1').ss_input({
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        },
+                        selection: {
+                            selectionMode: 'textEditorSelection',
+                            inputName: 'productImages[]',
+                            modeOptions: {
+                                method: function (value) {
+                                    CKEDITOR.instances['editor1'].insertHtml('<img style="max-width:100px;max-height:100px" src="' + value + '">');
+                                    tinyMCE.get("mytextarea").execCommand('mceInsertContent', false, '<img style="max-width:100px;max-height:100px" src="' + value + '">');
+                                }
+                            }
+                        }
+                    });
+
+                }
+            }
+        }]
+    }, {
+        id: '4',
+        title: 'Permissions',
+        description: '',
+        content: [{
+            id: '4a',
+            example: {
+                result: '<div id="ss-input3" class="permissions"></div> \n<div id="ss-input4" class="permissions"></div> \n<div id="ss-input5" class="permissions"></div> \n<div id="ss-input5b" class="permissions"></div>',
+                method: function () {
+                    $('#ss-input3').ss_input({
+                        permissions: ['edit'],
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        }
+                    });
+                    $('#ss-input4').ss_input({
+                        permissions: ['write'],
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        }
+                    });
+                    $('#ss-input5').ss_input({
+                        permissions: ['read', 'delete'],
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        }
+                    });
+                    $('#ss-input5b').ss_input({
+                        permissions: ['read', 'upload', 'copy'],
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        }
+                    });
+                }
+            }
+        }]
+    }, {
+        id: '5',
+        title: 'Path type',
+        description: '',
+        content: [{
+            id: '5a',
+            title: '<br><h3>absolute</h3>',
+            example: {
+                result: '<div id="ss-input6"></div><br>',
+                method: function () {
+                    $('#ss-input6').ss_input({
+                        permissions: ['edit'],
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        },
+                        selection: {
+                            inputName: 'profileImage',
+                            pathType: 'absolute'
+                        }
+                    });
+                }
+            }
+        }, {
+            id: '5b',
+            example: {
+                result: '<button class="btn btn-primary" id="ssi-multiSelection7">Select images</button>\n<div id="resultContainer7"></div>',
+                method: function () {
+                    $('#ssi-multiSelection7').ss_input({
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        },
+                        selection: {
+                            selectionMode: 'multiSelection',
+                            defaultValue: [{
+                                value: 'images/iron-maiden-fear-live-i15906.jpg'
+                            }, {
+                                value: 'images/master_of_puppets_album.jpg'
+                            }],
+                            modeOptions: {
+                                content: '#resultContainer7',
+                                inputName: 'productImages[]',
+                                className: 'table table-hover',
+                                pathType: 'absolute',
+                                input: [{
+                                    label: 'Name',
+                                    name: 'name[]',
+                                    type: 'text'
+                                }]
+                            }
+                        }
+                    });
+                }
+            }
+        }]
+    }, {
+        id: '6',
+        title: 'Plugins',
+        description: '',
+        content: [{
+            id: '6a',
+            title: '<br><h3>Exclude plugins</h3>',
+            example: {
+                result: '<div id="ss-input8" class="permisions"></div><br>',
+                method: function () {
+                    $('#ss-input8').ss_input({
+                        excludePlugin: ['sidebar', 'cache', 'select', 'search', 'contextMenu'],
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        }
+                    });
+                }
+            }
+        }, {
+            id: '6b',
+            title: '<br><h3>Choose plugins</h3>',
+            example: {
+                result: '<div id="ss-input9"></div><br>',
+                method: function () {
+                    $('#ss-input9').ss_input({
+                        plugins: ['sidebar', 'select', 'search', 'contextMenu', 'sort'],
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        }
+                    });
+                }
+            }
+        }]
+    }, {
+        id: '7',
+        title: 'localize',
+        description: '',
+        content: [{
+            id: '7a',
+            example: {
+                result: '<div id="ss-input10"></div><br>',
+                method: function () {
+                    $('#ss-input10').ss_input({
+                        language: 'gr',
+                        fileSystem: {
+                            scriptsPath: '/ss-input/src/ss-input/system/',
+                            rootPath: '/images'
+                        }
+                    });
+                }
+            }
+        }]
+    }, {
+        id: '8',
+        title: 'Database support',
+        description: '',
+        content: [{
+            id: '8a',
+            title: '<br><h3>Basic example</h3>',
+            example: {
+                result: '<div id="ss-input11"></div><br>',
+                method: function () {
+                    $('#ss-input11').ss_input({
+                        storageType: 'database',
+                        database: {
+                            collections: {
+                                Images: {
+                                    baseUrl: 'https://api.mlab.com/api/1/databases/ss_input/collections/musicAlbums/:id?apiKey='/*[*/ + 'LcrxGmtwb0maQ7DWGmBPnXQWcKja2CIj'/*]*/,
+                                    schema: {
+                                        "_id": {type: 'string', edit: false, id: true, search: true},
+                                        "title": {type: 'string', required: true, search: true, displayName: true},
+                                        "imagePath": {
+                                            type: 'string', details: false, inputType: 'textarea', displayImage: true,
+                                            default: 'http://www.designofsignage.com/application/symbol/building/image/600x600/no-photo.jpg'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }, {
+            id: '8b',
+            title: '<br><h3>Auto generate schema</h3>',
+            example: {
+                result: '<button class="btn btn-primary" id="ssi-textEditor2">Select images</button> <br><br> \n' +
+                '<textarea id="mytextarea2"><b>TINYMCE</b></textarea>\n' +
+                '<textarea name="editor2" id="editor2"><b>CKEDITOR</b></textarea>',
+                method: function () {
+                    /*[*/
+                    $('#editor2').ckeditor({width: '47%', height: '200px', removePlugins: 'toolbar',allowedContent: true});
+                    tinymce.init({
+                        menubar: false, statusbar: false, toolbar: false, selector: "#mytextarea2",
+                        theme: "modern", width: '47%', height: 200
+                    });
+                    /*]*/
+                    $('#ssi-textEditor2').ss_input({
+                        storageType: 'database',
+                        selection: {
+                            selectionMode: 'textEditorSelection',
+                            inputName: 'productImages[]',
+                            modeOptions: {
+                                method: function (value) {
+                                    CKEDITOR.instances['editor2'].insertHtml('<img style="max-width:100px;max-height:100px" src="' + value + '">');
+                                    tinyMCE.get("mytextarea2").execCommand('mceInsertContent', false, '<img style="max-width:100px;max-height:100px" src="' + value + '">');
+                                }
+                            }
+                        },
+                        database: {
+                            collections: {
+                                Images: {
+                                    baseUrl: 'https://api.mlab.com/api/1/databases/ss_input/collections/musicAlbums/:id?apiKey='/*[*/ + 'LcrxGmtwb0maQ7DWGmBPnXQWcKja2CIj'/*]*/,
+                                    selectionField: 'imagePath'
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }, {
+            id: '8c',
+            title: '<br><h3>Multiple collections</h3>',
+            example: {
+                result: '<button class="btn btn-primary" id="ssi-multiSelection8">Select images</button>\n<div id="resultContainer8"></div>',
+                method: function () {
+                    $('#ssi-multiSelection8').ss_input({
+                        storageType: 'database',
+                        selection: {
+                            selectionMode: 'multiSelection',
+                            modeOptions: {
+                                content: '#resultContainer8',
+                                inputName: 'images[]',
+                                className: 'table table-hover'
+                            }
+                        },
+                        database: {
+                            collections: {
+                                "Music Albums": {
+                                    baseUrl: 'https://api.mlab.com/api/1/databases/ss_input/collections/musicAlbums/:id?apiKey='/*[*/ + 'LcrxGmtwb0maQ7DWGmBPnXQWcKja2CIj'/*]*/
+                                },
+                                "Landscapes": {
+                                    baseUrl: 'https://api.mlab.com/api/1/databases/ss_input/collections/landscapes/:id?apiKey='/*[*/ + 'LcrxGmtwb0maQ7DWGmBPnXQWcKja2CIj'/*]*/
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }
+        ]
+    }
+];
+
+},{}],22:[function(require,module,exports){
 "use strict";
 module.exports =  [{
         id: '1',
@@ -32178,7 +33808,7 @@ module.exports =  [{
     }
 ];
 
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 "use strict";
 
 //var ssi_modal=require('../../ssi-modal/js/ssi-modal');
@@ -32796,154 +34426,187 @@ module.exports = [
     }
 ];
 
-},{}],22:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 "use strict";
 
 module.exports = [{
-        id: '1',
-        title: 'INSTALLATION',
-        content: [{
-            id: '1a',
-            description: 'You can install ssi-uploader with 3 ways.'
-        }, {
-            id: '1a',
-            description: '1st.Using npm.',
-            code: 'npm install ssi-uploader --save'
-
-        }, {
-            id: '1b',
-            description: '2nd. Using bower.',
-            code: 'bower install ssi-uploader --save'
-
-        }, {
-            id: '1c',
-            description: '3rd. Download the files and include them to your html file.',
-            code: '&lt;link href="ssi-uploader.css" rel="stylesheet"/&gt;\n&lt;script src="ssi-uploader.js"&gt;&lt;/script&gt;'
-
-        }]
-
-    },{
-        id: '44',
-        title: 'Callbacks',
-        description: 'The ssi-uploader supports 4 kind of callbacks:<code>beforeUpload, beforeEachUpload, onUpload, onEachUpload</code>. (<a class="example" href="ssi-uploader/examples/7">Example</a>)',
-        content: [{
-            id: '44ab',
-            title:'beforeUpload',
-            description: 'The <code>beforeUpload</code> callback is executed before an upload process starts.',
-            code: "$('input').ssi_uploader({url:'uploadAction.php',beforeUpload:function(){\n   console.log(\'The upload is ready to start.\');\n}})\n\n$('input').on(\'beforeUpload.ssi-uploader\',function(){console.log(\'A fill is going for uploading.\')});"
-        },{
-            id: '44ac',
-            title:'beforeEachUpload',
-            description: 'The <code>beforeEachUpload</code> callback is executed just before each file starts to uploading. This callback has access to the file\'s info and to the xhr object. If you abort the file, you can return a string with the reason of the abortion and that string will be displayed in the error label. Also a "beforeEachUpload.ssi-uploader" event will be triggred that you can listen to.',
-            code: "$('input').ssi_uploader({url:'uploadAction.php',beforeEachUpload:function(fileInfo,xhr){\n   console.log(fileInfo.name+' '+fileInfo.type+' '+fileInfo.size);\n   if(fileInfo.size > 1){ xhr.abort(); }\n   return 'The size is too big.';\n}});\n\n$('input').on(\'beforeEachUpload.ssi-uploader\',function(){console.log(\'A fill is going for uploading.\')});"
-
-        },{
-            id: '44ad',
-            title:'onUpload',
-            description: 'The <code>onUpload</code> callback is executed when the upload process ends. Also a "onUpload.ssi-uploader" event will be triggred that you can listen to.',
-            code: "$('input').ssi_uploader({url:'uploadAction.php',onUpload:function(){\n   console.log(\'The upload process finished.\');\n}})\n\n$('input').on(\'onUpload.ssi-uploader\',function(){console.log(\'The upload process finished.\')});"
-
-        },{
-            id: '44ae',
-            title:'onEachUpload',
-            description: 'The <code>onEachUpload</code> callback is executed when each file finish to uploading. This callback has access to the file\'s info. Also a "onEachUpload.ssi-uploader" event will be triggred that you can listen to.',
-            code: "$('input').ssi_uploader({url:'uploadAction.php',onEachUpload:function(fileInfo){\n   console.log(fileInfo.uploadStatus+' 'fileInfo.name+' '+fileInfo.type+' '+fileInfo.size+' '+fileInfo.uploadStatus);\n}});\n\n$('input').on(\'onEachUpload.ssi-uploader\',function(){console.log(\'A file uploaded.\')});"
-
-        }]
+    id: '1',
+    title: 'INSTALLATION',
+    content: [{
+        id: '1a',
+        description: 'You can install ssi-uploader with 3 ways.'
+    }, {
+        id: '1a',
+        description: '1st.Using npm.',
+        code: 'npm install ssi-uploader --save'
 
     }, {
-        id: '2',
-        title: 'Options',
-        description: '',
-        content: [{
-            id: '2a',
-            properties: [{
-                name: 'url',
-                type: '{string}',
-                defaultValue: 'null',
-                required: [{content: 'Required', type: 'danger'}],
-                description: 'The utl to which the ajax request is sent.'
+        id: '1b',
+        description: '2nd. Using bower.',
+        code: 'bower install ssi-uploader --save'
 
-            }, {
-                name: 'data',
-                type: '{object}',
-                defaultValue: 'null',
-                description: 'Sends extra data with the request. (ie <pre class="prettyprint inline">$(\'input\').ssi-uploader({url:\'uploadAction.php\',data:{"name":"myDragon"}})</pre>)'
-            }, {
-                name: 'locale',
-                type: '{string}',
-                defaultValue: '"en"',
-                description: 'The language to use. For now available in en, gr . To sse how to translate to your language click <button class="btn btn-default btn-xs howTo" href="ssi-uploader/examples/4">here</button>. (<a class="example" href="ssi-uploader/examples/3">Example</a>)'
-            }, {
-                name: 'preview',
-                type: '{boolean}',
-                defaultValue: 'true',
-                description: 'Enables/disables the file preview. (<a class="example" href="ssi-uploader/examples/2">Example</a>)'
-            }, {
-                name: 'maxNumberOfFiles',
-                type: '{number}',
-                defaultValue: 'null',
-                description: 'How many files are allowed per upload.)'
-            }, {
-                name: 'maxFileSize',
-                type: '{number}',
-                defaultValue: 'null',
-                description: 'The maximum size of each file. (<a class="example" href="ssi-uploader/examples/6">Example</a>)'
-            }, {
-                name: 'allowed',
-                type: '{array}',
-                defaultValue: "['jpg', 'jpeg', 'png', 'bmp', 'gif']",
-                description: 'The maximum size of each file. (<a class="example" href="ssi-uploader/examples/5">Example</a>)'
-            }, {
-                name: 'errorHandler',
-                type: '{object}',
-                defaultValue: "",
-                description: 'The method that will be used to display the messages. (<a class="example" href="ssi-uploader/examples/6">Example</a>)',
-                collapseLink:'a1'
-            }, {
-                name: 'errorHandler.method',
-                type: '{function}',
-                defaultValue: "<code>function(msg,type){alert(msg);}</code>",
-                description: 'The method that returns the type and the message.',
-                collapse:'a1'
-            }, {
-                name: 'errorHandler.success',
-                type: '{string}',
-                defaultValue: "'success'",
-                description: 'The type that will return when the message is success.',
-                collapse:'a1'
-            }, {
-                name: 'errorHandler.error',
-                type: '{string}',
-                defaultValue: "'error'",
-                description: 'The type that will return when the message is error.',
-                collapse:'a1'
-            }, {
-                name: 'beforeUpload',
-                type: '{function}',
-                defaultValue: "",
-                description: 'The callback that is executed before an upload process starts. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
-            }, {
-                name: 'beforeEachUpload',
-                type: '{function}',
-                defaultValue: "",
-                description: 'The callback that is executed just before each file starts to uploading. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
-            }, {
-                name: 'onUpload',
-                type: '{function}',
-                defaultValue: "",
-                description: 'The callback that is executed when the upload process ends. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
-            }, {
-                name: 'onEachUpload',
-                type: '{function}',
-                defaultValue: "",
-                description: 'The callback that is executed when each file finishes to uploading. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
-            }]
-        }]
-    }];
+    }, {
+        id: '1c',
+        description: '3rd. Download the files and include them to your html file.',
+        code: '&lt;link href="ssi-uploader.css" rel="stylesheet"/&gt;\n&lt;script src="ssi-uploader.js"&gt;&lt;/script&gt;'
+
+    }]
+
+}, {
+    id: '44',
+    title: 'Callbacks',
+    description: 'The ssi-uploader supports 4 kind of callbacks:<code>beforeUpload, beforeEachUpload, onUpload, onEachUpload</code>. (<a class="example" href="ssi-uploader/examples/7">Example</a>)',
+    content: [{
+        id: '44ab',
+        title: 'beforeUpload',
+        description: 'The <code>beforeUpload</code> callback is executed before an upload process starts.',
+        code: "$('input').ssi_uploader({url:'uploadAction.php',beforeUpload:function(){\n   console.log(\'The upload is ready to start.\');\n}})\n\n$('input').on(\'beforeUpload.ssi-uploader\',function(){console.log(\'A fill is going for uploading.\')});"
+    }, {
+        id: '44ac',
+        title: 'beforeEachUpload',
+        description: 'The <code>beforeEachUpload</code> callback is executed just before each file starts to uploading. This callback has access to the file\'s info and to the xhr object. If you abort the file, you can return a string with the reason of the abortion and that string will be displayed in the error label. Also a "beforeEachUpload.ssi-uploader" event will be triggred that you can listen to.',
+        code: "$('input').ssi_uploader({url:'uploadAction.php',beforeEachUpload:function(fileInfo,xhr){\n   console.log(fileInfo.name+' '+fileInfo.type+' '+fileInfo.size);\n   if(fileInfo.size > 1){ xhr.abort(); }\n   return 'The size is too big.';\n}});\n\n$('input').on(\'beforeEachUpload.ssi-uploader\',function(){console.log(\'A fill is going for uploading.\')});"
+
+    }, {
+        id: '44ad',
+        title: 'onUpload',
+        description: 'The <code>onUpload</code> callback is executed when the upload process ends. Also a "onUpload.ssi-uploader" event will be triggred that you can listen to.',
+        code: "$('input').ssi_uploader({url:'uploadAction.php',onUpload:function(){\n   console.log(\'The upload process finished.\');\n}})\n\n$('input').on(\'onUpload.ssi-uploader\',function(){console.log(\'The upload process finished.\')});"
+
+    }, {
+        id: '44ae',
+        title: 'onEachUpload',
+        description: 'The <code>onEachUpload</code> callback is executed when each file finish to uploading. This callback has access to the file\'s info. Also a "onEachUpload.ssi-uploader" event will be triggred that you can listen to.',
+        code: "$('input').ssi_uploader({url:'uploadAction.php',onEachUpload:function(fileInfo){\n   console.log(fileInfo.uploadStatus+' 'fileInfo.name+' '+fileInfo.type+' '+fileInfo.size+' '+fileInfo.uploadStatus);\n}});\n\n$('input').on(\'onEachUpload.ssi-uploader\',function(){console.log(\'A file uploaded.\')});"
+
+    }]
+
+}, {
+    id: '2',
+    title: 'Options',
+    description: '',
+    content: [{
+        id: '2a',
+        properties: [{
+            name: 'url',
+            type: '{String}',
+            defaultValue: 'null',
+            required: [{content: 'Required', type: 'danger'}],
+            description: 'The utl to which the ajax request is sent.'
+
+        }, {
+            name: 'data',
+            type: '{Object}',
+            defaultValue: 'null',
+            description: 'Sends extra data with the request. (ie <pre class="prettyprint inline">$(\'input\').ssi-uploader({url:\'uploadAction.php\',data:{"name":"myDragon"}})</pre>)'
+        }, {
+            name: 'ajaxOptions',
+            type: "{Object}",
+            defaultValue: "{type:'DELETE'}",
+            description: 'Extends the default options of $.ajax function. You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>',
+            collapseLink: '311ddd'
+        }, {
+            name: 'locale',
+            type: '{String}',
+            defaultValue: '"en"',
+            description: 'The language to use. For now available in en, gr . To sse how to translate to your language click <button class="btn btn-default btn-xs howTo" href="ssi-uploader/examples/4">here</button>. (<a class="example" href="ssi-uploader/examples/3">Example</a>)'
+        }, {
+            name: 'preview',
+            type: '{boolean}',
+            defaultValue: 'true',
+            description: 'Enables/disables the file preview. (<a class="example" href="ssi-uploader/examples/2">Example</a>)'
+        }, {
+            name: 'maxNumberOfFiles',
+            type: '{Number}',
+            defaultValue: 'null',
+            description: 'How many files are allowed per upload.)'
+        }, {
+            name: 'maxFileSize',
+            type: '{Number}',
+            defaultValue: 'null',
+            description: 'The maximum size of each file. (<a class="example" href="ssi-uploader/examples/6">Example</a>)'
+        }, {
+            name: 'allowed',
+            type: '{Array}',
+            defaultValue: "['jpg', 'jpeg', 'png', 'bmp', 'gif']",
+            description: 'The files you allow to be uploaded. (<a class="example" href="ssi-uploader/examples/5">Example</a>)'
+        }, {
+            name: 'errorHandler',
+            type: '{Object}',
+            defaultValue: "",
+            description: 'The method that will be used to display the messages. (<a class="example" href="ssi-uploader/examples/6">Example</a>)',
+            collapseLink: 'a1'
+        }, {
+            name: 'errorHandler.method',
+            type: '{Function}',
+            defaultValue: "<code>function(msg,type){alert(msg);}</code>",
+            description: 'The method that returns the type and the message.',
+            collapse: 'a1'
+        }, {
+            name: 'errorHandler.success',
+            type: '{String}',
+            defaultValue: "'success'",
+            description: 'The type that will return when the message is success.',
+            collapse: 'a1'
+        }, {
+            name: 'errorHandler.error',
+            type: '{String}',
+            defaultValue: "'error'",
+            description: 'The type that will return when the message is error.',
+            collapse: 'a1'
+        }, {
+            name: 'beforeUpload',
+            type: '{Function}',
+            defaultValue: "",
+            description: 'The callback that is executed before an upload process starts. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
+        }, {
+            name: 'beforeEachUpload',
+            type: '{Function}',
+            defaultValue: "",
+            description: 'The callback that is executed just before each file starts to uploading. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
+        }, {
+            name: 'onUpload',
+            type: '{Function}',
+            defaultValue: "",
+            description: 'The callback that is executed when the upload process ends. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
+        }, {
+            name: 'onEachUpload',
+            type: '{Function}',
+            defaultValue: "",
+            description: 'The callback that is executed when each file finishes to uploading. (<a class="example" href="ssi-uploader/examples/7">Example</a>)'
+        }, {
+            name: 'responseValidation',
+            type: '{Object||false}',
+            description: 'Setting up the response validation, ssi-uploader will be able to handle erros and display them. Structure 1 example: <pre class="prettyprint inline">{ type:"error",result:"Already exists" }</pre> Structure 2 example: <pre class="prettyprint inline">{ error:"Already exists." }</pre> ',
+            collapseLink: "333dsadasd"
+        }, {
+            name: 'validationKey',
+            type: '{String||Object}',
+            description: 'Defines the validation key of the response. For ',
+            collapse: "333dsadasd sub"
+        }, {
+            name: 'resultKey',
+            type: '{String}',
+            description: 'Defines the validation key of the response.',
+            collapse: "333dsadasd sub"
+        }, {
+            name: 'success',
+            type: '{String}',
+            description: 'Defines the success key of the response.',
+            collapse: "333dsadasd sub"
+        }, {
+            name: 'error',
+            type: '{String}',
+            description: 'Defines the error key of the response.',
+            collapse: "333dsadasd sub"
+        }],
+        code: "//structure 1\n$(\'#ss-uploader').ss_input({\n  responseValidation:{\n    validationKey: 'type',\n    resultKey: 'data',\n    success: 'success',\n    error: 'error'\n  }\n});\n\n//result\n /*\n  {\n    type:'error',\n    data:'Already Exists.'\n  } \n*/ \n\n//structure 2\n$(\'#ss-uploader').ss_input({\n  responseValidation:{\n    validationKey: {\n      success: 'success',\n      error: 'error'\n    },\n    resultKey: 'validationKey'\n  }\n})\n\n//result\n /*\n  {\n    error:'Already Exists.'\n  } \n*/"
+
+    }]
+}];
 
 
-},{}],23:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 "use strict";
 
 var notifyOptions={iconButtons: {
@@ -32973,7 +34636,7 @@ module.exports =[{
             example:{
             result: '<input type="file" multiple id="ssi-upload"/>',
             method:function(){
-                $('#ssi-upload').ssi_uploader({url:'http://socialcook.gr/scripts/uploadAction.php',beforeEachUpload:function(info,xhr){xhr.setRequestHeader("Access-Control-Allow-Origin","*")}}  );
+                $('#ssi-upload').ssi_uploader({ajaxOptions:{crossDomain: true},url:'http://ssinput.com/bower_components/ss-input/dist/ss-input/system/uploadAction.php',beforeEachUpload:function(info,xhr){xhr.setRequestHeader("Access-Control-Allow-Origin","*")}}  );
             }}
         }]
     },{
@@ -33094,7 +34757,7 @@ module.exports =[{
         }]
     }];
 
-},{}],24:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 (function (global){
 var Backbone = require('backbone');
 global.$ = global.jQuery = require("jquery");
@@ -33105,7 +34768,7 @@ var Router = require('./routes/SSInput').route;
 new Router;
 Backbone.history.start();
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./routes/SSInput":27,"backbone":1,"bootstrap":2,"jquery":15,"lodash":16}],25:[function(require,module,exports){
+},{"./routes/SSInput":29,"backbone":1,"bootstrap":2,"jquery":15,"lodash":16}],27:[function(require,module,exports){
 "use strict";
 var Backbone=require('backbone');
 var $=require('jquery');
@@ -33126,7 +34789,7 @@ var propertiesModel = Backbone.Model.extend({
 module.exports= propertiesModel;
 
 
-},{"backbone":1,"jquery":15,"lodash":16}],26:[function(require,module,exports){
+},{"backbone":1,"jquery":15,"lodash":16}],28:[function(require,module,exports){
 "use strict";
 var Backbone=require('backbone');
 var $=require('jquery');
@@ -33148,7 +34811,7 @@ var propertiesModel = Backbone.Model.extend({
 module.exports= propertiesModel;
 
 
-},{"backbone":1,"jquery":15,"lodash":16}],27:[function(require,module,exports){
+},{"backbone":1,"jquery":15,"lodash":16}],29:[function(require,module,exports){
 "use strict";
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -33162,14 +34825,18 @@ var plugins = {
     "ssi-uploader": {
         documentation: require('../data/ssi-uploader/documentation'),
         examples: require('../data/ssi-uploader/examples')
+    },
+    "ss-input": {
+        documentation: require('../data/ss-input/documentation'),
+        examples: require('../data/ss-input/examples')
     }
 };
 var methodsCollection = require('../collections/methods');
 var PropertiesCollection = require('../collections/properties');
 var PropertyView = require('../views/propertyView');
 var currentView;
-var currentPlugin='ssi-modal';
-var activated=false;
+var currentPlugin = 'ssi-modal';
+var activated = false;
 var scrollState = {
     doc: 0,
     example: 0
@@ -33181,7 +34848,11 @@ var SsinputRouter = Backbone.Router.extend({
         'ssi-modal/examples': 'ssi_modalExamples',
         'ssi-modal/examples/:id': 'ssi_modalExamples',
         'ssi-modal/documentation': 'ssi_modalDocumentation',
-     'ssi-uploader': 'ssi_uploader',
+        'ss-input': 'ss_input',
+        'ss-input/examples': 'ss_inputExamples',
+        'ss-input/documentation': 'ss_inputDocumentation',
+        'ss-input/examples/:id': 'ss_inputExamples',
+        'ssi-uploader': 'ssi_uploader',
         'ssi-uploader/examples': 'ssi_uploaderExamples',
         'ssi-uploader/examples/:id': 'ssi_uploaderExamples',
         'ssi-uploader/documentation': 'ssi_uploaderDocumentation',
@@ -33201,17 +34872,27 @@ var SsinputRouter = Backbone.Router.extend({
         $(document).off('.example');
         $('.title').html('');
         $('.collapse.in').collapse('hide');
-        currentPlugin=plugin;
+        currentPlugin = plugin;
 
     },
     bootPage: function () {
-        var thisS=this;
-        var $htmlBody = $('html, body');
+        var thisS = this;
+        var $htmlBody = $('body');
         $htmlBody.scrollTop(scrollState[currentView]);
         $('.anchor').click(function (e) {
             e.preventDefault();
             var href = $(this).attr('href');
             var elem = $(href);
+            var currentPosition = document.body.scrollTop;
+            $('#goBack').remove();
+            var $goBack = $('<div id="goBack">Go back</div>').one('click', function () {
+                $htmlBody.animate({
+                    scrollTop: currentPosition
+                }, 600, function () {
+                    $goBack.remove();
+                });
+            });
+            $htmlBody.append($goBack);
             $htmlBody.animate({
                 scrollTop: elem.offset().top - 60
             }, 600);
@@ -33225,10 +34906,28 @@ var SsinputRouter = Backbone.Router.extend({
             } else if ($hash.hasClass('collapse')) {
                 $('.' + $hash.attr('data-col')).collapse('show');
             }
-if($hash.children('a').html()=='Plugins' && activated===false){
-    activated=true;
-ssi_modal.notify('custom',{closeAfter:{time:7},title:false,content:'Plugins are not part of the core code. For now they are all in the same file. Somewhere in the future i hope you will be able to download them separately. If you don\'t want to use any, you can remove it. <a href="#" class="seeHow"> See how </a>.',onShow:function(modal){$('.seeHow').click(function(){;modal.close();ssi_modal.show({title:'Remove a plugin',content:'<ol class="delPL"><li>First open the ssi-modal.js file.</li><li>Find the line with the comment <pre class="prettyprint inline">//Start of (plugin Name) plugin</pre>.</li><li>Delete the code until you get to the comment <pre class="prettyprint inline">//End of (plugin Name) plugin</pre>.</li><li>Do the same with ssi-modal.css file.</li></ol>'});prettyPrint();return false;})},sizeClass:'medium',position:'top center',okBtn:{className:'btn btn-primary'}})
-}
+            if ($hash.children('a').html() == 'Plugins' && activated === false && currentPlugin == "ssi-modal") {
+                activated = true;
+                ssi_modal.notify('custom', {
+                    closeAfter: {time: 7},
+                    title: false,
+                    content: 'Plugins are not part of the core code. For now they are all in the same file. Somewhere in the future i hope you will be able to download them separately. If you don\'t want to use any, you can remove it. <a href="#" class="seeHow"> See how </a>.',
+                    onShow: function (modal) {
+                        $('.seeHow').click(function () {
+                            modal.close();
+                            ssi_modal.show({
+                                title: 'Remove a plugin',
+                                content: '<ol class="delPL"><li>First open the ssi-modal.js file.</li><li>Find the line with the comment <pre class="prettyprint inline">//Start of (plugin Name) plugin</pre>.</li><li>Delete the code until you get to the comment <pre class="prettyprint inline">//End of (plugin Name) plugin</pre>.</li><li>Do the same with ssi-modal.css file.</li></ol>'
+                            });
+                            prettyPrint();
+                            return false;
+                        })
+                    },
+                    sizeClass: 'medium',
+                    position: 'top center',
+                    okBtn: {className: 'btn btn-primary'}
+                })
+            }
         });
         $(document).on('scroll.examples', function () {
             if (currentView === 'doc') {
@@ -33236,19 +34935,24 @@ ssi_modal.notify('custom',{closeAfter:{time:7},title:false,content:'Plugins are 
             }
         });
 
-        $('body').scrollspy({target: '#scrollSpy', offset: 80})
-         .on('click.example','a.navMenu',function(e){
-             e.preventDefault();
-             e.stopPropagation();
-             var $eTarget=$(e.currentTarget);
-if($eTarget.hasClass('git')){
-    window.open("https://github.com/ssbeefeater/" + (currentPlugin ||'ssi-modal'), '_blank');
+        $('body').scrollspy({target: '#scrollSpy', offset: 80});
+        $('a.navMenu').each(function () {
+            var $this = $(this);
+            $this.attr('href', '#'+(currentPlugin || 'ssi-modal') +'/'+ $this.attr('data-href'))
+        })
 
-}else{
-    thisS.navigate((currentPlugin ||'ssi-modal')+$eTarget.attr('href'),{trigger:true})
-}
+        /*  .on('click.example', 'a.navMenu', function (e) {
+         e.preventDefault();
+         e.stopPropagation();
+         var $eTarget = $(e.currentTarget);
+         if ($eTarget.hasClass('git')) {
+         window.open("https://github.com/ssbeefeater/" + (currentPlugin || 'ssi-modal'), '_blank');
 
-         });
+         } else {
+         thisS.navigate((currentPlugin || 'ssi-modal') + $eTarget.attr('href'), {trigger: true})
+         }
+
+         });*/
         prettyPrint();
         scrollSpyUl.find("li a[href^='#']").on('click', function (e) {
             e.preventDefault();
@@ -33258,7 +34962,7 @@ if($eTarget.hasClass('git')){
                 scrollTop: $(hash).offset().top - 60
             }, 600);
         });
-        $('[data-toggle="tooltip"]').tooltip({html:true});
+        $('[data-toggle="tooltip"]').tooltip({html: true});
         ssi_modal.removeAll();
 
     },
@@ -33291,7 +34995,7 @@ if($eTarget.hasClass('git')){
                 myform.action = "https://www.paypal.com/cgi-bin/webscr";
                 myform.method = "post";
                 myform.target = "_top";
-               var cmd = document.createElement("input");
+                var cmd = document.createElement("input");
                 cmd.value = "_s-xclick";
                 cmd.name = "cmd";
                 var hosted_button_id = document.createElement("input");
@@ -33323,12 +35027,14 @@ if($eTarget.hasClass('git')){
             sizeClass: 'auto',
             className: 'NF',
             fitScreen: false,
-            outSideClose:true,
-            closeIcon:true,
-            beforeClose:function(){window.history.back()},
+            outSideClose: true,
+            closeIcon: true,
+            beforeClose: function () {
+                window.history.back()
+            },
             title: '',
             content: '<div class="pageNF"> <h1>Not found <span>:(</span></h1><p>Sorry, but the page you were trying to view does not exist.</p><p>It looks like this was the result of either:</p><ul><li>a mistyped address</li><li>an out-of-date link</li></ul></div>',
-            buttons:{}
+            buttons: {}
         })
     },
     'home': function () {
@@ -33336,15 +35042,17 @@ if($eTarget.hasClass('git')){
         this.homePage('ssi-modal', {buttons: '', title: '', content: content, backdropClassName: 'ssi-modalBg'});
     },
     'ssi_modal': function () {
-       this.ssi_modalExamples();
+        this.ssi_modalExamples();
         var content = 'tested on: <img src="images/browser_icons.png"><div id="desc">ssi-modal is an open source modal window plugin that only depends on jquery. It has many options and it\'s super flexible, maybe the most flexible modal out there.</div><div class="feature"><br><ul><li><i class="fa fa-check"></i> Responsive</li><li><i class="fa fa-check"></i> Mobile friendly</li><li><i class="fa fa-check"></i> Customizable</li><li><i class="fa fa-check"> Full feature</i></li></div>'
-      var thisS=this;
+        var thisS = this;
         this.homePage('ssi-modal', {
             fitScreen: 180,
             fixedHeight: 180,
             center: true,
             closeIcon: true,
-            onClose:function(){thisS.navigate('ssi-modal/examples',{trigger:false})},
+            onClose: function () {
+                thisS.navigate('ssi-modal/examples', {trigger: false})
+            },
             content: content,
             backdropClassName: 'ssi-modalBg'
         });
@@ -33390,14 +35098,18 @@ if($eTarget.hasClass('git')){
             }
         }];
         var content = 'tested on: <img src="images/browser_iconsUL.png"><div id="descUL"><h2>ssi-uploader</h2><br>A jquery, ajax, asynchronous upload plugin.</div>';
-        var options= {outSideClose:false,onClose:function(){thisS.navigate('ssi-uploader/examples',{trigger:false})},className:'UL',title:'',content: content, backdropClassName: 'ssi-uploaderBg'};
+        var options = {
+            outSideClose: false, onClose: function () {
+                thisS.navigate('ssi-uploader/examples', {trigger: false})
+            }, className: 'UL', title: '', content: content, backdropClassName: 'ssi-uploaderBg'
+        };
 
-        var thisS=this;
+        var thisS = this;
         $(document).ready(function () {
             thisS.bootPage();
-           var a= ssi_modal.createObject(options);
+            var a = ssi_modal.createObject(options);
             a.init();
-            a.setButtons(buttons,'.UL .ssi-modalContent');
+            a.setButtons(buttons, '.UL .ssi-modalContent');
             a.show();
         });
     },
@@ -33617,22 +35329,34 @@ if($eTarget.hasClass('git')){
             });
         });
     },
-  'ssi_uploaderExamples': function (id) {
+    'ssi_uploaderExamples': function (id) {
         this.examplesPage('ssi-uploader', id);
     },
     'ssi_uploaderDocumentation': function () {
         this.documentationPage('ssi-uploader');
-        $('body').on('click.example','button.howTo',function(e){
+        $('body').on('click.example', 'button.howTo', function (e) {
             e.preventDefault();
-            ssi_modal.show({onShow:function(){prettyPrint()},content:'<ol class="delPL"><li>First open the ssi-uploader.js file.</li><li>Find the varaible with name locale. You will see something like this <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...}}</pre>.</li><li>Now add your language and follow tha same pattern. <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...},gr:{hi:\'Γειά\',error:\'Σφάλμα\'}}</pre>.</li><li>Now you can set you own language to the plugin <pre class="prettyprint inline">$(\'input\').ssi_uploader({locale:\'gr\'})</pre></li></ol>'})})
+            ssi_modal.show({
+                onShow: function () {
+                    prettyPrint()
+                },
+                content: '<ol class="delPL"><li>First open the ssi-uploader.js file.</li><li>Find the varaible with name locale. You will see something like this <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...}}</pre>.</li><li>Now add your language and follow tha same pattern. <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...},gr:{hi:\'Γειά\',error:\'Σφάλμα\'}}</pre>.</li><li>Now you can set you own language to the plugin <pre class="prettyprint inline">$(\'input\').ssi_uploader({locale:\'gr\'})</pre></li></ol>'
+            })
+        })
 
+    },
+    'ss_inputExamples': function (id) {
+        this.examplesPage('ss-input', id);
+    },
+    'ss_inputDocumentation': function () {
+        this.documentationPage('ss-input');
     }
 
 });
-module.exports = {route:SsinputRouter,not:'dd'};
+module.exports = {route: SsinputRouter, not: 'dd'};
 
 
-},{"../collections/methods":18,"../collections/properties":19,"../data/ssi-modal/documentation":20,"../data/ssi-modal/examples":21,"../data/ssi-uploader/documentation":22,"../data/ssi-uploader/examples":23,"../views/mainView":32,"../views/propertyView":33,"backbone":1,"jquery":15,"lodash":16}],28:[function(require,module,exports){
+},{"../collections/methods":18,"../collections/properties":19,"../data/ss-input/documentation":20,"../data/ss-input/examples":21,"../data/ssi-modal/documentation":22,"../data/ssi-modal/examples":23,"../data/ssi-uploader/documentation":24,"../data/ssi-uploader/examples":25,"../views/mainView":34,"../views/propertyView":35,"backbone":1,"jquery":15,"lodash":16}],30:[function(require,module,exports){
 "use strict";
 var Backbone=require('backbone');
 var $=require('jquery');
@@ -33665,7 +35389,7 @@ var _=require('lodash');
   module.exports= SpyItemsView;
 
 
-},{"backbone":1,"jquery":15,"lodash":16}],29:[function(require,module,exports){
+},{"backbone":1,"jquery":15,"lodash":16}],31:[function(require,module,exports){
 "use strict";
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -33700,7 +35424,7 @@ var codeView = Backbone.View.extend({
 });
 
 module.exports=codeView;
-},{"backbone":1,"jquery":15,"lodash":16}],30:[function(require,module,exports){
+},{"backbone":1,"jquery":15,"lodash":16}],32:[function(require,module,exports){
 "use strict";
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -33719,7 +35443,7 @@ var descriptionView = Backbone.View.extend({
 });
 
 module.exports=descriptionView;
-},{"backbone":1,"jquery":15,"lodash":16}],31:[function(require,module,exports){
+},{"backbone":1,"jquery":15,"lodash":16}],33:[function(require,module,exports){
 "use strict";
 var Backbone=require('backbone');
 var $=require('jquery');
@@ -33749,14 +35473,15 @@ var _=require('lodash');
         });
       }
       var method=''+this.model.attributes.example.method;
-     this.model.attributes.example.code=escapeHtml(method.replace(/function\s?\(\s?\)\s?{/,"").replace(/}$/,""));
-     this.model.attributes.example.html=escapeHtml(this.model.attributes.example.result);
+    //
+     this.model.attributes.example.code=escapeHtml(method.replace(/function\s?\(\s?\)\s?{/,"").replace(/}$/,"").replace(/\/\*[\[]*?\*\/[\s\S]*?.*\/\*[\]]*?\*\//gm,''));
+     this.model.attributes.example.html=escapeHtml(this.model.attributes.example.result.replace(/\/\*[\[]*?\*\/[\s\S]*?.*\/\*[\]]*?\*\//gm,''));
       this.$el.html(this.template(this.model.toJSON()));
     }
   });
   module.exports= ContentsView;
 
-},{"backbone":1,"jquery":15,"lodash":16}],32:[function(require,module,exports){
+},{"backbone":1,"jquery":15,"lodash":16}],34:[function(require,module,exports){
 "use strict";
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -33850,7 +35575,7 @@ var mainView = Backbone.View.extend({
 
 module.exports = mainView;
 
-},{"../collections/properties":19,"../views/SpyItemView":28,"../views/codeView":29,"../views/descriptionView":30,"../views/exampleView":31,"../views/propertyView":33,"backbone":1,"jquery":15,"lodash":16}],33:[function(require,module,exports){
+},{"../collections/properties":19,"../views/SpyItemView":30,"../views/codeView":31,"../views/descriptionView":32,"../views/exampleView":33,"../views/propertyView":35,"backbone":1,"jquery":15,"lodash":16}],35:[function(require,module,exports){
 "use strict";
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -33921,4 +35646,4 @@ var PropertiesView = Backbone.View.extend({
 });
 
 module.exports = PropertiesView;
-},{"backbone":1,"jquery":15,"lodash":16}]},{},[24]);
+},{"backbone":1,"jquery":15,"lodash":16}]},{},[26]);

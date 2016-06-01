@@ -97,9 +97,8 @@
 }
 
 .ssi-previewBox {
-  overflow: auto;
+  float: left;
   width: 100%;
-  max-height: 550px;
   color: #ccc;
   padding: 10px;
 }
@@ -118,6 +117,12 @@
 .ssi-removeBtn {
   margin: 5px 0 5px 0;
   padding: 0;
+}
+
+.ssi-uploader::after {
+  content: ' ';
+  display: block;
+  clear: both;
 }
 
 .ssi-uploadFiles {
