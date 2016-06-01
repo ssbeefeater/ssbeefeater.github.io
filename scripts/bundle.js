@@ -33114,7 +33114,7 @@ module.exports =  [{
             }]
         }, {
             id: '3deee',
-            description: '<span class="attention">With ssi_modal.imgBox() you can use 3 more options.</span>',
+            description: '<span class="attention">With ssi_modal.imgBox() you can use 4 more options.</span>',
             properties: [{
                 name: 'navigation',
                 type: '{boolean}',
@@ -33138,6 +33138,11 @@ module.exports =  [{
                 defaultValue: 'null',
                 description: 'The button will be visible only when the mouse cursor is inside the main window',
                 collapse: '8 sum'
+            }, {
+                name: 'allowIframe',
+                type: "{boolean}",
+                defaultValue: 'true',
+                description: 'If false, iframe will not allowed and will drop an img not fount error instead.',
             }, {
                 name: 'iframe',
                 type: '{object}',
@@ -33262,7 +33267,7 @@ module.exports =  [{
                 collapse: '13a',
                 description: 'The label of the cancel button.'
             }, {
-                name: 'overideOther',
+                name: 'overrideOther',
                 type: '{boolean}',
                 defaultValue: "false",
                 description: 'If true,a new message will override the old messages.'
