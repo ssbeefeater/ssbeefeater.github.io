@@ -34609,153 +34609,184 @@ module.exports = [{
 },{}],25:[function(require,module,exports){
 "use strict";
 
-var notifyOptions={iconButtons: {
-    className: 'fa fa-question about',
-     method: function (e, modal) {
-        ssi_modal.closeAll('notify');
-        var btn = $(this).addClass('disabled');
-        ssi_modal.dialog({
-            onClose: function () {
-                btn.removeClass('disabled')
-            },
-            onShow:function(){},
-            okBtn:{className:'btn btn-primary btn-sm'},
-            title: 'ssi-modal',
-            content: 'ssi-modal is an open source modal window plugin that only depends on jquery. It has many options and it\'s super flexible, maybe the most flexible modal out there... For more details click <a class="sss" href="http://ssbeefeater.github.io/#ssi-modal" target="_blank">here</a>',
-            sizeClass:'small',
-            animation: true
-        });
+var notifyOptions = {
+    iconButtons: {
+        className: 'fa fa-question about',
+        method: function (e, modal) {
+            ssi_modal.closeAll('notify');
+            var btn = $(this).addClass('disabled');
+            ssi_modal.dialog({
+                onClose: function () {
+                    btn.removeClass('disabled')
+                },
+                onShow: function () {
+                },
+                okBtn: {className: 'btn btn-primary btn-sm'},
+                title: 'ssi-modal',
+                content: 'ssi-modal is an open source modal window plugin that only depends on jquery. It has many options and it\'s super flexible, maybe the most flexible modal out there... For more details click <a class="sss" href="http://ssbeefeater.github.io/#ssi-modal" target="_blank">here</a>',
+                sizeClass: 'small',
+                animation: true
+            });
+        }
     }
-}};
-module.exports =[{
-        id: '1',
-        title: 'Basic example',
-        description: '',
-        content: [{
-            id: '1a',
-            example:{
+};
+module.exports = [{
+    id: '1',
+    title: 'Basic example',
+    description: '',
+    content: [{
+        id: '1a',
+        example: {
             result: '<input type="file" multiple id="ssi-upload"/>',
-            method:function(){
-                $('#ssi-upload').ssi_uploader({ajaxOptions:{crossDomain: true,contentType: "application/json"},url:'http://ssinput.com/bower_components/ss-input/dist/ss-input/system/uploadAction.php',beforeEachUpload:function(info,xhr){xhr.setRequestHeader("Access-Control-Allow-Origin","*")}}  );
-            }}
-        }]
-    },{
-        id: '2',
-        title: 'Disable preview',
-        description: 'For multiple files click in the name box to see your files!',
-        content: [{
-            id: '2a',
-            example:{
-            result: '<input type="file" id="ssi-upload2"/>',
-            method:function(){
-                $('#ssi-upload2').ssi_uploader({url:'uploadAction.php',preview:false});
-            }}
-        }]
-    },{
-        id: '3',
-        title: 'Disable drag n drop',
-        description: '',
-        content: [{
-            id: '3a',
-            example:{
+            method: function () {
+                $('#ssi-upload').ssi_uploader({
+                    url: 'http://ssinput.com/php/upload.php',
+                    responseValidation: {validationKey:'type',resultKey:'msg',success:'success',error:'error'}
+                }
+                )
+                ;
+            }
+        }
+    }]
+}, {
+    id: '2',
+    title: 'Disable preview',
+    description: 'For multiple files click in the name box to see them!',
+    content: [{
+        id: '2a',
+        example: {
+            result: '<input type="file" multiple id="ssi-upload2"/>',
+            method: function () {
+                $('#ssi-upload2').ssi_uploader({url: 'http://ssinput.com/php/upload.php', preview: false});
+            }
+        }
+    }]
+}, {
+    id: '3',
+    title: 'Disable drag n drop',
+    description: '',
+    content: [{
+        id: '3a',
+        example: {
             result: '<input type="file" multiple id="ssi-upload3"/>',
-            method:function(){
-                $('#ssi-upload3').ssi_uploader({url:'uploadAction.php',dropZone:false});
-            }}
-        }]
-    },{
-        id: '4',
-        title: 'Localize',
-        description: '',
-        content: [{
-            id: '4a',
-            example:{
+            method: function () {
+                $('#ssi-upload3').ssi_uploader({url: 'http://ssinput.com/php/upload.php', dropZone: false});
+            }
+        }
+    }]
+}, {
+    id: '4',
+    title: 'Localize',
+    description: '',
+    content: [{
+        id: '4a',
+        example: {
             result: '<input type="file" multiple id="ssi-upload4"/>',
-            method:function(){
-                $('#ssi-upload4').ssi_uploader({url:'uploadAction.php',locale:'gr'});
-            }}
-        }]
-    },{
-        id: '5',
-        title: 'More file types',
-        description: '',
-        content: [{
-            id: '5a',
-            example:{
-                result: '<input type="file" multiple id="ssi-upload5"/>',
-            method:function(){
+            method: function () {
+                $('#ssi-upload4').ssi_uploader({url: 'http://ssinput.com/php/upload.php', locale: 'gr'});
+            }
+        }
+    }]
+}, {
+    id: '5',
+    title: 'More file types',
+    description: '',
+    content: [{
+        id: '5a',
+        example: {
+            result: '<input type="file" multiple id="ssi-upload5"/>',
+            method: function () {
                 $('#ssi-upload5').ssi_uploader({
-                    url:'uploadAction.php',
-                    allowed: ['png','jpg','pdf','txt'],
+                    url: 'http://ssinput.com/php/upload.php',
+                    allowed: ['png', 'jpg', 'pdf', 'txt'],
                     errorHandler: {
-                        method: function (msg,type) {
-                           ssi_modal.notify(type, {content:msg});
+                        method: function (msg, type) {
+                            ssi_modal.notify(type, {content: msg});
                         },
                         success: 'success',
                         error: 'error'
                     },
                     maxFileSize: 122//mb
                 });
-            }}
-        }]
-    },{
-        id: '6',
-        title: 'Error handler',
-        description: '',
-        content: [{
-            id: '6a',
-            example:{
-                result: '<input type="file" multiple id="ssi-upload6"/>',
-            method:function(){
+            }
+        }
+    }]
+}, {
+    id: '6',
+    title: 'Error handler',
+    description: '',
+    content: [{
+        id: '6a',
+        example: {
+            result: '<input type="file" multiple id="ssi-upload6"/>',
+            method: function () {
                 $('#ssi-upload6').ssi_uploader({
-                    url:'uploadAction.php',
-                    allowed: ['gif','jpg'],
-                    preview:false,
+                    url: 'http://ssinput.com/php/upload.php',
+                    allowed: ['gif', 'jpg'],
+                    preview: false,
                     errorHandler: {
-                        method: function (msg,type) {
-                           ssi_modal.notify(type, {content:msg});
+                        method: function (msg, type) {
+                            ssi_modal.notify(type, {content: msg});
                         },
                         success: 'success',
                         error: 'error'
                     },
                     maxFileSize: 0.01//mb
                 });
-            }}
-        }]
-    },{
-        id: '7',
-        title: 'Callbacks',
-        description: '',
-        content: [{
-            id: '7a',
-            example:{
+            }
+        }
+    }]
+}, {
+    id: '7',
+    title: 'Callbacks',
+    description: '',
+    content: [{
+        id: '7a',
+        example: {
             result: '<input type="file" multiple id="ssi-upload7"/>',
-            method:function(){
+            method: function () {
                 $('#ssi-upload7').ssi_uploader({
-                    url:'uploadAction.php',
+                    url: 'http://ssinput.com/php/upload.php',
                     onUpload: function () {
-                      ssi_modal.notify('info', $.extend({},notifyOptions,{title:'onUpload',icon:false,position:'top center'}));
+                        ssi_modal.notify('info', $.extend({}, notifyOptions, {
+                            title: 'onUpload',
+                            icon: false,
+                            position: 'top center'
+                        }));
                     },
                     onEachUpload: function (fileInfo) {
-                        ssi_modal.notify('error', $.extend({},notifyOptions,{ classSize:'auto',title:'onEachUpload',position:'bottom center',content:
-                             'Status: '+fileInfo.uploadStatus+
-                             '<br>name: '+fileInfo.name+
-                             '<br>sizeClass: '+fileInfo.size+
-                             '<br>type: '+fileInfo.type}));
+                        ssi_modal.notify('error', $.extend({}, notifyOptions, {
+                            classSize: 'auto',
+                            title: 'onEachUpload',
+                            position: 'bottom center',
+                            content: 'Status: ' + fileInfo.uploadStatus +
+                            '<br>name: ' + fileInfo.name +
+                            '<br>sizeClass: ' + fileInfo.size +
+                            '<br>type: ' + fileInfo.type
+                        }));
                     },
                     beforeUpload: function () {
-                        ssi_modal.notify('warning', $.extend({},notifyOptions,{title:'onUpload',icon:false,position:'top left'}));
+                        ssi_modal.notify('warning', $.extend({}, notifyOptions, {
+                            title: 'onUpload',
+                            icon: false,
+                            position: 'top left'
+                        }));
                     },
-                    beforeEachUpload: function (fileInfo,xhr) {
-                        ssi_modal.notify('success', $.extend({},notifyOptions,{icon:false,sizeClass:'small',title:'beforeEachUpload',content:
-                        'name:'+fileInfo.name+
-                        '<br>size: '+fileInfo.size+
-                        '<br>type: '+fileInfo.type}));
+                    beforeEachUpload: function (fileInfo, xhr) {
+                        ssi_modal.notify('success', $.extend({}, notifyOptions, {
+                            icon: false,
+                            sizeClass: 'small',
+                            title: 'beforeEachUpload',
+                            content: 'name:' + fileInfo.name +
+                            '<br>size: ' + fileInfo.size +
+                            '<br>type: ' + fileInfo.type
+                        }));
                     }
                 });
-            }}
-        }]
-    }];
+            }
+        }
+    }]
+}];
 
 },{}],26:[function(require,module,exports){
 (function (global){
@@ -34938,21 +34969,12 @@ var SsinputRouter = Backbone.Router.extend({
         $('body').scrollspy({target: '#scrollSpy', offset: 80});
         $('a.navMenu').each(function () {
             var $this = $(this);
-            $this.attr('href', '#'+(currentPlugin || 'ssi-modal') +'/'+ $this.attr('data-href'))
-        })
-
-        /*  .on('click.example', 'a.navMenu', function (e) {
-         e.preventDefault();
-         e.stopPropagation();
-         var $eTarget = $(e.currentTarget);
-         if ($eTarget.hasClass('git')) {
-         window.open("https://github.com/ssbeefeater/" + (currentPlugin || 'ssi-modal'), '_blank');
-
-         } else {
-         thisS.navigate((currentPlugin || 'ssi-modal') + $eTarget.attr('href'), {trigger: true})
-         }
-
-         });*/
+            if($this.hasClass('git')){
+                $this.attr('href',"https://github.com/ssbeefeater/" + (currentPlugin || 'ssi-modal'))
+            }else{
+                $this.attr('href', '#'+(currentPlugin || 'ssi-modal') +'/'+ $this.attr('data-href'))
+            }
+        });
         prettyPrint();
         scrollSpyUl.find("li a[href^='#']").on('click', function (e) {
             e.preventDefault();
