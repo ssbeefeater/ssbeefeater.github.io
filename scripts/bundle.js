@@ -33142,7 +33142,7 @@ module.exports =  [{
                 name: 'allowIframe',
                 type: "{boolean}",
                 defaultValue: 'true',
-                description: 'If false, iframe will not allowed and will drop an img not found error instead.',
+                description: 'If false, iframe will not allowed and will drop an img not found error instead.'
             }, {
                 name: 'iframe',
                 type: '{object}',
