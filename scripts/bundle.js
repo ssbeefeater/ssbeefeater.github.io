@@ -34636,7 +34636,7 @@ module.exports =[{
             example:{
             result: '<input type="file" multiple id="ssi-upload"/>',
             method:function(){
-                $('#ssi-upload').ssi_uploader({ajaxOptions:{crossDomain: true},url:'http://ssinput.com/bower_components/ss-input/dist/ss-input/system/uploadAction.php',beforeEachUpload:function(info,xhr){xhr.setRequestHeader("Access-Control-Allow-Origin","*")}}  );
+                $('#ssi-upload').ssi_uploader({ajaxOptions:{crossDomain: true,contentType: "application/json"},url:'http://ssinput.com/bower_components/ss-input/dist/ss-input/system/uploadAction.php',beforeEachUpload:function(info,xhr){xhr.setRequestHeader("Access-Control-Allow-Origin","*")}}  );
             }}
         }]
     },{
