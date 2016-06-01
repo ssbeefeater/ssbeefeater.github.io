@@ -34640,11 +34640,8 @@ module.exports = [{
             result: '<input type="file" multiple id="ssi-upload"/>',
             method: function () {
                 $('#ssi-upload').ssi_uploader({
-                    url: 'http://ssinput.com/php/upload.php',
-                    responseValidation: {validationKey:'type',resultKey:'msg',success:'success',error:'error'}
-                }
-                )
-                ;
+                    url: 'http://ssinput.com/php/upload.php'
+                });
             }
         }
     }]
@@ -34670,7 +34667,7 @@ module.exports = [{
         example: {
             result: '<input type="file" multiple id="ssi-upload3"/>',
             method: function () {
-                $('#ssi-upload3').ssi_uploader({url: 'http://ssinput.com/php/upload.php', dropZone: false});
+                $('#ssi-upload3').ssi_uploader({url: 'http://ssinput.com/php/uploadError.php', dropZone: false});
             }
         }
     }]
@@ -34721,7 +34718,7 @@ module.exports = [{
             result: '<input type="file" multiple id="ssi-upload6"/>',
             method: function () {
                 $('#ssi-upload6').ssi_uploader({
-                    url: 'http://ssinput.com/php/upload.php',
+                    url: 'http://ssinput.com/php/uploadError.php',
                     allowed: ['gif', 'jpg'],
                     preview: false,
                     errorHandler: {

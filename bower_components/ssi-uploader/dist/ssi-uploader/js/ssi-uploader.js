@@ -461,6 +461,7 @@
                     $uploadBtn.find('#ssi-up_loading') //add spiner to uploadbutton
                      .html('<i class="fa fa-spinner fa-pulse"></i>');
                     if (typeof thisS.options.beforeEachUpload === 'function') {
+
                         var msg = thisS.options.beforeEachUpload({// execute the beforeEachUpload callback and save the returned value
                             name: thisS.toUpload[ii].name,//send some info of the file
                             type: thisS.toUpload[ii].type,
@@ -498,9 +499,6 @@
                         thisS.totalProgress[ii] = '';
                         thisS.inProgress--;
                         $clearBtn.prop("disabled", false);
-                        if (getCompleteStatus(thisS)) {//if no more elements in progress
-                            finishUpload(thisS);
-                        }
                         if (typeof thisS.options.onEachUpload === 'function') {//execute the onEachUpload callback
                             thisS.options.onEachUpload({//and return some info
                                 uploadStatus: 'error',
@@ -509,13 +507,15 @@
                                 type: thisS.toUpload[ii].type
                             });
                         }
+                        if (getCompleteStatus(thisS)) {//if no more elements in progress
+                            finishUpload(thisS);
+                        }
                         console.log(arguments);//log the error
                         console.log(" Ajax error: " + error);
                     }
                 }
-            }, thisS.ajaxOptions);
-
-            $.ajax(ajaxOptions).done(function (responseData) {
+            }, thisS.options.ajaxOptions);
+            $.ajax(ajaxOptions).done(function (responseData, textStatus, jqXHR) {
                 var msg, title = '', dataType = 'error', spanClass = 'exclamation', data;
                 try {
                     data = $.parseJSON(responseData);
@@ -538,7 +538,11 @@
                         }
                     }
                 } else {
-                    cb(true);
+                    if (jqXHR.status == 200) {
+                        cb(true);
+                    } else {
+                        cb(false, data);
+                    }
                 }
                 function cb(result, data) {
                     if (result) {//if response type is success
@@ -547,8 +551,8 @@
                         spanClass = 'check';
                         thisS.successfulUpload++;// one more successful upload
                     } else {
+                        uploadBar.addClass('ssi-canceledProgressBar');
                         if (thisS.options.preview) {
-                            uploadBar.addClass('ssi-canceledProgressBar');
                             msg = thisS.language.error;
                         }
                         title = data;
@@ -583,7 +587,6 @@
             //--------------end of ajax request-----------------------
 
             i = ii;
-            // thisS.toUpload[i]=null;//cl
             i++;//go to the next element
             while (thisS.toUpload[i] === null) {// do it until you find a file
                 i++;
@@ -716,7 +719,7 @@
             preview: true,
             dropZone: true,
             maxNumberOfFiles: '',
-            responseValidation:false,
+            responseValidation: false,
             maxFileSize: 2,
             ajaxOptions: {},
             onUpload: function () {
