@@ -34757,6 +34757,7 @@ module.exports = [{
                         }));
                     },
                     onEachUpload: function (fileInfo) {
+                        console.log(fileInfo);
                         ssi_modal.notify('error', $.extend({}, notifyOptions, {
                             classSize: 'auto',
                             title: 'onEachUpload',
