@@ -34911,6 +34911,7 @@ var SsinputRouter = Backbone.Router.extend({
     bootPage: function () {
         var thisS = this;
         var $htmlBody = $('body');
+        $('title').text=(currentPlugin||'ssi-modal');
         $htmlBody.scrollTop(scrollState[currentView]);
         $('.anchor').click(function (e) {
             e.preventDefault();
