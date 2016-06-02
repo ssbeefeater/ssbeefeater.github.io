@@ -35373,7 +35373,7 @@ var SsinputRouter = Backbone.Router.extend({
 });
 
 $('#contact').click(function(){
-    ssi_modal.dialog({okBtn:{className:'btn btn-primary'},sizeClass:"dialog",content:'<span class="ci">For any question or advise send me a message.<span><br><br> <ul class="contactInfo" style="list-style: none"><li><i class="fa fa-envelope-o"></i>  E-mail: <a href="mailto:ssbeefeater@gmail.com" target="_top">ssbeefeater@gmail.com</a></li><li><i style="color: #3B5998;" class="fa fa-facebook-official"></i> Facebook:<a href="https://www.facebook.com/SSBeeFeaTer" target="_blank">ssbeefeater</a></li><li><i class="fa fa-twitter-square" style="color: #1da1f2;"></i> Tweeter: <a href="https://twitter.com/SSBeeFeaTer" target="_blank">ssbeefeater</a></li></ul>'})
+    ssi_modal.dialog({okBtn:{className:'btn btn-primary'},sizeClass:"dialog",content:'<span class="ci">For any question or advise send me a message.<span><br><br> <ul class="contactInfo" style="list-style: none"><li><i class="fa fa-envelope-o"></i>  E-mail: <a href="mailto:ssbeefeater@gmail.com" target="_top">ssbeefeater@gmail.com</a></li><li><i style="color: #3B5998;" class="fa fa-facebook-official"></i> Facebook:<a href="https://www.facebook.com/SSBeeFeaTer" target="_blank">ssbeefeater</a></li><li><i class="fa fa-twitter-square" style="color: #1da1f2;"></i> Tgwitter: <a href="https://twitter.com/SSBeeFeaTer" target="_blank">@SSBeeFeaTer</a></li></ul>'})
     return false;
 });
 module.exports = {route: SsinputRouter, not: 'dd'};
