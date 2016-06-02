@@ -1,77 +1,99 @@
 <!doctype html>
 <html class="no-js" lang="">
 <head>
-  <meta charset="utf-8">
-  <title>ssi-modal</title>
-  <meta name="description" content="The most powerful modal window">
-  <meta name="keywords" content="jQuery, modal, plugin, window, JavaScript">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css(.tmp) styles/main.css -->
+    <meta charset="utf-8">
+    <title>ssi-modal</title>
+    <meta name="description" content="The most powerful modal window">
+    <meta name="keywords" content="jQuery, modal, plugin, window, JavaScript">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.tmp) styles/main.css -->
 
-  <link rel="stylesheet" href="css/bundle.css"/> <!-- endbuild -->
-  <link rel="stylesheet" href="bower_components/ssi-modal/dist/ssi-modal/styles/ssi-modal.css"/> <!-- endbuild -->
-  <link rel="stylesheet" href="bower_components/ssi-uploader/dist/ssi-uploader/styles/ssi-uploader.css"/> <!-- endbuild -->
-  <link rel="stylesheet" href="bower_components/ss-input/dist/ss-input/styles/ss-input.css"/> <!-- endbuild -->
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/> <!-- endbuild -->
+    <link rel="stylesheet" href="css/bundle.css"/> <!-- endbuild -->
+    <link rel="stylesheet" href="bower_components/ssi-modal/dist/ssi-modal/styles/ssi-modal.css"/> <!-- endbuild -->
+    <link rel="stylesheet" href="bower_components/ssi-uploader/dist/ssi-uploader/styles/ssi-uploader.css"/>
+    <!-- endbuild -->
+    <link rel="stylesheet" href="bower_components/ss-input/dist/ss-input/styles/ss-input.css"/> <!-- endbuild -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/> <!-- endbuild -->
 </head>
 <body>
 
 <!--[if lt IE 10]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-  your browser</a> to improve your experience.</p><p>If you want to test the ssi-modal go <a href="ieExamples.html">here</a>.
+    your browser</a> to improve your experience.</p><p>If you want to test the ssi-modal go <a href="ieExamples.html">here</a>.
 
 <![endif]-->
 <!-- Navigation -->
 <!--[if !(lt IE 10)]>
  <!-- Brand and toggle get grouped for better mobile display -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
 
-      <a class="navbar-brand" href="#"></a>
+            <a data-original-title="A file/database manager for the web." data-toggle="tooltip" data-placement="bottom"
+               class="ss-input navbar-brand" href="http://ssinput.com/">ss-input</a>
+            <a data-original-title="A powerful modal window." data-toggle="tooltip" data-placement="bottom"
+               class="ssi-modal navbar-brand" href="http://ssbeefeater.github.io/#ssi-modal">ssi-modal</a>
 
+            <a data-original-title="An async jQuery uploader." data-toggle="tooltip" data-placement="bottom"
+               class="ssi-uploader navbar-brand" href="http://ssbeefeater.github.io/#ssi-uploader">ssi-uploader</a>
+
+
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="header-menu collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul id="menu" class="nav navbar-nav">
+                <li><a class="git navMenu" target="_blank" href="/documentation">GitHub</a></li>
+                <li><a data-href="examples" href="" class="navMenu">Examples</a></li>
+                <li><a data-href="documentation" href="" class="navMenu">Documentation</a></li>
+                <li><a href="/contact" id="contact" class="navMenu">Contact informations</a></li>
+
+                <li>
+                    <form style="float: left;padding:15px" action="https://www.paypal.com/cgi-bin/webscr" method="post"
+                          target="_top"><input type="hidden" name="cmd" value="_s-xclick"> <input type="hidden"
+                                                                                                  name="hosted_button_id"
+                                                                                                  value="RGC7YRQBPSMCE">
+                        <input type="image" data-placement="bottom" data-toggle="tooltip"
+                               data-original-title="If you  <i class='fa fa-heart'></i>  my work, consider a donation"
+                               src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0"
+                               name="submit" alt="PayPal - The safer, easier way to pay online!"> <img alt="" border="0"
+                                                                                                       src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
+                                                                                                       width="1"
+                                                                                                       height="1">
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="header-menu collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul id="menu" class="nav navbar-nav">
-          <li><a class="git navMenu" target="_blank" href="/documentation">GitHub</a></li>
-          <li><a data-href="examples" href="" class="navMenu">Examples</a></li>
-          <li><a data-href="documentation" href="" class="navMenu">Documentation</a></li>
-        <li> <form  style="float: left;padding:15px" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"> <input type="hidden" name="cmd" value="_s-xclick"> <input type="hidden" name="hosted_button_id" value="RGC7YRQBPSMCE"> <input type="image" data-placement="bottom" data-toggle="tooltip" data-original-title="If you  <i class='fa fa-heart'></i>  my work, consider a donation" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"> <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"> </form></li>
-      </ul>
-    </div>
-    <!-- /.navbar-collapse -->
-  </div>
-  <!-- /.container -->
+    <!-- /.container -->
 </nav>
 <!-- Page Content -->
 
 <div id="mainContent" class="container-fluid">
-  <div class="row">
-    <div id="scrollSpy" class="col-md-2">
-      <h3 class="title"></h3>
+    <div class="row">
+        <div id="scrollSpy" class="col-md-2">
+            <h3 class="title"></h3>
 
-      <ul id="scrollSpyUl" class="nav nav-pills nav-stacked">
+            <ul id="scrollSpyUl" class="nav nav-pills nav-stacked">
 
-      </ul>
+            </ul>
+        </div>
+        <div id="content" class="col-md-10 col-lg-offset-2">
+
+
+        </div>
+
     </div>
-    <div id="content" class="col-md-10 col-lg-offset-2">
-
-
-
-
-    </div>
-
-  </div>
 
 </div>
 <!-- /.container -->
@@ -80,13 +102,20 @@
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-76482854-1', 'auto');
-  ga('send', 'pageview');
+    ga('create', 'UA-76482854-1', 'auto');
+    ga('send', 'pageview');
 
 </script>
 
@@ -96,38 +125,42 @@
 
 <script type="text/template" id="contentTemplate">
 
-  <div>
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#result<%=id%>" aria-controls="home" role="tab" data-toggle="tab">Result</a>
-      </li>
-      <li role="presentation"><a href="#code<%=id%>" aria-controls="profile" role="tab" data-toggle="tab">Code</a></li>
-    </ul>
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="result<%=id%>">
-        </br> <%= example.result%></div>
-      <div role="tabpanel" class="tab-pane" id="code<%=id%>">
-        <div>
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#javascript<%=id%>" aria-controls="home" role="tab" data-toggle="tab">Javascript</a>
+    <div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#result<%=id%>" aria-controls="home" role="tab"
+                                                      data-toggle="tab">Result</a>
             </li>
-            <li role="presentation"><a href="#html<%=id%>" aria-controls="profile" role="tab" data-toggle="tab">Html</a></li>
-          </ul>
-          <div class="tab-content">
+            <li role="presentation"><a href="#code<%=id%>" aria-controls="profile" role="tab" data-toggle="tab">Code</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="result<%=id%>">
+                </br> <%= example.result%>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="code<%=id%>">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#javascript<%=id%>" aria-controls="home"
+                                                                  role="tab" data-toggle="tab">Javascript</a>
+                        </li>
+                        <li role="presentation"><a href="#html<%=id%>" aria-controls="profile" role="tab"
+                                                   data-toggle="tab">Html</a></li>
+                    </ul>
+                    <div class="tab-content">
 
-            <div role="tabpanel" class="tab-pane active" id="javascript<%=id%>">
-              <pre class="prettyprint"><code class="language-javascript"><%=example.code%></code></pre>
+                        <div role="tabpanel" class="tab-pane active" id="javascript<%=id%>">
+                            <pre class="prettyprint"><code class="language-javascript"><%=example.code%></code></pre>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="html<%=id%>">
+                            <pre class="prettyprint"><code class="language-html"><%=example.html%></code></pre>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="html<%=id%>">
-              <pre class="prettyprint"><code class="language-html"><%=example.html%></code></pre>
-            </div>
-          </div>
+
+
         </div>
-      </div>
-
-
-
     </div>
-  </div>
 </script>
 
 

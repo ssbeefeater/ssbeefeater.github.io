@@ -35142,11 +35142,7 @@ var SsinputRouter = Backbone.Router.extend({
     'examplesPage': function (plugin, id) {
         var thisS = this;
         currentView = 'example';
-        $('.navbar-brand').html(plugin).click(function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-            thisS.navigate(plugin, {trigger: true});
-        });
+
         this.beforeBoot(plugin);
         var items = new methodsCollection(plugins[plugin]['examples']);
         new mainView({collection: items});
@@ -35166,11 +35162,7 @@ var SsinputRouter = Backbone.Router.extend({
         var items = new methodsCollection(plugins[plugin].documentation);
         new mainView({collection: items});
         var thisS = this;
-        $('.navbar-brand').html(plugin).click(function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-            thisS.navigate(plugin, {trigger: true});
-        });
+
         $(document).ready(function () {
             thisS.bootPage();
         });
@@ -35378,6 +35370,11 @@ var SsinputRouter = Backbone.Router.extend({
         this.documentationPage('ss-input');
     }
 
+});
+
+$('#contact').click(function(){
+    ssi_modal.dialog({okBtn:{className:'btn btn-primary'},sizeClass:"dialog",content:'<span class="ci">For any question or advise send me a message.<span><br><br> <ul class="contactInfo" style="list-style: none"><li><i class="fa fa-envelope-o"></i>  E-mail: <a href="mailto:ssbeefeater@gmail.com" target="_top">ssbeefeater@gmail.com</a></li><li><i style="color: #3B5998;" class="fa fa-facebook-official"></i> Facebook:<a href="https://www.facebook.com/SSBeeFeaTer" target="_blank">ssbeefeater</a></li><li><i class="fa fa-twitter-square" style="color: #1da1f2;"></i> Tweeter: <a href="https://twitter.com/SSBeeFeaTer" target="_blank">ssbeefeater</a></li></ul>'})
+    return false;
 });
 module.exports = {route: SsinputRouter, not: 'dd'};
 
