@@ -32420,23 +32420,20 @@ module.exports = [
 module.exports =  [{
         id: '1',
         title: 'INSTALLATION',
-        content: [{
+        content: [ {
             id: '1a',
-            description: 'You can install ssi-modal with 3 ways.'
-        }, {
-            id: '1a',
-            description: '1st.Using npm.',
+            description: '1. Using <a href="https://www.npmjs.com/" target="_blank">npm</a>.',
             code: 'npm install ssi-modal --save'
 
         }, {
             id: '1b',
-            description: '2nd. Using bower.',
+            description:'2. Using <a href="http://bower.io/" target="_blank">bower</a>.',
             code: 'bower install ssi-modal --save'
 
         }, {
             id: '1c',
-            description: '3rd. Download the files and include them to your html file.',
-            code: '&lt;link href="ssi-modal.css" rel="stylesheet"/&gt;\n&lt;script src="ssi-modal.js"&gt;&lt;/script&gt;'
+            description: '3. <a href="https://github.com/ssbeefeater/ssi-modal/releases/latest" target="_blank">Download</a> the files and include them to your html file.',
+            code: '&lt;link href="ssi-modal/dist/ssi-modal/styles/ssi-modal.min.css" rel="stylesheet"/&gt;\n&lt;script src="ssi-modal/dist/ssi-modal/js/ssi-modal.min.js"&gt;&lt;/script&gt;'
 
         }]
 
@@ -34439,21 +34436,18 @@ module.exports = [{
     title: 'INSTALLATION',
     content: [{
         id: '1a',
-        description: 'You can install ssi-uploader with 3 ways.'
-    }, {
-        id: '1a',
-        description: '1st.Using npm.',
+        description: '1. Using <a href="https://www.npmjs.com/" target="_blank">npm</a>.',
         code: 'npm install ssi-uploader --save'
 
     }, {
         id: '1b',
-        description: '2nd. Using bower.',
+        description: '2. Using <a href="http://bower.io/" target="_blank">bower</a>.',
         code: 'bower install ssi-uploader --save'
 
     }, {
         id: '1c',
-        description: '3rd. Download the files and include them to your html file.',
-        code: '&lt;link href="ssi-uploader.css" rel="stylesheet"/&gt;\n&lt;script src="ssi-uploader.js"&gt;&lt;/script&gt;'
+        description: '3. <a href="https://github.com/ssbeefeater/ssi-uploader/releases/latest" target="_blank">Download</a> the files and include them to your html file.',
+        code: '&lt;link href="ssi-uploader/dist/ssi-uploader/styles/ssi-uploader.min.css" rel="stylesheet"/&gt;\n&lt;script src="ssi-uploader/dist/ssi-uploader/js/ssi-uploader.min.js"&gt;&lt;/script&gt;'
 
     }]
 
