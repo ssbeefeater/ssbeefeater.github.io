@@ -32432,7 +32432,7 @@ module.exports =  [{
 
         }, {
             id: '1c',
-            description: '3. <a href="https://github.com/ssbeefeater/ssi-modal/releases/latest" target="_blank">Download</a> the files and include them to your html file.',
+            description: '3. <a id="1" class="visitCount" href="https://github.com/ssbeefeater/ssi-modal/releases/latest" target="_blank">Download</a> the files and include them to your html file.',
             code: '&lt;link href="ssi-modal/dist/ssi-modal/styles/ssi-modal.min.css" rel="stylesheet"/&gt;\n&lt;script src="ssi-modal/dist/ssi-modal/js/ssi-modal.min.js"&gt;&lt;/script&gt;'
 
         }]
@@ -34446,7 +34446,7 @@ module.exports = [{
 
     }, {
         id: '1c',
-        description: '3. <a href="https://github.com/ssbeefeater/ssi-uploader/releases/latest" target="_blank">Download</a> the files and include them to your html file.',
+        description: '3. <a  id="1" class="visitCount" href="https://github.com/ssbeefeater/ssi-uploader/releases/latest" target="_blank">Download</a> the files and include them to your html file.',
         code: '&lt;link href="ssi-uploader/dist/ssi-uploader/styles/ssi-uploader.min.css" rel="stylesheet"/&gt;\n&lt;script src="ssi-uploader/dist/ssi-uploader/js/ssi-uploader.min.js"&gt;&lt;/script&gt;'
 
     }]
@@ -34906,8 +34906,8 @@ var SsinputRouter = Backbone.Router.extend({
     bootPage: function () {
         var thisS = this;
         var $htmlBody = $('body');
-        $('title').text=(currentPlugin||'ssi-modal');
-        document.title = (currentPlugin||'ssi-modal');
+        $('title').text = (currentPlugin || 'ssi-modal');
+        document.title = (currentPlugin || 'ssi-modal');
         $htmlBody.scrollTop(scrollState[currentView]);
         $('.anchor').click(function (e) {
             e.preventDefault();
@@ -34968,10 +34968,10 @@ var SsinputRouter = Backbone.Router.extend({
         $('body').scrollspy({target: '#scrollSpy', offset: 80});
         $('a.navMenu').each(function () {
             var $this = $(this);
-            if($this.hasClass('git')){
-                $this.attr('href',"https://github.com/ssbeefeater/" + (currentPlugin || 'ssi-modal'))
-            }else{
-                $this.attr('href', '#'+(currentPlugin || 'ssi-modal') +'/'+ $this.attr('data-href'))
+            if ($this.hasClass('git')) {
+                $this.attr('href', "https://github.com/ssbeefeater/" + (currentPlugin || 'ssi-modal'))
+            } else {
+                $this.attr('href', '#' + (currentPlugin || 'ssi-modal') + '/' + $this.attr('data-href'))
             }
         });
         prettyPrint();
@@ -35367,9 +35367,42 @@ var SsinputRouter = Backbone.Router.extend({
 
 });
 
-$('#contact').click(function(){
-    ssi_modal.dialog({okBtn:{className:'btn btn-primary'},sizeClass:"dialog",content:'<span class="ci">For any question or advise send me a message.<span><br><br> <ul class="contactInfo" style="list-style: none"><li><i class="fa fa-envelope-o"></i>  E-mail: <a href="mailto:ssbeefeater@gmail.com" target="_top">ssbeefeater@gmail.com</a></li><li><i style="color: #3B5998;" class="fa fa-facebook-official"></i> Facebook:<a href="https://www.facebook.com/SSBeeFeaTer" target="_blank">ssbeefeater</a></li><li><i class="fa fa-twitter-square" style="color: #1da1f2;"></i> Twitter: <a href="https://twitter.com/SSBeeFeaTer" target="_blank">@SSBeeFeaTer</a></li></ul>'})
-    return false;
+$('#5').click(function (e) {
+    e.preventDefault();
+    ssi_modal.dialog({
+        okBtn: {className: 'btn btn-primary'},
+        sizeClass: "dialog",
+        content: '<span class="ci">For any question or advise send me a message.<span><br><br> <ul class="contactInfo" style="list-style: none"><li><i class="fa fa-envelope-o"></i>  E-mail: <a href="mailto:ssbeefeater@gmail.com" target="_top">ssbeefeater@gmail.com</a></li><li><i style="color: #3B5998;" class="fa fa-facebook-official"></i> Facebook:<a href="https://www.facebook.com/SSBeeFeaTer" target="_blank">ssbeefeater</a></li><li><i class="fa fa-twitter-square" style="color: #1da1f2;"></i> Twitter: <a href="https://twitter.com/SSBeeFeaTer" target="_blank">@SSBeeFeaTer</a></li></ul>'
+    })
+});
+var links = {
+    1: 'download',
+    2: 'github',
+    3: 'ssi-uploader',
+    4: 'ssi-modal',
+    5: 'contact',
+    6: 'ss-input'
+};
+$('body').on('click', '.visitCount', function () {
+
+    var id = $(this).attr('id');
+    var currentPlugin = currentPlugin || 'ssi-modal';
+    var inc = {
+        "$inc": {}
+    };
+    inc['$inc'][links[id]] = 1;
+ $.ajax({
+        url: 'https://api.mlab.com/api/1/databases/ss_input/collections/' + currentPlugin + '/1?apiKey=LcrxGmtwb0maQ7DWGmBPnXQWcKja2CIj',
+        data: JSON.stringify(inc),
+        type: "PUT",
+        contentType: "application/json"
+    })
+});
+$.ajax({
+    url: 'https://api.mlab.com/api/1/databases/ss_input/collections/' + (currentPlugin||'ssi-modal') + '/1?apiKey=LcrxGmtwb0maQ7DWGmBPnXQWcKja2CIj',
+    data: JSON.stringify({"$inc": {"visits": 1}}),
+    type: "PUT",
+    contentType: "application/json"
 });
 module.exports = {route: SsinputRouter, not: 'dd'};
 
