@@ -34969,7 +34969,7 @@ var SsinputRouter = Backbone.Router.extend({
         $('a.git').attr('href', "https://github.com/ssbeefeater/" + (currentPlugin || 'ssi-modal'))
         $('a.navMenu').each(function () {
             var $this = $(this);
-            if (!$this.hasClass('git')) {
+            if (!$this.hasClass('git')&&!$this.hasClass('contactInfo')) {
                 $this.attr('href', '#' + (currentPlugin || 'ssi-modal') + '/' + $this.attr('data-href'))
             }
         });
