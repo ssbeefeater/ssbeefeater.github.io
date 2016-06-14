@@ -34966,11 +34966,10 @@ var SsinputRouter = Backbone.Router.extend({
         });
 
         $('body').scrollspy({target: '#scrollSpy', offset: 80});
+        $('a.git').attr('href', "https://github.com/ssbeefeater/" + (currentPlugin || 'ssi-modal'))
         $('a.navMenu').each(function () {
             var $this = $(this);
-            if ($this.hasClass('git')) {
-                $this.attr('href', "https://github.com/ssbeefeater/" + (currentPlugin || 'ssi-modal'))
-            } else {
+            if (!$this.hasClass('git')) {
                 $this.attr('href', '#' + (currentPlugin || 'ssi-modal') + '/' + $this.attr('data-href'))
             }
         });
@@ -35367,7 +35366,7 @@ var SsinputRouter = Backbone.Router.extend({
 
 });
 
-$('#5').click(function (e) {
+$('#5Link').click(function (e) {
     e.preventDefault();
     ssi_modal.dialog({
         okBtn: {className: 'btn btn-primary'},
@@ -35390,7 +35389,7 @@ $('body').on('click', '.visitCount', function () {
     var inc = {
         "$inc": {}
     };
-    inc['$inc'][links[id]] = 1;
+    inc['$inc'][links[id.replace('Link')]] = 1;
  $.ajax({
         url: 'https://api.mlab.com/api/1/databases/ss_input/collections/' + currentPlugin + '/1?apiKey=LcrxGmtwb0maQ7DWGmBPnXQWcKja2CIj',
         data: JSON.stringify(inc),
