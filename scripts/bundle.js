@@ -34452,12 +34452,12 @@ module.exports = [{
         id: '44ab',
         title: 'beforeUpload',
         description: 'The <code>beforeUpload</code> callback is executed before an upload process starts.',
-        code: "$('input').ssi_uploader({url:'uploadAction.php',beforeUpload:function(){\n   console.log(\'The upload is ready to start.\');\n}})\n\n$('input').on(\'beforeUpload.ssi-uploader\',function(){console.log(\'A fill is going for uploading.\')});"
+        code: "$('input').ssi_uploader({url:'uploadAction.php',beforeUpload:function(){\n   console.log(\'The upload is ready to start.\');\n}})\n\n$('input').on(\'beforeUpload.ssi-uploader\',function(){console.log(\'A file is going for uploading.\')});"
     }, {
         id: '44ac',
         title: 'beforeEachUpload',
         description: 'The <code>beforeEachUpload</code> callback is executed just before each file starts to uploading. This callback has access to the file\'s info and to the xhr object. If you abort the file, you can return a string with the reason of the abortion and that string will be displayed in the error label. Also a "beforeEachUpload.ssi-uploader" event will be triggred that you can listen to.',
-        code: "$('input').ssi_uploader({url:'uploadAction.php',beforeEachUpload:function(fileInfo,xhr){\n   console.log(fileInfo.name+' '+fileInfo.type+' '+fileInfo.size);\n   if(fileInfo.size > 1){ xhr.abort(); }\n   return 'The size is too big.';\n}});\n\n$('input').on(\'beforeEachUpload.ssi-uploader\',function(){console.log(\'A fill is going for uploading.\')});"
+        code: "$('input').ssi_uploader({url:'uploadAction.php',beforeEachUpload:function(fileInfo,xhr){\n   console.log(fileInfo.name+' '+fileInfo.type+' '+fileInfo.size);\n   if(fileInfo.size > 1){ xhr.abort(); }\n   return 'The size is too big.';\n}});\n\n$('input').on(\'beforeEachUpload.ssi-uploader\',function(){console.log(\'A file is going for uploading.\')});"
 
     }, {
         id: '44ad',
