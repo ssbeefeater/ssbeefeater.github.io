@@ -34592,7 +34592,7 @@ module.exports = [{
             description: 'Defines the error key of the response.',
             collapse: "333dsadasd sub"
         }],
-        code: "//structure 1\n$(\'#ss-uploader').ss_input({\n  responseValidation:{\n    validationKey: 'type',\n    resultKey: 'data',\n    success: 'success',\n    error: 'error'\n  }\n});\n\n//result\n /*\n  {\n    type:'error',\n    data:'Already Exists.'\n  } \n*/ \n\n//structure 2\n$(\'#ss-uploader').ss_input({\n  responseValidation:{\n    validationKey: {\n      success: 'success',\n      error: 'error'\n    },\n    resultKey: 'validationKey'\n  }\n})\n\n//result\n /*\n  {\n    error:'Already Exists.'\n  } \n*/"
+        code: "//structure 1\n$(\'#ss-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: 'type',\n    resultKey: 'data',\n    success: 'success',\n    error: 'error'\n  }\n});\n\n//result\n /*\n  {\n    type:'error',\n    data:'Already Exists.'\n  } \n*/ \n\n//structure 2\n$(\'#ss-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: {\n      success: 'success',\n      error: 'error'\n    },\n    resultKey: 'validationKey'\n  }\n})\n\n//result\n /*\n  {\n    error:'Already Exists.'\n  } \n*/"
 
     }]
 }];
