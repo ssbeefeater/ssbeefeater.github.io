@@ -34118,13 +34118,6 @@ module.exports = [
             extendOriginalContent:true
         })
     });
-
-    /*  ===== You can also use it with this way=====
-
-    <button data-ssi_modal="#simpleDiv" id="modal8" class="btn btn-primary">Open modal</button>
-    <div id="simpleDiv"><input type="text" value="Edit me"/></div>
-
-    $('#modal8').ssi_modal({title:'ssi-modal', extendOriginalContent:true});*/
                 }
             }
         }]
