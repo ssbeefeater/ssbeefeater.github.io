@@ -34496,7 +34496,6 @@ module.exports = [{
             type: "{Object}",
             defaultValue: "{type:'DELETE'}",
             description: 'Extends the default options of $.ajax function. You can find available options <a href="http://api.jquery.com/jquery.ajax/" target="_blank">here</a>',
-            collapseLink: '311ddd'
         }, {
             name: 'locale',
             type: '{String}',
@@ -34591,9 +34590,32 @@ module.exports = [{
             type: '{String}',
             description: 'Defines the error key of the response.',
             collapse: "333dsadasd sub"
-        }],
+        }]
+    }, {
+        id: '2a',
         code: "//structure 1\n$(\'#ss-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: 'type',\n    resultKey: 'data',\n    success: 'success',\n    error: 'error'\n  }\n});\n\n//result\n /*\n  {\n    type:'error',\n    data:'Already Exists.'\n  } \n*/ \n\n//structure 2\n$(\'#ss-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: {\n      success: 'success',\n      error: 'error'\n    },\n    resultKey: 'validationKey'\n  }\n})\n\n//result\n /*\n  {\n    error:'Already Exists.'\n  } \n*/"
+    }
 
+    ]
+}, {
+    id: '3',
+    title: 'Backend example (php)',
+    description: 'ssi-uploader can handle errors from server easily. Using the responseValidation option you can manage the structure of the responses to fit your needs. Let\'s see some backend examples using the php language.',
+    content: [{
+        id: '3a',
+        title: 'Without responseValidation',
+        description: 'If responseValidation option is set to false you can handle errors using the response status code. See the following example',
+        code: "// A basic file upload script\n\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\nforeach ($_FILES ['files'] ['name'] as $uploadFile => $name) {\n    $filePath=uploadPath.'/'.$name;\n    if(file_exists($filePath)){\n        header(':', true, 403); // or http_response_code(403); for php>=5.4\n        echo 'File exist!'; //Custom error From Server\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['files'] ['tmp_name'][$uploadFile], $filePath)) {\n             $errors = error_get_last();\n             header(':', true, 403); // or http_response_code(403); for php>=5.4\n             echo $errors; //Error From Server\n             return;\n        }\n    }\n}\necho 'success';"
+    }, {
+        id: '3b',
+        title: 'With responseValidation (structure 1)',
+        description: 'If you set responseValidation like <a class="anchor" href="#2a">this</a> (see structure 1) you can handle more complex responses:',
+        code: "//ssi-uploader options\n$(\'#ss-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: 'type',\n    resultKey: 'msg',\n    success: 'success',\n    error: 'error'\n  }\n});\n\n// A basic file upload script\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\nforeach ($_FILES ['files'] ['name'] as $uploadFile => $name) {\n    $filePath=uploadPath.'/'.$name;\n    if(file_exists($filePath)){\n        echo json_encode(array( //Custom error From Server\n           'type' => 'error',\n           'msg' => 'File exist!'\n        ));\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['files'] ['tmp_name'][$uploadFile], $filePath)) {\n             $errors = error_get_last();\n             echo json_encode(array( //Error From Server\n               'type' => 'error',\n               'msg' => $errors\n             ));\n             return;\n        }\n    }\n}\necho json_encode(array(\n    'type' => 'success',\n    'msg' => 'success'\n));"
+    }, {
+        id: '3c',
+        title: 'With responseValidation (structure 2)',
+        description: 'If you are not satisfied with the above examples, ssi-uploader gives you one more option(<a class="anchor" href="#2a">see</a> structure 2):',
+        code: "//ssi-uploader options\n$(\'#ss-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: {\n      success: 'success',\n      error: 'error'\n    },\n    resultKey: 'validationKey'\n  }\n})\n\n// A basic file upload script\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\nforeach ($_FILES ['files'] ['name'] as $uploadFile => $name) {\n    $filePath=uploadPath.'/'.$name;\n    if(file_exists($filePath)){\n        echo json_encode(array( //Custom error From Server\n           'error' => 'File exist!'\n        ));\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['files'] ['tmp_name'][$uploadFile], $filePath)) {\n             $errors = error_get_last();\n             echo json_encode(array( //Error From Server\n               'error' => $errors\n             ));\n             return;\n        }\n    }\n}\necho json_encode(array(\n    'success' => 'success'\n));"
     }]
 }];
 
@@ -35558,21 +35580,23 @@ var mainView = Backbone.View.extend({
                 if (artContent[i].title) {
                     wrapperContent.push('<h4 id="' + artContent[i].id + '">' + artContent[i].title + '</h4>');
                     if (artContent[i].title.indexOf('Example') === -1) {
-                        if (titleCount===0){
+                        if (titleCount === 0) {
                             spyItem.$el.addClass('collapseLink').attr({
                                 'data-toggle': "collapse",
-                                'data-target': '.' +'c' + model.get('id')
+                                'data-target': '.' + 'c' + model.get('id')
                             });
-                            titleCount=1
+                            titleCount = 1
                         }
                         var modela2 = new Backbone.Model({'title': artContent[i].title, 'id': artContent[i].id});
                         var spyItem2 = new SpyItemView({'model': modela2});
                         spyItem2.$el.find('h6').remove();
                         spyItem2.$el.find('h3').contents().unwrap();
-                        spyItem2.$el.addClass('collapse c' + model.get('id')).attr('data-col','c' + model.get('id')).find('br').remove();
+                        spyItem2.$el.addClass('collapse c' + model.get('id')).attr('data-col', 'c' + model.get('id')).find('br').remove();
                         spyItems.push(spyItem2.$el.css({'font-size': '10px', 'margin-left': '25px'}));
                     }
 
+                } else {
+                    var codeId = artContent[i].id || '';
                 }
                 if (artContent[i].description) {
                     var description = new DescriptionView(artContent[i].description);
@@ -35586,6 +35610,9 @@ var mainView = Backbone.View.extend({
                 }
                 if (artContent[i].code) {
                     var code = new CodeView(artContent[i].code);
+                    if (codeId) {
+                        code.$el.attr('id', codeId);
+                    }
                     wrapperContent.push(code.$el);
                     wrapperContent.push('<hr style="border-color:#cfcfcf;">')
                 }
