@@ -34591,7 +34591,7 @@ module.exports = [{
             description: 'Defines the error key of the response.',
             collapse: "333dsadasd sub"
         }, {
-            name: 'padding-top',
+            name: 'ignoreCallbackErrors',
             type: '{Boolean}',
             defaultValue: "false",
             description: 'If true the upload will continue normally even if there is an error in a callback function. If false the upload will aborted, if it\'s possible, and will console.log the errors.'
