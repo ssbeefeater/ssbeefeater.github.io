@@ -1,4 +1,5 @@
 @import 'sprite';
+@import 'sprite';
 
 .ssi-infoTooltip, .ssi-tooltipText {
   border: 1px #b7b7b7 solid;
@@ -59,7 +60,7 @@ opacity: 0.8;
  pointer-events: none;
 }
 .ssi-statusLabel {
-  padding: 0 6px 2px;
+  padding: 2px 6px ;
   text-align: center;
   font-size: 10px;
   color: #fff;
@@ -78,9 +79,8 @@ opacity: 0.8;
 }
 
 .ssi-previewBox {
-  overflow: auto;
+  float: left;
   width: 100%;
-  max-height: 550px;
   color: #ccc;
   padding: 10px;
 }
@@ -100,7 +100,11 @@ opacity: 0.8;
   margin: 5px 0 5px 0;
   padding: 0;
 }
-
+.ssi-uploader::after{
+  content:' ';
+  display:block;
+  clear:both;
+}
 .ssi-uploadFiles {
   position: relative;
   float: left;
@@ -108,7 +112,7 @@ opacity: 0.8;
   overflow: hidden;
   border-radius: 3px;
   width: 180px;
-  height: 35px;
+  min-height: 32px;
   margin: 2px 2px 2px 0;
   font-size: 15px;
   vertical-align: middle;
@@ -187,6 +191,7 @@ span.trash10 {
 }
 
 .ssi-buttonWrapper {
+  float: left;
   padding: 5px;
 }
 
@@ -216,7 +221,7 @@ span.trash10 {
   float: right;
   margin: 2px;
 }
-
+.ssi-upImgTd{position: relative}
 .ssi-upImgTd .fa-spin {
   display: inline-block;
   position: absolute;
@@ -255,12 +260,15 @@ span.trash10 {
   margin-top: 0;
   opacity: 0.6;
 }
-
 .ssi-uploaderNP {
-  width: 600px;
   position: relative;
-}
 
+&::after{
+  content:' ';
+  display:block;
+  clear:both;
+}
+}
 .ssi-uploadDetails {
   width: 180px;
   max-height: 0;
@@ -272,7 +280,9 @@ span.trash10 {
   overflow: hidden;
   padding-right: 2px;
 }
-
+.ssi-uploadBoxWrapper{
+  float: left;
+}
 .ssi-uploadBoxOpened {
   max-height: 200px;
   z-index: 2000;
@@ -336,6 +346,7 @@ table.ssi-fileList tr.ssi-space > td {
 .ssi-imgToUploadTable {
   border: 1px solid #e1e1e1;
   color: #000000;
+  font-size: 15px;
   margin-right: 4px;
   -webkit-box-shadow: 0 10px 6px -6px #777;
   -moz-box-shadow: 0 10px 6px -6px #777;
@@ -421,7 +432,6 @@ span.ssi-InputLabel input[type="file"] {
 }
 
 .document-item::after {
-  content: 'file';
   content: attr(filetype);
   left: -4px;
   padding: 0px 2px;
@@ -441,9 +451,9 @@ span.ssi-InputLabel input[type="file"] {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 11px 0 0 11px;
+  border-width: 13px 0 0 13px;
   border-color: white transparent transparent #920035;
   position: absolute;
-  top: -8px;
-  left: 60px;
+  top: -7px;
+  left: 61px;
 }

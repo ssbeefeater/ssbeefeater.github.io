@@ -34457,7 +34457,7 @@ module.exports = [{
         id: '44ac',
         title: 'beforeEachUpload',
         description: 'The <code>beforeEachUpload</code> callback is executed just before each file starts to uploading. This callback has access to the file\'s info and to the xhr object. If you abort the file, you can return a string with the reason of the abortion and that string will be displayed in the error label. Also a "beforeEachUpload.ssi-uploader" event will be triggred that you can listen to.',
-        code: "$('input').ssi_uploader({url:'uploadAction.php',beforeEachUpload:function(fileInfo,xhr){\n   console.log(fileInfo.name+' '+fileInfo.type+' '+fileInfo.size);\n   if(fileInfo.size > 1){ xhr.abort(); }\n   return 'The size is too big.';\n}});\n\n$('input').on(\'beforeEachUpload.ssi-uploader\',function(){console.log(\'A file is going for uploading.\')});"
+        code: "$('input').ssi_uploader({url:'uploadAction.php',beforeEachUpload:function(fileInfo,xhr){\n   console.log(fileInfo.name+' '+fileInfo.type+' '+fileInfo.size);\n   if(fileInfo.size > 1){ xhr.abort(); }\n   return 'The size is too big.';\n}});\n\n$('input').on(\'beforeEachUpload.ssi-uploader\',function(){console.log(\'A file is going for uploading.\')});\n\n//To abort the upload action you can also do it by this way:\n$('input').ssi_uploader({url:'uploadAction.php',beforeEachUpload:function(fileInfo,xhr){\n   if(fileInfo.size > 1){\n      throw new Error('The size is too big.');\n   }\n}});"
 
     }, {
         id: '44ad',
@@ -34590,6 +34590,11 @@ module.exports = [{
             type: '{String}',
             description: 'Defines the error key of the response.',
             collapse: "333dsadasd sub"
+        }, {
+            name: 'padding-top',
+            type: '{Boolean}',
+            defaultValue: "false",
+            description: 'If true the upload will continue normally even if there is an error in a callback function. If false the upload will aborted, if it\'s possible, and will console.log the errors.'
         }]
     }, {
         id: '2a',

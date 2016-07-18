@@ -16,26 +16,18 @@ var config = {
     port: 9005,
     devBaseUrl: 'http://localhost',
     paths: {
-        images: './src/images/**/*.{png,jpg}',
-        css: [
-            './src/styles/*.css',
-            './node_modules/bootstrap/dist/css/bootstrap.min.css',
-            './node_modules/ssi-modal/dist/ssi-modal/styles/ssi-modal.css'
-        ],
         html: './src/*.html',
-        js: './src/scripts/**/*.js',
         ssi_uploaderJs: './src/ssi-uploader/js/ssi-uploader.js',
         ssi_uploaderSass: './src/ssi-uploader/styles/ssi-uploader.scss',
         ssi_uploaderImage: './src/ssi-uploader/styles/images/**/*.{png,jpg}',
-        dist: './dist',
-        mainJs: './src/scripts/main.js'
+        dist: './dist'
     },
     sassOptions: {
         errLogToConsole: true,
         outputStyle: 'expanded'
     }
 };
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', function () {
     browserSync.init({
         server: {
             baseDir: "./dist"
@@ -49,41 +41,45 @@ gulp.task('sprites', function () {
     return sprity.src({
          src: config.paths.ssi_uploaderImage,
          style: './sprite.scss',
-         cssPath:'images/',
+         cssPath: 'images/',
          processor: 'sass'// make sure you have installed sprity-sass
      })
+     .on('error', console.error.bind(console))
      .pipe(gulpif('*.png', gulp.dest('./dist/ssi-uploader/styles/images/'), gulp.dest('./src/ssi-uploader/styles/')))
 });
 gulp.task('html', function () {
     gulp.src(config.paths.html)
-        .pipe(gulp.dest(config.paths.dist))
-        .pipe(browserSync.reload({stream:true}))
+     .pipe(gulp.dest(config.paths.dist))
+     .pipe(browserSync.reload({stream: true}))
 });
 gulp.task('compile', function () {
     gulp.src(config.paths.ssi_uploaderJs)
      .pipe(closureCompiler({
          compilerPath: './node_modules/google-closure-compiler/compiler.jar',
-         fileName:'ssi-uploader.min.js',
+         fileName: 'ssi-uploader.min.js',
          compilerFlags: {
-             create_source_map: config.paths.dist+'/ssi-uploader/js/ssi-uploader.min.js.map'
+             create_source_map: config.paths.dist + '/ssi-uploader/js/ssi-uploader.min.js.map'
          }
      })).on('error', console.error.bind(console))
-     .pipe(gulp.dest(config.paths.dist+'/ssi-uploader/js/'));
+     .pipe(gulp.dest(config.paths.dist + '/ssi-uploader/js/'));
 });
 gulp.task('js', function () {
     gulp.src(config.paths.ssi_uploaderJs)
      .on('error', console.error.bind(console))
-     .pipe(gulp.dest(config.paths.dist+'/ssi-uploader/js'));
+     .pipe(gulp.dest(config.paths.dist + '/ssi-uploader/js'))
+    .pipe(browserSync.reload({stream: true}));
 });
 gulp.task('sass', function () {
     gulp.src(config.paths.ssi_uploaderSass)
      .pipe(sass(config.sassOptions))
+     .on('error', console.error.bind(console))
      .pipe(autoprefixer())
      .pipe(gulp.dest(config.paths.dist + '/ssi-uploader/styles'))
-     .pipe(browserSync.reload({stream:true}))
+     .pipe(browserSync.reload({stream: true}))
      .pipe(rename({suffix: '.min'}))
      .pipe(sourcemaps.init())
      .pipe(csso())
+     .on('error', console.error.bind(console))
      .pipe(sourcemaps.write('.'))
      .pipe(gulp.dest(config.paths.dist + '/ssi-uploader/styles'));
 });
@@ -97,4 +93,4 @@ gulp.task('watch', function () {
     gulp.watch(config.paths.ssi_uploaderSass, ['sass']);
     gulp.watch(config.paths.ssi_uploaderImage, ['images']);
 });
-gulp.task('default', ['html', 'sass', 'js','browser-sync','watch']);
+gulp.task('default', ['html', 'sass', 'js', 'browser-sync', 'watch']);
