@@ -32785,7 +32785,7 @@ module.exports =  [{
                     content: 'stack',
                     type: 'success'
                 }],
-                description: 'Boolean: Enables/disables a fade animation to both backdrop and modal window. String:Sets the animation you select to both backdrop and modal window. Object: Specifies the show and hide animation',
+                description: 'Boolean: Enables/disables a fade animation to both backdrop and modal window. String:Sets the animation you select to both backdrop and modal window. Object: Specifies the show and hide animation. <span class="important">By default, ssi-modal supports only a simple fade animation that can be enabled if you set animation to <code>true</code>. If you need more complicated animations you can use any css animation library like <a href="https://daneden.github.io/animate.css/" target="_blank">animate.css</a></span>. (<a class="example" href="ssi-modal/examples/12">Example</a>)',
                 collapseLink: '4'
             }, {
                 name: 'animation.show',
@@ -32807,7 +32807,7 @@ module.exports =  [{
                     content: 'stack',
                     type: 'success'
                 }],
-                description: 'Boolean: Enables/disables a fade animation to the modal window. String:Sets the animation you select to the modal window. Object: Specifies the show and hide animation',
+                description: 'Boolean: Enables/disables a fade animation to the modal window. String:Sets the animation you select to the modal window. Object: Specifies the show and hide animation. <span class="important">By default, ssi-modal supports only a simple fade animation that can be enabled if you set modalAnimation to <code>true</code>. If you need more complicated animations you can use any css animation library like <a href="https://daneden.github.io/animate.css/" target="_blank">animate.css</a></span>. (<a class="example" href="ssi-modal/examples/12">Example</a>)',
                 collapseLink: '5'
             }, {
                 name: 'modalAnimation.show',
@@ -32829,7 +32829,7 @@ module.exports =  [{
                     content: 'stack',
                     type: 'success'
                 }],
-                description: 'Boolean: Enables/disables a fade animation to the backdrop. String:Sets the animation you select to the backdrop. Object: Specifies the show and hide animation',
+                description: 'Boolean: Enables/disables a fade animation to the backdrop. String:Sets the animation you select to the backdrop. Object: Specifies the show and hide animation. <span class="important">By default, ssi-modal supports only a simple fade animation that can be enabled if you set backdropAnimation to <code>true</code>. If you need more complicated animations you can use any css animation library like <a href="https://daneden.github.io/animate.css/" target="_blank">animate.css</a></span>. (<a class="example" href="ssi-modal/examples/12">Example</a>)',
                 collapseLink: '6'
             }, {
                 name: 'backdropAnimation.show',
