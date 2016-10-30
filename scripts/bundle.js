@@ -34469,7 +34469,7 @@ module.exports = [{
         id: '44ae',
         title: 'onEachUpload',
         description: 'The <code>onEachUpload</code> callback is executed when each file finish to uploading. This callback has access to the file\'s info. Also a "onEachUpload.ssi-uploader" event will be triggred that you can listen to.',
-        code: "$('input').ssi_uploader({url:'uploadAction.php',onEachUpload:function(fileInfo){\n   console.log(fileInfo.uploadStatus+' 'fileInfo.name+' '+fileInfo.type+' '+fileInfo.size+' '+fileInfo.uploadStatus);\n}});\n\n$('input').on(\'onEachUpload.ssi-uploader\',function(){console.log(\'A file uploaded.\')});"
+        code: "$('input').ssi_uploader({url:'uploadAction.php',onEachUpload:function(fileInfo){\n   console.log(fileInfo.uploadStatus+' 'fileInfo.name+' '+fileInfo.type+' '+fileInfo.size+' '+fileInfo.uploadStatus+' '+fileInfo.responseMsg);\n}});\n\n$('input').on(\'onEachUpload.ssi-uploader\',function(){console.log(\'A file uploaded.\')});"
 
     }]
 
@@ -34777,8 +34777,9 @@ module.exports = [{
                             title: 'onEachUpload',
                             position: 'bottom center',
                             content: 'Status: ' + fileInfo.uploadStatus +
+                            '<br>Response: ' + fileInfo.responseMsg +
                             '<br>name: ' + fileInfo.name +
-                            '<br>sizeClass: ' + fileInfo.size +
+                            '<br>size: ' + fileInfo.size +
                             '<br>type: ' + fileInfo.type
                         }));
                     },
