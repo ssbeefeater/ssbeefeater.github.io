@@ -34500,7 +34500,7 @@ module.exports = [{
             name: 'locale',
             type: '{String}',
             defaultValue: '"en"',
-            description: 'The language to use. For now available in en, gr . To sse how to translate to your language click <button class="btn btn-default btn-xs howTo" href="ssi-uploader/examples/4">here</button>. (<a class="example" href="ssi-uploader/examples/3">Example</a>)'
+            description: 'The language to use. For now available languages are en, gr, fr and zh_CN . To see how to translate to your language click <button class="btn btn-default btn-xs howTo" href="ssi-uploader/examples/4">here</button>. (<a class="example" href="ssi-uploader/examples/3">Example</a>)'
         }, {
             name: 'preview',
             type: '{boolean}',
@@ -35373,7 +35373,7 @@ var SsinputRouter = Backbone.Router.extend({
                 onShow: function () {
                     prettyPrint()
                 },
-                content: '<ol class="delPL"><li>First open the ssi-uploader.js file.</li><li>Find the varaible with name locale. You will see something like this <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...}}</pre>.</li><li>Now add your language and follow tha same pattern. <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...},gr:{hi:\'Γειά\',error:\'Σφάλμα\'}}</pre>.</li><li>Now you can set you own language to the plugin <pre class="prettyprint inline">$(\'input\').ssi_uploader({locale:\'gr\'})</pre></li></ol>'
+                content: '<ol class="delPL"><li>First open the ssi-uploader.js file.</li><li>Find the varaible with name locale. You will see something like this <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...}}</pre>.</li><li>Now add your language and follow the same pattern. <pre class="prettyprint inline">var locale={en:{hi:\'hello\',error:\'Error\',...},gr:{hi:\'Γειά\',error:\'Σφάλμα\'}}</pre>.</li><li>Now you can set you own language to the plugin <pre class="prettyprint inline">$(\'input\').ssi_uploader({locale:\'gr\'})</pre></li></ol>'
             })
         })
 
