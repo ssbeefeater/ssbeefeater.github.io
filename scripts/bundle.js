@@ -34444,6 +34444,23 @@ module.exports = [{
 
     }]
 
+},{
+    id: '333',
+    title: 'Changelog',
+    content: [{
+        id: '333a',
+        title: 'v1.3.0-beta',
+        description: '<ul><li>The input name is no more "files[]" but you need to add it in your input element.If no name is set, then the input name will be "files"</li></ul>',
+        code: "//html\n&lt;input type=&quot;file&quot; id=&quot;ssi-uploader&quot; name=&quot;myInputName&quot;&gt;\n\n//js\n$(\'#ssi-uploader').ssi_uploader();\n\n//and in php\n$_FILES ['myInputName'] ['name'];"
+
+    },{
+        id: '333b',
+        title: 'v1.1.0-beta',
+        description: '<ul><li>New option ignoreCallbackErrors (Boolean, default:false): If true the upload will continue normally even if there is an error in a callback function. If false the upload will aborted when it is possible and will console.log the errors.</li><li>New feature that it shows some details about the upload action (number of pending, number of completed and number of in progress files).</li><li>Fix a bug in multiple files upload.</li><li>Change the tooltip logic and some css.</li><li>New method to throw custom error message in BeforeEachUpload callback by throwing an Error. </li></ul>',
+        code: "$('input').ssi_uploader({\n   url:'my/url/upload.php',\n   BeforeEachUpload:function(fileInfo,xhr){\n     if(fileInfo.name=='noImage.jpg'){\n       throw new Error('custom message');\n     }\n   }\n})"
+
+    }]
+
 }, {
     id: '44',
     title: 'Callbacks',
@@ -34610,17 +34627,17 @@ module.exports = [{
         id: '3a',
         title: 'Without responseValidation',
         description: 'If responseValidation option is set to false you can handle errors using the response status code. See the following example',
-        code: "// A basic file upload script\n\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\nforeach ($_FILES ['files'] ['name'] as $uploadFile => $name) {\n    $filePath=uploadPath.'/'.$name;\n    if(file_exists($filePath)){\n        header(':', true, 403); // or http_response_code(403); for php>=5.4\n        echo 'File exist!'; //Custom error From Server\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['files'] ['tmp_name'][$uploadFile], $filePath)) {\n             $errors = error_get_last();\n             header(':', true, 403); // or http_response_code(403); for php>=5.4\n             echo $errors; //Error From Server\n             return;\n        }\n    }\n}\necho 'success';"
+        code: "//html\n&lt;input type=&quot;file&quot; id=&quot;ssi-uploader&quot; name=&quot;myInputName&quot;&gt;\n\n// A basic file upload script\n\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\n$fileName=$_FILES ['myInputName'] ['name']; \n$filePath=uploadPath.'/'.$fileName;\n    if(file_exists($filePath)){\n        header(':', true, 403); // or http_response_code(403); for php>=5.4\n        echo 'File exist!'; //Custom error From Server\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['myInputName'] ['tmp_name'], $filePath)) {\n             $errors = error_get_last();\n             header(':', true, 403); // or http_response_code(403); for php>=5.4\n             echo $errors; //Error From Server\n             return;\n        }\n    }\necho 'success';"
     }, {
         id: '3b',
         title: 'With responseValidation (structure 1)',
         description: 'If you set responseValidation like <a class="anchor" href="#2a">this</a> (see structure 1) you can handle more complex responses:',
-        code: "//ssi-uploader options\n$(\'#ss-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: 'type',\n    resultKey: 'msg',\n    success: 'success',\n    error: 'error'\n  }\n});\n\n// A basic file upload script\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\nforeach ($_FILES ['files'] ['name'] as $uploadFile => $name) {\n    $filePath=uploadPath.'/'.$name;\n    if(file_exists($filePath)){\n        echo json_encode(array( //Custom error From Server\n           'type' => 'error',\n           'msg' => 'File exist!'\n        ));\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['files'] ['tmp_name'][$uploadFile], $filePath)) {\n             $errors = error_get_last();\n             echo json_encode(array( //Error From Server\n               'type' => 'error',\n               'msg' => $errors\n             ));\n             return;\n        }\n    }\n}\necho json_encode(array(\n    'type' => 'success',\n    'msg' => 'success'\n));"
+        code: "//html\n&lt;input type=&quot;file&quot; id=&quot;ssi-uploader&quot; name=&quot;myInputName&quot;&gt;\n\n//ssi-uploader options\n$(\'#ssi-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: 'type',\n    resultKey: 'msg',\n    success: 'success',\n    error: 'error'\n  }\n});\n\n// A basic file upload script\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\n$fileName=$_FILES ['myInputName']['name'];\n$filePath=uploadPath.'/'.$fileName;\n    if(file_exists($filePath)){\n        echo json_encode(array( //Custom error From Server\n           'type' => 'error',\n           'msg' => 'File exist!'\n        ));\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['myInputName']['tmp_name'], $filePath)) {\n             $errors = error_get_last();\n             echo json_encode(array( //Error From Server\n               'type' => 'error',\n               'msg' => $errors\n             ));\n             return;\n        }\n    }\necho json_encode(array(\n    'type' => 'success',\n    'msg' => 'success'\n));"
     }, {
         id: '3c',
         title: 'With responseValidation (structure 2)',
         description: 'If you are not satisfied with the above examples, ssi-uploader gives you one more option(<a class="anchor" href="#2a">see</a> structure 2):',
-        code: "//ssi-uploader options\n$(\'#ss-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: {\n      success: 'success',\n      error: 'error'\n    },\n    resultKey: 'validationKey'\n  }\n})\n\n// A basic file upload script\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\nforeach ($_FILES ['files'] ['name'] as $uploadFile => $name) {\n    $filePath=uploadPath.'/'.$name;\n    if(file_exists($filePath)){\n        echo json_encode(array( //Custom error From Server\n           'error' => 'File exist!'\n        ));\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['files'] ['tmp_name'][$uploadFile], $filePath)) {\n             $errors = error_get_last();\n             echo json_encode(array( //Error From Server\n               'error' => $errors\n             ));\n             return;\n        }\n    }\n}\necho json_encode(array(\n    'success' => 'success'\n));"
+        code: "//html\n&lt;input type=&quot;file&quot; id=&quot;ssi-uploader&quot; name=&quot;myInputName&quot;&gt;\n\n//ssi-uploader options\n$(\'#ssi-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: {\n      success: 'success',\n      error: 'error'\n    },\n    resultKey: 'validationKey'\n  }\n})\n\n// A basic file upload script\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\n$fileName=$_FILES ['myInputName'] ['name'];\n$filePath=uploadPath.'/'.$fileName;\n    if(file_exists($filePath)){\n        echo json_encode(array( //Custom error From Server\n           'error' => 'File exist!'\n        ));\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['myInputName'] ['tmp_name'], $filePath)) {\n             $errors = error_get_last();\n             echo json_encode(array( //Error From Server\n               'error' => $errors\n             ));\n             return;\n        }\n    }\necho json_encode(array(\n    'success' => 'success'\n));"
     }]
 }];
 
