@@ -34450,7 +34450,7 @@ module.exports = [{
     content: [{
         id: '333a',
         title: 'v1.3.0-beta',
-        description: '<ul><li>The input name is no more "files[]" but you need to add it in your input element.If no name is set, then the input name will be "files"</li></ul>',
+        description: '<ul><li>Now supports English(en), Greek(gr), French(fr) and Chinese Simplified(zh_CN).</li><li>The input name is no more "files[]" but you need to add it in your input element.If no name is set, then the input name will be "files"</li></ul>',
         code: "//html\n&lt;input type=&quot;file&quot; id=&quot;ssi-uploader&quot; name=&quot;myInputName&quot;&gt;\n\n//js\n$(\'#ssi-uploader').ssi_uploader();\n\n//and in php\n$_FILES ['myInputName'] ['name'];"
 
     },{
