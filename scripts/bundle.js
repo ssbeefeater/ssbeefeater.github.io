@@ -33202,7 +33202,7 @@ module.exports =  [{
         }, {
             id: '3e',
             title: '<br><br>ssi_modal.notify()<h6><span class="label label-danger">normal</span><span class="label label-success">stack</span></h6>',
-            description: 'Generates a toast like notification message. (<a class="example" href="ssi-modal/examples/3">Example</a>)',
+            description: 'Generates a toast like notification message. (<a class="example" href="ssi-modal/examples/13">Example</a>)',
             properties: [{
                 name: 'type',
                 type: "{'success' || 'error' || 'warning' || 'info' || 'dialog' || 'confirm'}",
