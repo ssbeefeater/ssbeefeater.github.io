@@ -34632,12 +34632,12 @@ module.exports = [{
         id: '3b',
         title: 'With responseValidation (structure 1)',
         description: 'If you set responseValidation like <a class="anchor" href="#2a">this</a> (see structure 1) you can handle more complex responses:',
-        code: "//html\n&lt;input type=&quot;file&quot; id=&quot;ssi-uploader&quot; name=&quot;myInputName&quot;&gt;\n\n//ssi-uploader options\n$(\'#ssi-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: 'type',\n    resultKey: 'msg',\n    success: 'success',\n    error: 'error'\n  }\n});\n\n// A basic file upload script\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\n$fileName=$_FILES ['myInputName']['name'];\n$filePath=uploadPath.'/'.$fileName;\n    if(file_exists($filePath)){\n        echo json_encode(array( //Custom error From Server\n           'type' => 'error',\n           'msg' => 'File exist!'\n        ));\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['myInputName']['tmp_name'], $filePath)) {\n             $errors = error_get_last();\n             echo json_encode(array( //Error From Server\n               'type' => 'error',\n               'msg' => $errors\n             ));\n             return;\n        }\n    }\necho json_encode(array(\n    'type' => 'success',\n    'msg' => 'success'\n));"
+        code: "//html\n&lt;input type=&quot;file&quot; id=&quot;ssi-uploader&quot; name=&quot;myInputName&quot;&gt;\n\n//ssi-uploader options\n$(\'#ssi-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: 'type',\n    resultKey: 'msg',\n    success: 'success',\n    error: 'error'\n  }\n});\n\n// A basic file upload script\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\n$fileName=$_FILES ['myInputName']['name'];\n$filePath=uploadPath.'/'.$fileName;\n    if(file_exists($filePath)){\n        echo json_encode(array( //Custom error From Server\n           'type' => 'error',\n           'msg' => 'File exist!'\n        ));\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['myInputName']['tmp_name'], $filePath)) {\n             $errors = error_get_last();\n             echo json_encode(array( //Error From Server\n               'type' => 'error',\n               'msg' => $errors\n             ));\n             return;\n        }\n    }\necho json_encode(array(\n    'type' => 'success',\n    'msg' => 'success msg'\n));"
     }, {
         id: '3c',
         title: 'With responseValidation (structure 2)',
         description: 'If you are not satisfied with the above examples, ssi-uploader gives you one more option(<a class="anchor" href="#2a">see</a> structure 2):',
-        code: "//html\n&lt;input type=&quot;file&quot; id=&quot;ssi-uploader&quot; name=&quot;myInputName&quot;&gt;\n\n//ssi-uploader options\n$(\'#ssi-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: {\n      success: 'success',\n      error: 'error'\n    },\n    resultKey: 'validationKey'\n  }\n})\n\n// A basic file upload script\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\n$fileName=$_FILES ['myInputName'] ['name'];\n$filePath=uploadPath.'/'.$fileName;\n    if(file_exists($filePath)){\n        echo json_encode(array( //Custom error From Server\n           'error' => 'File exist!'\n        ));\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['myInputName'] ['tmp_name'], $filePath)) {\n             $errors = error_get_last();\n             echo json_encode(array( //Error From Server\n               'error' => $errors\n             ));\n             return;\n        }\n    }\necho json_encode(array(\n    'success' => 'success'\n));"
+        code: "//html\n&lt;input type=&quot;file&quot; id=&quot;ssi-uploader&quot; name=&quot;myInputName&quot;&gt;\n\n//ssi-uploader options\n$(\'#ssi-uploader').ssi_uploader({\n  responseValidation:{\n    validationKey: {\n      success: 'success',\n      error: 'error'\n    },\n    resultKey: 'validationKey'\n  }\n})\n\n// A basic file upload script\n&lt;?php\n$mainDir = $_SERVER ['DOCUMENT_ROOT'];\n$uploadPath=$mainDir.'/images/uploads';\n$fileName=$_FILES ['myInputName'] ['name'];\n$filePath=uploadPath.'/'.$fileName;\n    if(file_exists($filePath)){\n        echo json_encode(array( //Custom error From Server\n           'error' => 'File exist!'\n        ));\n        return;\n    }else{\n        if (!move_uploaded_file($_FILES ['myInputName'] ['tmp_name'], $filePath)) {\n             $errors = error_get_last();\n             echo json_encode(array( //Error From Server\n               'error' => $errors\n             ));\n             return;\n        }\n    }\necho json_encode(array(\n    'success' => 'success msg'\n));"
     }]
 }];
 
@@ -34914,6 +34914,7 @@ var SsinputRouter = Backbone.Router.extend({
         'ssi-modal/examples': 'ssi_modalExamples',
         'ssi-modal/examples/:id': 'ssi_modalExamples',
         'ssi-modal/documentation': 'ssi_modalDocumentation',
+        'ssi-modal/documentation/:id': 'ssi_modalDocumentationAnchor',
         'ss-input': 'ss_input',
         'ss-input/examples': 'ss_inputExamples',
         'ss-input/documentation': 'ss_inputDocumentation',
@@ -34922,6 +34923,7 @@ var SsinputRouter = Backbone.Router.extend({
         'ssi-uploader/examples': 'ssi_uploaderExamples',
         'ssi-uploader/examples/:id': 'ssi_uploaderExamples',
         'ssi-uploader/documentation': 'ssi_uploaderDocumentation',
+        'ssi-uploader/documentation/:id': 'ssi_uploaderDocumentationAnchor',
         '*notFound': 'notFound'
     },
     initialize: function () {
@@ -35186,6 +35188,31 @@ var SsinputRouter = Backbone.Router.extend({
                 $('html, body').scrollTop($elem.addAnimation('animated bounceIn').offset().top - 160);
             }
         });
+
+    },
+    'docsPageAnchor': function (plugin, id) {
+    var thisS = this;
+    currentView = 'documentation';
+    this.beforeBoot(plugin);
+    var items = new methodsCollection(plugins[plugin]['documentation']);
+    new mainView({collection: items});
+
+    $(document).ready(function () {
+        thisS.bootPage();
+        if (id) {
+            var $elem = $('#' + id);
+            setTimeout(function(){
+                $('html, body').scrollTop($elem.addAnimation('animated bounceIn').offset().top-($elem.height()/2-100));
+            },50);
+        }
+    });
+
+},
+    'ssi_uploaderDocumentationAnchor': function (id) {
+        this.docsPageAnchor('ssi-uploader', id);
+    },
+    'ssi_modalDocumentationAnchor': function (id) {
+        this.docsPageAnchor('ssi-modal', id);
 
     },
     'documentationPage': function (plugin) {
