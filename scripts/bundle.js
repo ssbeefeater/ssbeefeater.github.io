@@ -36842,7 +36842,7 @@ var Router = require('./routes/SSInput').route;
 
 new Router;
 Backbone.history.start();
-$('a').on('click',function(e){
+$('#scrollSpy').find('a').on('click',function(e){
     e.preventDefault();
     $('html, body').animate({
                     scrollTop:  $($(this).attr('href'))[0].offsetTop
@@ -37217,9 +37217,11 @@ var SsinputRouter = Backbone.Router.extend({
         thisS.bootPage();
         if (id) {
             var $elem = $('#' + id);
-            setTimeout(function(){
-                $('html, body').scrollTop($elem.addAnimation('animated bounceIn').offset().top-($elem.height()/2-100));
-            },50);
+            $('html, body').animate({
+                scrollTop:  $elem[0].offsetTop
+            }, 800,()=>{
+                    $elem.addClass('animated bounceIn');
+            });
         }
     });
 
