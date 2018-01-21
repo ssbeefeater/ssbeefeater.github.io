@@ -36513,6 +36513,11 @@ module.exports = [{
             description: 'The utl to which the ajax request is sent.'
 
         }, {
+            name: 'inForm',
+            type: '{Boolean}',
+            defaultValue: 'false',
+            description: 'Let you send the selected files with a form. <span class="attention">If you set this option to true the uploading status will not be visible.</span>'
+        }, {
             name: 'data',
             type: '{Object}',
             defaultValue: 'null',
